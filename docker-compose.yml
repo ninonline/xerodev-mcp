@@ -1,0 +1,58 @@
+# ==============================================================================
+# Docker Compose - Default Mock Mode (Production Build)
+# ==============================================================================
+#
+# Usage:
+#   docker compose up              # Run with mock data (no Xero credentials needed)
+#   docker compose up --build      # Rebuild and run
+#   docker compose logs -f         # View logs
+#
+# For development with hot-reload:
+#   docker compose -f docker-compose.dev.yml up
+#
+# For live Xero mode:
+#   docker compose -f docker-compose.yml -f docker-compose.live.yml up
+#
+# ==============================================================================
+
+services:
+  xerodev-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: xerodev-mcp:latest
+    container_name: xerodev-mcp
+
+    # MCP uses stdio - no ports needed
+    # stdin_open and tty are needed for interactive stdio communication
+    stdin_open: true
+    tty: true
+
+    # Environment configuration
+    environment:
+      - NODE_ENV=production
+      - MCP_MODE=mock
+      - LOG_LEVEL=info
+      - MCP_DATABASE_PATH=/app/data/xerodev.db
+
+    # Persistent storage for SQLite database
+    volumes:
+      - xerodev-data:/app/data
+
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+    # Restart policy
+    restart: unless-stopped
+
+# Named volumes
+volumes:
+  xerodev-data:
+    driver: local

@@ -1,0 +1,36 @@
+# ==============================================================================
+# Docker Compose - Live Xero Mode Override
+# ==============================================================================
+#
+# WARNING: This connects to REAL Xero accounts!
+# Changes made in this mode affect actual business data.
+#
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.live.yml up
+#
+# Prerequisites:
+#   1. Create a Xero App at https://developer.xero.com/
+#   2. Set up OAuth 2.0 credentials
+#   3. Copy .env.example to .env and fill in your credentials
+#   4. Generate an encryption key: openssl rand -hex 32
+#
+# ==============================================================================
+
+services:
+  xerodev-mcp:
+    # Override environment for live mode
+    environment:
+      - NODE_ENV=production
+      - MCP_MODE=live
+      - LOG_LEVEL=info
+      - MCP_DATABASE_PATH=/app/data/xerodev.db
+      # Required for live mode - load from .env file
+      - XERO_CLIENT_ID=${XERO_CLIENT_ID}
+      - XERO_CLIENT_SECRET=${XERO_CLIENT_SECRET}
+      - XERO_REDIRECT_URI=${XERO_REDIRECT_URI:-http://localhost:3000/callback}
+      # Encryption key for token storage (REQUIRED for live mode)
+      - MCP_ENCRYPTION_KEY=${MCP_ENCRYPTION_KEY}
+
+    # Load environment from .env file
+    env_file:
+      - .env

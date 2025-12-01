@@ -1,0 +1,109 @@
+{
+  "_meta": {
+    "description": "Payments for AU tenant",
+    "tenant_id": "acme-au-001",
+    "count": 10,
+    "scenarios": ["invoice payments", "credit note allocations", "partial payments", "batch payments"]
+  },
+  "payments": [
+    {
+      "payment_id": "pay-001",
+      "invoice": { "invoice_id": "inv-001" },
+      "account": { "account_id": "acc-bank-001" },
+      "date": "2025-01-20",
+      "amount": 1650.00,
+      "currency_code": "AUD",
+      "reference": "EFT - Customer payment",
+      "status": "AUTHORISED"
+    },
+    {
+      "payment_id": "pay-002",
+      "invoice": { "invoice_id": "inv-003" },
+      "account": { "account_id": "acc-bank-001" },
+      "date": "2025-01-19",
+      "amount": 2750.00,
+      "currency_code": "AUD",
+      "reference": "Direct deposit",
+      "status": "AUTHORISED"
+    },
+    {
+      "payment_id": "pay-003",
+      "invoice": { "invoice_id": "inv-005" },
+      "account": { "account_id": "acc-bank-001" },
+      "date": "2025-01-18",
+      "amount": 500.00,
+      "currency_code": "AUD",
+      "reference": "Partial payment - 1 of 3",
+      "status": "AUTHORISED"
+    },
+    {
+      "payment_id": "pay-004",
+      "invoice": { "invoice_id": "inv-005" },
+      "account": { "account_id": "acc-bank-001" },
+      "date": "2025-01-22",
+      "amount": 500.00,
+      "currency_code": "AUD",
+      "reference": "Partial payment - 2 of 3",
+      "status": "AUTHORISED"
+    },
+    {
+      "payment_id": "pay-005",
+      "credit_note": { "credit_note_id": "cn-004" },
+      "account": { "account_id": "acc-bank-001" },
+      "date": "2025-01-15",
+      "amount": 363.00,
+      "currency_code": "AUD",
+      "reference": "Credit note refund",
+      "status": "AUTHORISED"
+    },
+    {
+      "payment_id": "pay-006",
+      "invoice": { "invoice_id": "inv-007" },
+      "account": { "account_id": "acc-bank-001" },
+      "date": "2025-01-17",
+      "amount": 4400.00,
+      "currency_code": "AUD",
+      "reference": "Wire transfer",
+      "status": "AUTHORISED"
+    },
+    {
+      "payment_id": "pay-007",
+      "invoice": { "invoice_id": "inv-008" },
+      "account": { "account_id": "acc-bank-001" },
+      "date": "2025-01-16",
+      "amount": 1100.00,
+      "currency_code": "AUD",
+      "reference": "Credit card payment",
+      "status": "AUTHORISED"
+    },
+    {
+      "payment_id": "pay-008",
+      "invoice": { "invoice_id": "inv-010" },
+      "account": { "account_id": "acc-bank-001" },
+      "date": "2025-01-21",
+      "amount": 5500.00,
+      "currency_code": "AUD",
+      "reference": "Batch payment - January",
+      "status": "AUTHORISED"
+    },
+    {
+      "payment_id": "pay-009",
+      "invoice": { "invoice_id": "inv-012" },
+      "account": { "account_id": "acc-bank-001" },
+      "date": "2025-01-14",
+      "amount": 825.00,
+      "currency_code": "AUD",
+      "status": "DELETED"
+    },
+    {
+      "payment_id": "pay-010",
+      "invoice": { "invoice_id": "inv-015" },
+      "account": { "account_id": "acc-bank-001" },
+      "date": "2025-01-23",
+      "amount": 2200.00,
+      "currency_code": "AUD",
+      "reference": "PayPal transfer",
+      "status": "AUTHORISED"
+    }
+  ]
+}

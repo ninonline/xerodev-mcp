@@ -1,0 +1,62 @@
+# ==============================================================================
+# Docker Compose - Development Mode with Hot-Reload
+# ==============================================================================
+#
+# Usage:
+#   docker compose -f docker-compose.dev.yml up              # Start development server
+#   docker compose -f docker-compose.dev.yml up --build      # Rebuild and start
+#   docker compose -f docker-compose.dev.yml exec xerodev-mcp npm test  # Run tests
+#
+# Features:
+#   - Hot-reload on source changes (tsx watch)
+#   - Source code mounted as volume
+#   - Full devDependencies available
+#
+# ==============================================================================
+
+services:
+  xerodev-mcp:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dev
+    container_name: xerodev-mcp-dev
+
+    # MCP uses stdio
+    stdin_open: true
+    tty: true
+
+    # Volume mounts for development
+    volumes:
+      # Source code with hot-reload (read-only to prevent container writes)
+      - ./src:/app/src:ro
+      # Test fixtures
+      - ./test/fixtures:/app/test/fixtures:ro
+      # TypeScript config
+      - ./tsconfig.json:/app/tsconfig.json:ro
+      # Persistent SQLite data
+      - xerodev-dev-data:/app/data
+
+    # Environment configuration
+    environment:
+      - NODE_ENV=development
+      - MCP_MODE=mock
+      - LOG_LEVEL=debug
+      - MCP_DATABASE_PATH=/app/data/xerodev.db
+
+    # Resource limits (more generous for development)
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+    # Don't restart in development - let errors surface
+    restart: "no"
+
+# Named volumes
+volumes:
+  xerodev-dev-data:
+    driver: local

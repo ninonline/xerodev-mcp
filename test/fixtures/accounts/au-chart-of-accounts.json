@@ -1,0 +1,325 @@
+{
+  "_meta": {
+    "description": "Standard Australian Chart of Accounts with GST tax types",
+    "tenant_id": "acme-au-001",
+    "region": "AU"
+  },
+  "accounts": [
+    {
+      "account_id": "acc-001",
+      "code": "200",
+      "name": "Sales",
+      "type": "REVENUE",
+      "tax_type": "OUTPUT",
+      "description": "Income from sales of goods and services",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-002",
+      "code": "210",
+      "name": "Interest Income",
+      "type": "REVENUE",
+      "tax_type": "EXEMPTOUTPUT",
+      "description": "Interest earned on bank accounts",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-003",
+      "code": "220",
+      "name": "Other Revenue",
+      "type": "REVENUE",
+      "tax_type": "OUTPUT",
+      "description": "Miscellaneous revenue",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-004",
+      "code": "260",
+      "name": "Export Sales",
+      "type": "REVENUE",
+      "tax_type": "EXEMPTOUTPUT",
+      "description": "Sales to overseas customers (GST-free)",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-005",
+      "code": "300",
+      "name": "Advertising",
+      "type": "EXPENSE",
+      "tax_type": "INPUT",
+      "description": "Advertising and marketing costs",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-006",
+      "code": "310",
+      "name": "Bank Fees",
+      "type": "EXPENSE",
+      "tax_type": "EXEMPTINPUT",
+      "description": "Bank charges and fees (GST-free)",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-007",
+      "code": "320",
+      "name": "Consulting & Accounting",
+      "type": "EXPENSE",
+      "tax_type": "INPUT",
+      "description": "Professional services",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-008",
+      "code": "330",
+      "name": "Depreciation",
+      "type": "EXPENSE",
+      "tax_type": "BASEXCLUDED",
+      "description": "Depreciation of fixed assets",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-009",
+      "code": "400",
+      "name": "Office Expenses",
+      "type": "EXPENSE",
+      "tax_type": "INPUT",
+      "description": "General office supplies and expenses",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-010",
+      "code": "410",
+      "name": "Printing & Stationery",
+      "type": "EXPENSE",
+      "tax_type": "INPUT",
+      "description": "Printing and stationery supplies",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-011",
+      "code": "420",
+      "name": "Rent",
+      "type": "EXPENSE",
+      "tax_type": "INPUT",
+      "description": "Office rent payments",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-012",
+      "code": "430",
+      "name": "Subscriptions",
+      "type": "EXPENSE",
+      "tax_type": "INPUT",
+      "description": "Software and publication subscriptions",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-013",
+      "code": "440",
+      "name": "Telephone & Internet",
+      "type": "EXPENSE",
+      "tax_type": "INPUT",
+      "description": "Communication expenses",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-014",
+      "code": "450",
+      "name": "Travel - National",
+      "type": "EXPENSE",
+      "tax_type": "INPUT",
+      "description": "Domestic travel expenses",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-015",
+      "code": "460",
+      "name": "Travel - International",
+      "type": "EXPENSE",
+      "tax_type": "EXEMPTINPUT",
+      "description": "International travel (GST-free)",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-016",
+      "code": "470",
+      "name": "Wages & Salaries",
+      "type": "EXPENSE",
+      "tax_type": "BASEXCLUDED",
+      "description": "Employee wages and salaries",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-017",
+      "code": "480",
+      "name": "Superannuation",
+      "type": "EXPENSE",
+      "tax_type": "BASEXCLUDED",
+      "description": "Superannuation contributions",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-018",
+      "code": "610",
+      "name": "Accounts Receivable",
+      "type": "CURRENT",
+      "tax_type": null,
+      "description": "Trade debtors",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-019",
+      "code": "620",
+      "name": "Prepayments",
+      "type": "CURRENT",
+      "tax_type": null,
+      "description": "Prepaid expenses",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-020",
+      "code": "710",
+      "name": "Office Equipment",
+      "type": "FIXED",
+      "tax_type": null,
+      "description": "Office furniture and equipment",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-021",
+      "code": "720",
+      "name": "Computer Equipment",
+      "type": "FIXED",
+      "tax_type": null,
+      "description": "Computers and peripherals",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-022",
+      "code": "800",
+      "name": "Accounts Payable",
+      "type": "LIABILITY",
+      "tax_type": null,
+      "description": "Trade creditors",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-023",
+      "code": "810",
+      "name": "GST Collected",
+      "type": "LIABILITY",
+      "tax_type": null,
+      "description": "GST collected on sales",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-024",
+      "code": "820",
+      "name": "GST Paid",
+      "type": "CURRENT",
+      "tax_type": null,
+      "description": "GST paid on purchases",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-025",
+      "code": "830",
+      "name": "PAYG Withholding",
+      "type": "LIABILITY",
+      "tax_type": null,
+      "description": "PAYG tax withheld from employees",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-026",
+      "code": "840",
+      "name": "Superannuation Payable",
+      "type": "LIABILITY",
+      "tax_type": null,
+      "description": "Superannuation liability",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-027",
+      "code": "090",
+      "name": "Business Bank Account",
+      "type": "BANK",
+      "tax_type": null,
+      "description": "Main business bank account",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-028",
+      "code": "091",
+      "name": "Savings Account",
+      "type": "BANK",
+      "tax_type": null,
+      "description": "Business savings account",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-029",
+      "code": "900",
+      "name": "Owner's Equity",
+      "type": "EQUITY",
+      "tax_type": null,
+      "description": "Owner's capital",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-030",
+      "code": "910",
+      "name": "Retained Earnings",
+      "type": "EQUITY",
+      "tax_type": null,
+      "description": "Accumulated profits",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-031",
+      "code": "999",
+      "name": "Old Sales Account",
+      "type": "REVENUE",
+      "tax_type": "OUTPUT",
+      "description": "Archived account - DO NOT USE",
+      "status": "ARCHIVED"
+    }
+  ],
+  "tax_rates": [
+    {
+      "name": "GST on Income",
+      "tax_type": "OUTPUT",
+      "rate": 10.0,
+      "status": "ACTIVE",
+      "description": "10% GST on sales"
+    },
+    {
+      "name": "GST on Expenses",
+      "tax_type": "INPUT",
+      "rate": 10.0,
+      "status": "ACTIVE",
+      "description": "10% GST on purchases"
+    },
+    {
+      "name": "GST Free Income",
+      "tax_type": "EXEMPTOUTPUT",
+      "rate": 0.0,
+      "status": "ACTIVE",
+      "description": "GST-free sales (exports, medical, etc.)"
+    },
+    {
+      "name": "GST Free Expenses",
+      "tax_type": "EXEMPTINPUT",
+      "rate": 0.0,
+      "status": "ACTIVE",
+      "description": "GST-free purchases"
+    },
+    {
+      "name": "BAS Excluded",
+      "tax_type": "BASEXCLUDED",
+      "rate": 0.0,
+      "status": "ACTIVE",
+      "description": "Not reported on BAS (wages, depreciation)"
+    }
+  ]
+}

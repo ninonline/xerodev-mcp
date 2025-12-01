@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "description": "Australian tenant with GST tax system",
+    "region": "AU",
+    "currency": "AUD",
+    "use_cases": [
+      "Test GST calculations",
+      "Test Australian tax types (OUTPUT, INPUT, EXEMPTOUTPUT)",
+      "Validate Australian Chart of Accounts"
+    ]
+  },
+  "tenant_id": "acme-au-001",
+  "xero_tenant_id": "550e8400-e29b-41d4-a716-446655440001",
+  "org_name": "Acme Corporation Pty Ltd",
+  "region": "AU",
+  "currency": "AUD",
+  "tax_system": "GST",
+  "granted_scopes": [
+    "accounting.transactions",
+    "accounting.contacts",
+    "accounting.settings",
+    "offline_access"
+  ],
+  "connection_status": "active"
+}

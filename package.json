@@ -1,0 +1,56 @@
+{
+  "name": "xerodev-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for testing and validating Xero integrations without live credentials",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "xerodev-mcp": "dist/index.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src --ext .ts",
+    "generate:fixtures": "tsx scripts/generate-fixtures.ts",
+    "validate:fixtures": "tsx scripts/validate-fixtures.ts",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "xero",
+    "mcp",
+    "model-context-protocol",
+    "integration",
+    "testing",
+    "accounting"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "better-sqlite3": "^11.6.0",
+    "xero-node": "^13.3.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.3.0",
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^3.0.0"
+  },
+  "files": [
+    "dist",
+    "test/fixtures"
+  ],
+  "volta": {
+    "node": "20.18.1"
+  }
+}

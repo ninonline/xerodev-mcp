@@ -1,0 +1,515 @@
+{
+  "_meta": {
+    "description": "Sample contacts for AU tenant",
+    "tenant_id": "acme-au-001",
+    "count": 20
+  },
+  "contacts": [
+    {
+      "contact_id": "contact-001",
+      "name": "ABC Supplies Pty Ltd",
+      "email": "accounts@abcsupplies.com.au",
+      "first_name": "Sarah",
+      "last_name": "Johnson",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "123 Collins Street",
+          "city": "Melbourne",
+          "region": "VIC",
+          "postal_code": "3000",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "03 9000 1234"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-002",
+      "name": "Tech Solutions Australia",
+      "email": "billing@techsolutions.com.au",
+      "first_name": "Michael",
+      "last_name": "Chen",
+      "is_customer": true,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "456 George Street",
+          "city": "Sydney",
+          "region": "NSW",
+          "postal_code": "2000",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "02 8000 5678"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-003",
+      "name": "Brisbane Consulting Group",
+      "email": "invoices@brisbaneconsulting.com.au",
+      "first_name": "Emma",
+      "last_name": "Williams",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "789 Queen Street",
+          "city": "Brisbane",
+          "region": "QLD",
+          "postal_code": "4000",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "07 3000 9012"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-004",
+      "name": "Perth Mining Services",
+      "email": "ap@perthmining.com.au",
+      "first_name": "James",
+      "last_name": "Brown",
+      "is_customer": false,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "321 St Georges Terrace",
+          "city": "Perth",
+          "region": "WA",
+          "postal_code": "6000",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "08 6000 3456"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-005",
+      "name": "Adelaide Legal Partners",
+      "email": "accounts@adelaidelegal.com.au",
+      "first_name": "Sophie",
+      "last_name": "Taylor",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "100 King William Street",
+          "city": "Adelaide",
+          "region": "SA",
+          "postal_code": "5000",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "08 8000 7890"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-006",
+      "name": "Hobart Fresh Produce",
+      "email": "orders@hobartfresh.com.au",
+      "first_name": "David",
+      "last_name": "Miller",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "55 Elizabeth Street",
+          "city": "Hobart",
+          "region": "TAS",
+          "postal_code": "7000",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "03 6200 1234"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-007",
+      "name": "Darwin Logistics",
+      "email": "finance@darwinlogistics.com.au",
+      "first_name": "Jessica",
+      "last_name": "Anderson",
+      "is_customer": false,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "42 Mitchell Street",
+          "city": "Darwin",
+          "region": "NT",
+          "postal_code": "0800",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "08 8900 5678"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-008",
+      "name": "Canberra Government Services",
+      "email": "procurement@canberragov.com.au",
+      "first_name": "Robert",
+      "last_name": "Wilson",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "1 London Circuit",
+          "city": "Canberra",
+          "region": "ACT",
+          "postal_code": "2600",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "02 6100 9012"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-009",
+      "name": "Gold Coast Tourism",
+      "email": "accounts@gctoursim.com.au",
+      "first_name": "Lisa",
+      "last_name": "Martin",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "2 Cavill Avenue",
+          "city": "Surfers Paradise",
+          "region": "QLD",
+          "postal_code": "4217",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "07 5500 3456"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-010",
+      "name": "Newcastle Steel Works",
+      "email": "invoicing@newcastlesteel.com.au",
+      "first_name": "Thomas",
+      "last_name": "Davis",
+      "is_customer": false,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "88 Hunter Street",
+          "city": "Newcastle",
+          "region": "NSW",
+          "postal_code": "2300",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "02 4900 7890"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-011",
+      "name": "Geelong Manufacturing",
+      "email": "ap@geelongmfg.com.au",
+      "first_name": "Karen",
+      "last_name": "White",
+      "is_customer": true,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "15 Moorabool Street",
+          "city": "Geelong",
+          "region": "VIC",
+          "postal_code": "3220",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "03 5200 1234"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-012",
+      "name": "Sunshine Coast Digital",
+      "email": "hello@sunshinecoastdigital.com.au",
+      "first_name": "Andrew",
+      "last_name": "Lee",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "77 Ocean Street",
+          "city": "Maroochydore",
+          "region": "QLD",
+          "postal_code": "4558",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "07 5400 5678"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-013",
+      "name": "Cairns Reef Tours",
+      "email": "bookings@cairnsreef.com.au",
+      "first_name": "Michelle",
+      "last_name": "Thompson",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "33 Shields Street",
+          "city": "Cairns",
+          "region": "QLD",
+          "postal_code": "4870",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "07 4000 9012"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-014",
+      "name": "Wollongong Engineering",
+      "email": "projects@wollongongeng.com.au",
+      "first_name": "Daniel",
+      "last_name": "Harris",
+      "is_customer": false,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "200 Crown Street",
+          "city": "Wollongong",
+          "region": "NSW",
+          "postal_code": "2500",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "02 4200 3456"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-015",
+      "name": "Townsville Shipping",
+      "email": "freight@townsvilleship.com.au",
+      "first_name": "Jennifer",
+      "last_name": "Clark",
+      "is_customer": false,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "5 Flinders Street",
+          "city": "Townsville",
+          "region": "QLD",
+          "postal_code": "4810",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "07 4700 7890"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-016",
+      "name": "Ballarat Heritage Crafts",
+      "email": "sales@ballaratcrafts.com.au",
+      "first_name": "Peter",
+      "last_name": "Robinson",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "12 Sturt Street",
+          "city": "Ballarat",
+          "region": "VIC",
+          "postal_code": "3350",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "03 5300 1234"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-017",
+      "name": "Bendigo Gold Museum",
+      "email": "admin@bendigogold.com.au",
+      "first_name": "Stephanie",
+      "last_name": "Hall",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "61 Violet Street",
+          "city": "Bendigo",
+          "region": "VIC",
+          "postal_code": "3550",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "03 5400 5678"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-018",
+      "name": "Launceston Wines",
+      "email": "orders@launcestonwines.com.au",
+      "first_name": "Christopher",
+      "last_name": "Young",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "90 Brisbane Street",
+          "city": "Launceston",
+          "region": "TAS",
+          "postal_code": "7250",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "03 6300 9012"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-019",
+      "name": "Old Supplier Co",
+      "email": "defunct@oldsupplier.com.au",
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "is_customer": false,
+      "is_supplier": true,
+      "status": "ARCHIVED",
+      "addresses": [],
+      "phones": []
+    },
+    {
+      "contact_id": "contact-020",
+      "name": "Test Customer",
+      "email": "test@example.com.au",
+      "first_name": "Test",
+      "last_name": "User",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "1 Test Street",
+          "city": "Testville",
+          "region": "VIC",
+          "postal_code": "3000",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "03 0000 0000"
+        }
+      ]
+    }
+  ]
+}
