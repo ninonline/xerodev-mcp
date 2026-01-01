@@ -8,9 +8,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- CI/CD security scanning with Trivy vulnerability scanner
-- Docker health check for container monitoring
-- OCI image labels for Docker MCP catalog compliance
+- `update_contact` CRUD tool for modifying existing contacts
+- Database-backed idempotency store with per-tenant isolation
+- Audit logging for all tool operations with `get_audit_log` retrieval
+- Contact validation warning when no role (customer/supplier) is set
+
+### Changed
+- Validation payload shapes now use flat structure (`contact_id`) instead of nested (`contact: { contact_id }`)
+- Live-mode contact validation now includes proper field validation (name, email, roles)
+- Mock adapter contact validation matches live adapter behavior
+- Idempotency clearing functions now use proper imports for test compatibility
+
+### Fixed
+- Fixed create_invoice test idempotency clearing with `clearAllIdempotency()`
+- All 492 tests passing (was 481)
 
 ## [0.2.0] - 2025-01-01
 
@@ -43,4 +54,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Educational error system with recovery.next_tool_call suggestions
 - Multi-tenant support (3 tenants)
 - Progressive verbosity levels (silent, compact, diagnostic, debug)
-- 481 tests across 28 test files
+- 492 tests across 29 test files

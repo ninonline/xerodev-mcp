@@ -5,7 +5,7 @@ An MCP (Model Context Protocol) server for testing and validating Xero integrati
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](https://www.docker.com/)
 [![MCP](https://img.shields.io/badge/MCP-compatible-green.svg)](https://modelcontextprotocol.io/)
-[![Tests](https://img.shields.io/badge/Tests-481%20Passing-brightgreen.svg)](https://github.com/ninonline/xerodev-mcp)
+[![Tests](https://img.shields.io/badge/Tests-492%20Passing-brightgreen.svg)](https://github.com/ninonline/xerodev-mcp)
 [![Version](https://img.shields.io/badge/version-0.2.0-blue.svg)](https://github.com/ninonline/xerodev-mcp/releases)
 
 ## Quick Start
@@ -24,7 +24,7 @@ docker compose up
 - 60 contacts (customers and suppliers)
 - 60 invoices, 30 quotes, 24 credit notes
 - 30 payments and 45 bank transactions
-- 25 tools for validation, simulation, CRUD, and OAuth operations
+- 26 tools for validation, simulation, CRUD, and OAuth operations
 
 ## Overview
 
@@ -90,7 +90,7 @@ Validates payloads against the tenant's configuration. Returns educational error
   "entity_type": "Invoice",
   "payload": {
     "type": "ACCREC",
-    "contact": { "contact_id": "contact-001" },
+    "contact_id": "contact-001",
     "line_items": [{
       "description": "Consulting Services",
       "quantity": 10,
@@ -234,6 +234,24 @@ Create a new contact in the tenant.
   "verbosity": "diagnostic"
 }
 ```
+
+#### update_contact
+
+Update an existing contact in the tenant.
+
+```json
+{
+  "tenant_id": "acme-au-001",
+  "contact_id": "contact-001",
+  "name": "Updated Company Name",
+  "email": "newemail@example.com",
+  "is_customer": true,
+  "is_supplier": true,
+  "verbosity": "diagnostic"
+}
+```
+
+Only fields provided will be updated. Unprovided fields remain unchanged. Use `status: "ARCHIVED"` to archive a contact.
 
 #### create_invoice
 
@@ -475,7 +493,7 @@ src/
 
 test/
 ├── fixtures/                # JSON test data
-└── unit/                    # Unit tests (481 tests)
+└── unit/                    # Unit tests (492 tests)
 ```
 
 ## Testing
