@@ -1,0 +1,678 @@
+{
+  "_meta": {
+    "description": "Sample invoices for AU tenant",
+    "tenant_id": "acme-au-001",
+    "count": 20
+  },
+  "invoices": [
+    {
+      "invoice_id": "inv-001",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-001"
+      },
+      "date": "2025-12-22",
+      "due_date": "2026-01-21",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Software Development",
+          "quantity": 2,
+          "unit_amount": 430.35,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "System Integration",
+          "quantity": 6,
+          "unit_amount": 173.04,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Project Management",
+          "quantity": 13,
+          "unit_amount": 161.73,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 4001.43,
+      "total_tax": 0,
+      "total": 4001.43
+    },
+    {
+      "invoice_id": "inv-002",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-010"
+      },
+      "date": "2025-12-02",
+      "due_date": "2026-01-01",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Security Audit",
+          "quantity": 17,
+          "unit_amount": 447.13,
+          "account_code": "200",
+          "tax_type": "OUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 7601.21,
+      "total_tax": 760.12,
+      "total": 8361.33
+    },
+    {
+      "invoice_id": "inv-003",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-007"
+      },
+      "date": "2025-12-14",
+      "due_date": "2026-01-13",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Content Writing",
+          "quantity": 9,
+          "unit_amount": 111.22,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Website Development",
+          "quantity": 3,
+          "unit_amount": 98.77,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Training and Workshops",
+          "quantity": 13,
+          "unit_amount": 370.33,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 6111.58,
+      "total_tax": 0,
+      "total": 6111.58
+    },
+    {
+      "invoice_id": "inv-004",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-010"
+      },
+      "date": "2025-12-27",
+      "due_date": "2026-01-26",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Data Analysis",
+          "quantity": 10,
+          "unit_amount": 230.08,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 2300.8,
+      "total_tax": 0,
+      "total": 2300.8
+    },
+    {
+      "invoice_id": "inv-005",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-002"
+      },
+      "date": "2025-12-07",
+      "due_date": "2026-01-06",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Training and Workshops",
+          "quantity": 12,
+          "unit_amount": 211.29,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "SEO Services",
+          "quantity": 2,
+          "unit_amount": 298.03,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 3131.54,
+      "total_tax": 0,
+      "total": 3131.54
+    },
+    {
+      "invoice_id": "inv-006",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-016"
+      },
+      "date": "2025-12-10",
+      "due_date": "2026-01-09",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "SEO Services",
+          "quantity": 18,
+          "unit_amount": 374.94,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Software Development",
+          "quantity": 17,
+          "unit_amount": 277.84,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Technical Support",
+          "quantity": 1,
+          "unit_amount": 408.85,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 11881.05,
+      "total_tax": 0,
+      "total": 11881.05
+    },
+    {
+      "invoice_id": "inv-007",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-009"
+      },
+      "date": "2025-12-12",
+      "due_date": "2026-01-11",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Graphic Design",
+          "quantity": 8,
+          "unit_amount": 190.25,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Business Analysis",
+          "quantity": 20,
+          "unit_amount": 490.96,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "SEO Services",
+          "quantity": 14,
+          "unit_amount": 380.35,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 16666.1,
+      "total_tax": 0,
+      "total": 16666.1
+    },
+    {
+      "invoice_id": "inv-008",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-003"
+      },
+      "date": "2025-12-08",
+      "due_date": "2026-01-07",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Training and Workshops",
+          "quantity": 3,
+          "unit_amount": 70.83,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Graphic Design",
+          "quantity": 12,
+          "unit_amount": 353.88,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 4459.05,
+      "total_tax": 0,
+      "total": 4459.05
+    },
+    {
+      "invoice_id": "inv-009",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-020"
+      },
+      "date": "2025-12-15",
+      "due_date": "2026-01-14",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Training and Workshops",
+          "quantity": 10,
+          "unit_amount": 170.72,
+          "account_code": "200",
+          "tax_type": "OUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 1707.2,
+      "total_tax": 170.72,
+      "total": 1877.92
+    },
+    {
+      "invoice_id": "inv-010",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-020"
+      },
+      "date": "2025-11-29",
+      "due_date": "2025-12-29",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Graphic Design",
+          "quantity": 8,
+          "unit_amount": 248.43,
+          "account_code": "220",
+          "tax_type": "OUTPUT"
+        },
+        {
+          "description": "Data Analysis",
+          "quantity": 2,
+          "unit_amount": 333.97,
+          "account_code": "220",
+          "tax_type": "OUTPUT"
+        },
+        {
+          "description": "SEO Services",
+          "quantity": 2,
+          "unit_amount": 309.86,
+          "account_code": "220",
+          "tax_type": "OUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 3275.1,
+      "total_tax": 327.51,
+      "total": 3602.61
+    },
+    {
+      "invoice_id": "inv-011",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-010"
+      },
+      "date": "2025-12-11",
+      "due_date": "2026-01-10",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Software Development",
+          "quantity": 16,
+          "unit_amount": 314.95,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Website Development",
+          "quantity": 5,
+          "unit_amount": 434.59,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 7212.15,
+      "total_tax": 0,
+      "total": 7212.15
+    },
+    {
+      "invoice_id": "inv-012",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-020"
+      },
+      "date": "2025-12-17",
+      "due_date": "2026-01-16",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Marketing Services",
+          "quantity": 14,
+          "unit_amount": 144.51,
+          "account_code": "200",
+          "tax_type": "OUTPUT"
+        },
+        {
+          "description": "Cloud Infrastructure Setup",
+          "quantity": 18,
+          "unit_amount": 313.06,
+          "account_code": "200",
+          "tax_type": "OUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 7658.22,
+      "total_tax": 765.82,
+      "total": 8424.04
+    },
+    {
+      "invoice_id": "inv-013",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-002"
+      },
+      "date": "2025-12-29",
+      "due_date": "2026-01-28",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Project Management",
+          "quantity": 6,
+          "unit_amount": 119.74,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "System Integration",
+          "quantity": 12,
+          "unit_amount": 482.32,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Graphic Design",
+          "quantity": 10,
+          "unit_amount": 424.23,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 10748.58,
+      "total_tax": 0,
+      "total": 10748.58
+    },
+    {
+      "invoice_id": "inv-014",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-018"
+      },
+      "date": "2025-12-08",
+      "due_date": "2026-01-07",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Website Development",
+          "quantity": 8,
+          "unit_amount": 263.97,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Cloud Infrastructure Setup",
+          "quantity": 13,
+          "unit_amount": 158.91,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 4177.59,
+      "total_tax": 0,
+      "total": 4177.59
+    },
+    {
+      "invoice_id": "inv-015",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-001"
+      },
+      "date": "2025-12-15",
+      "due_date": "2026-01-14",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "SEO Services",
+          "quantity": 19,
+          "unit_amount": 177.28,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Cloud Infrastructure Setup",
+          "quantity": 10,
+          "unit_amount": 357.34,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 6941.72,
+      "total_tax": 0,
+      "total": 6941.72
+    },
+    {
+      "invoice_id": "inv-016",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-007"
+      },
+      "date": "2025-12-05",
+      "due_date": "2026-01-04",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Project Management",
+          "quantity": 7,
+          "unit_amount": 278.93,
+          "account_code": "220",
+          "tax_type": "OUTPUT"
+        },
+        {
+          "description": "Project Management",
+          "quantity": 10,
+          "unit_amount": 193.61,
+          "account_code": "220",
+          "tax_type": "OUTPUT"
+        },
+        {
+          "description": "Technical Support",
+          "quantity": 5,
+          "unit_amount": 204.14,
+          "account_code": "220",
+          "tax_type": "OUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 4909.31,
+      "total_tax": 490.93,
+      "total": 5400.24
+    },
+    {
+      "invoice_id": "inv-017",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-020"
+      },
+      "date": "2025-12-26",
+      "due_date": "2026-01-25",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Data Analysis",
+          "quantity": 5,
+          "unit_amount": 254.99,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Business Analysis",
+          "quantity": 3,
+          "unit_amount": 132.03,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Website Development",
+          "quantity": 7,
+          "unit_amount": 433.31,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 4704.21,
+      "total_tax": 0,
+      "total": 4704.21
+    },
+    {
+      "invoice_id": "inv-018",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-007"
+      },
+      "date": "2025-12-21",
+      "due_date": "2026-01-20",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Graphic Design",
+          "quantity": 1,
+          "unit_amount": 379.9,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "SEO Services",
+          "quantity": 15,
+          "unit_amount": 101.37,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 1900.45,
+      "total_tax": 0,
+      "total": 1900.45
+    },
+    {
+      "invoice_id": "inv-019",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-016"
+      },
+      "date": "2025-12-15",
+      "due_date": "2026-01-14",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Software Development",
+          "quantity": 13,
+          "unit_amount": 169.46,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Security Audit",
+          "quantity": 2,
+          "unit_amount": 325.51,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Cloud Infrastructure Setup",
+          "quantity": 6,
+          "unit_amount": 116.53,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 3553.18,
+      "total_tax": 0,
+      "total": 3553.18
+    },
+    {
+      "invoice_id": "inv-020",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-017"
+      },
+      "date": "2025-12-26",
+      "due_date": "2026-01-25",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Software Development",
+          "quantity": 13,
+          "unit_amount": 310.77,
+          "account_code": "200",
+          "tax_type": "OUTPUT"
+        },
+        {
+          "description": "Business Analysis",
+          "quantity": 13,
+          "unit_amount": 314.39,
+          "account_code": "200",
+          "tax_type": "OUTPUT"
+        },
+        {
+          "description": "Project Management",
+          "quantity": 13,
+          "unit_amount": 307.58,
+          "account_code": "200",
+          "tax_type": "OUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 12125.62,
+      "total_tax": 1212.56,
+      "total": 13338.18
+    }
+  ]
+}

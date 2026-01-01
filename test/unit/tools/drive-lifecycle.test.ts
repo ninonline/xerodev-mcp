@@ -5,7 +5,7 @@ import { XeroMockAdapter } from '../../../src/adapters/xero-mock-adapter.js';
 describe('drive_lifecycle', () => {
   let adapter: XeroMockAdapter;
   const tenantId = 'acme-au-001';
-  const validBankAccountId = 'acc-027';
+  const validBankAccountId = 'acc-bank-090'; // Bank account (code 090)
 
   beforeAll(() => {
     adapter = new XeroMockAdapter();

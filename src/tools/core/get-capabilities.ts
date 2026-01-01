@@ -50,6 +50,10 @@ interface CapabilitiesData {
     workflow: string[];
     rules: string[];
   };
+  oauth_workflow?: {
+    enabled: boolean;
+    steps: string[];
+  };
   available_tenants?: Array<{
     tenant_id: string;
     tenant_name: string;
@@ -98,6 +102,19 @@ export async function handleGetCapabilities(
       ],
     },
 
+    oauth_workflow: mode === 'live' ? {
+      enabled: true,
+      steps: [
+        '1. Call get_authorization_url to generate an OAuth consent URL',
+        '2. Visit the URL in a web browser and log in to Xero',
+        '3. Select which Xero organisations to authorize',
+        '4. After authorization, copy the full callback URL from your browser',
+        '5. Call exchange_auth_code with the callback URL',
+        '6. Call list_connections to see your stored connections',
+        '7. Use tenant_id from connections in subsequent API calls',
+      ],
+    } : undefined,
+
     available_tenants: args.include_tenants
       ? tenants.map(t => ({
           tenant_id: t.tenant_id,
@@ -119,15 +136,20 @@ export async function handleGetCapabilities(
 
   const executionTimeMs = Date.now() - startTime;
 
+  let narrative = `Server running in ${mode.toUpperCase()} mode. `;
+  if (mode === 'mock') {
+    narrative += 'You can safely test without affecting real data.';
+  } else {
+    narrative += 'WARNING: Operations will affect real Xero data. ';
+    narrative += 'Before using API tools, complete the OAuth flow by calling get_authorization_url.';
+  }
+  narrative += ' Follow the workflow in guidelines.workflow for best results.';
+
   return createResponse({
     success: true,
     data: capabilities,
     verbosity: args.verbosity as VerbosityLevel,
     executionTimeMs,
-    narrative: `Server running in ${mode.toUpperCase()} mode. ${
-      mode === 'mock'
-        ? 'You can safely test without affecting real data.'
-        : 'WARNING: Operations will affect real Xero data.'
-    } Follow the workflow in guidelines.workflow for best results.`,
+    narrative,
   });
 }

@@ -1,0 +1,149 @@
+{
+  "_meta": {
+    "description": "Sample payments for UK tenant",
+    "tenant_id": "company-uk-001",
+    "count": 10
+  },
+  "payments": [
+    {
+      "payment_id": "pay-001",
+      "invoice": {
+        "invoice_id": "inv-011"
+      },
+      "account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-20",
+      "amount": 2879.36,
+      "currency_code": "GBP",
+      "reference": "Direct Deposit",
+      "status": "AUTHORISED"
+    },
+    {
+      "payment_id": "pay-002",
+      "invoice": {
+        "invoice_id": "inv-003"
+      },
+      "account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-23",
+      "amount": 53.39,
+      "currency_code": "GBP",
+      "reference": "Wire Transfer",
+      "status": "AUTHORISED"
+    },
+    {
+      "payment_id": "pay-003",
+      "invoice": {
+        "invoice_id": "inv-002"
+      },
+      "account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-26",
+      "amount": 2313,
+      "currency_code": "GBP",
+      "reference": "EFT Payment",
+      "status": "AUTHORISED"
+    },
+    {
+      "payment_id": "pay-004",
+      "invoice": {
+        "invoice_id": "inv-003"
+      },
+      "account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-25",
+      "amount": 53.39,
+      "currency_code": "GBP",
+      "reference": "EFT Payment",
+      "status": "AUTHORISED"
+    },
+    {
+      "payment_id": "pay-005",
+      "invoice": {
+        "invoice_id": "inv-004"
+      },
+      "account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-18",
+      "amount": 9523.26,
+      "currency_code": "GBP",
+      "reference": "Wire Transfer",
+      "status": "AUTHORISED"
+    },
+    {
+      "payment_id": "pay-006",
+      "invoice": {
+        "invoice_id": "inv-008"
+      },
+      "account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-19",
+      "amount": 1120.92,
+      "currency_code": "GBP",
+      "reference": "Wire Transfer",
+      "status": "AUTHORISED"
+    },
+    {
+      "payment_id": "pay-007",
+      "invoice": {
+        "invoice_id": "inv-011"
+      },
+      "account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-18",
+      "amount": 2879.36,
+      "currency_code": "GBP",
+      "reference": "Card Payment",
+      "status": "AUTHORISED"
+    },
+    {
+      "payment_id": "pay-008",
+      "invoice": {
+        "invoice_id": "inv-013"
+      },
+      "account": {
+        "account_id": "acc-bank-1010"
+      },
+      "date": "2025-12-25",
+      "amount": 1749.53,
+      "currency_code": "GBP",
+      "reference": "Wire Transfer",
+      "status": "AUTHORISED"
+    },
+    {
+      "payment_id": "pay-009",
+      "invoice": {
+        "invoice_id": "inv-015"
+      },
+      "account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-26",
+      "amount": 202.95,
+      "currency_code": "GBP",
+      "reference": "EFT Payment",
+      "status": "AUTHORISED"
+    },
+    {
+      "payment_id": "pay-010",
+      "invoice": {
+        "invoice_id": "inv-013"
+      },
+      "account": {
+        "account_id": "acc-bank-1010"
+      },
+      "date": "2025-12-23",
+      "amount": 1749.53,
+      "currency_code": "GBP",
+      "reference": "Wire Transfer",
+      "status": "AUTHORISED"
+    }
+  ]
+}

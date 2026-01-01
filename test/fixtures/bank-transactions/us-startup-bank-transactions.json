@@ -1,0 +1,429 @@
+{
+  "_meta": {
+    "description": "Sample bank transactions for US tenant",
+    "tenant_id": "startup-us-001",
+    "count": 15
+  },
+  "bank_transactions": [
+    {
+      "bank_transaction_id": "bt-001",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-002"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-10",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 285.37,
+          "account_code": "4010",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 285.37,
+      "total_tax": 0,
+      "total": 285.37,
+      "reference": "Ref: 1AM15V",
+      "is_reconciled": true
+    },
+    {
+      "bank_transaction_id": "bt-002",
+      "type": "SPEND",
+      "contact": {
+        "contact_id": "contact-007"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-03",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Software subscription",
+          "quantity": 1,
+          "unit_amount": 465.82,
+          "account_code": "6090",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 465.82,
+      "total_tax": 0,
+      "total": 465.82,
+      "reference": "Ref: OPT7WX",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-003",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-010"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-25",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 166.28,
+          "account_code": "4000",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 166.28,
+      "total_tax": 0,
+      "total": 166.28,
+      "reference": "Ref: O2O3LV",
+      "is_reconciled": true
+    },
+    {
+      "bank_transaction_id": "bt-004",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-006"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-19",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 342.67,
+          "account_code": "4010",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 342.67,
+      "total_tax": 0,
+      "total": 342.67,
+      "reference": "Ref: GUYMM1",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-005",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-014"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-08",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 466.72,
+          "account_code": "4030",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 466.72,
+      "total_tax": 0,
+      "total": 466.72,
+      "reference": "Ref: KG9LWL",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-006",
+      "type": "SPEND",
+      "contact": {
+        "contact_id": "contact-007"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1010"
+      },
+      "date": "2025-12-02",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Office supplies",
+          "quantity": 1,
+          "unit_amount": 64.93,
+          "account_code": "7020",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 64.93,
+      "total_tax": 0,
+      "total": 64.93,
+      "reference": "Ref: RABCRO",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-007",
+      "type": "SPEND",
+      "contact": {
+        "contact_id": "contact-018"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-16",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Utilities payment",
+          "quantity": 1,
+          "unit_amount": 206.17,
+          "account_code": "7020",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 206.17,
+      "total_tax": 0,
+      "total": 206.17,
+      "reference": "Ref: O1X6WB",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-008",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-006"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1010"
+      },
+      "date": "2025-12-26",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 313.86,
+          "account_code": "4000",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 313.86,
+      "total_tax": 0,
+      "total": 313.86,
+      "reference": "Ref: 3MEVJP",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-009",
+      "type": "SPEND",
+      "contact": {
+        "contact_id": "contact-012"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1010"
+      },
+      "date": "2025-12-06",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Software subscription",
+          "quantity": 1,
+          "unit_amount": 61.42,
+          "account_code": "6030",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 61.42,
+      "total_tax": 0,
+      "total": 61.42,
+      "reference": "Ref: 9RTSRK",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-010",
+      "type": "SPEND",
+      "contact": {
+        "contact_id": "contact-002"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1010"
+      },
+      "date": "2025-12-08",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Office supplies",
+          "quantity": 1,
+          "unit_amount": 172.37,
+          "account_code": "6060",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 172.37,
+      "total_tax": 0,
+      "total": 172.37,
+      "reference": "Ref: H424XQ",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-011",
+      "type": "SPEND",
+      "contact": {
+        "contact_id": "contact-016"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1010"
+      },
+      "date": "2025-12-09",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Office supplies",
+          "quantity": 1,
+          "unit_amount": 284.31,
+          "account_code": "6070",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 284.31,
+      "total_tax": 0,
+      "total": 284.31,
+      "reference": "Ref: PJPA0R",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-012",
+      "type": "SPEND",
+      "contact": {
+        "contact_id": "contact-005"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1010"
+      },
+      "date": "2025-12-08",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Utilities payment",
+          "quantity": 1,
+          "unit_amount": 304.89,
+          "account_code": "6030",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 304.89,
+      "total_tax": 0,
+      "total": 304.89,
+      "reference": "Ref: KCGVAY",
+      "is_reconciled": true
+    },
+    {
+      "bank_transaction_id": "bt-013",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-011"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-09",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 273.25,
+          "account_code": "4020",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 273.25,
+      "total_tax": 0,
+      "total": 273.25,
+      "reference": "Ref: K5BXBW",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-014",
+      "type": "SPEND",
+      "contact": {
+        "contact_id": "contact-004"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1010"
+      },
+      "date": "2025-12-14",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Office supplies",
+          "quantity": 1,
+          "unit_amount": 419.34,
+          "account_code": "6090",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 419.34,
+      "total_tax": 0,
+      "total": 419.34,
+      "reference": "Ref: RL6NHD",
+      "is_reconciled": true
+    },
+    {
+      "bank_transaction_id": "bt-015",
+      "type": "SPEND",
+      "contact": {
+        "contact_id": "contact-011"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1010"
+      },
+      "date": "2025-12-25",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Office supplies",
+          "quantity": 1,
+          "unit_amount": 388,
+          "account_code": "6040",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 388,
+      "total_tax": 0,
+      "total": 388,
+      "reference": "Ref: SNICTD",
+      "is_reconciled": true
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "description": "United Kingdom tenant with VAT tax system",
+    "region": "UK",
+    "currency": "GBP",
+    "use_cases": [
+      "Test VAT calculations",
+      "Test UK tax types",
+      "Validate UK Chart of Accounts"
+    ]
+  },
+  "tenant_id": "company-uk-001",
+  "xero_tenant_id": "ee376251-a042-4ee4-a9f9-16cce976f775",
+  "org_name": "Acme Technologies Ltd",
+  "region": "UK",
+  "currency": "GBP",
+  "tax_system": "VAT",
+  "granted_scopes": [
+    "accounting.transactions",
+    "accounting.contacts",
+    "accounting.settings",
+    "offline_access"
+  ],
+  "connection_status": "active"
+}

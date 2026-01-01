@@ -1,0 +1,320 @@
+{
+  "_meta": {
+    "description": "US Chart of Accounts with SALES_TAX tax types",
+    "tenant_id": "startup-us-001",
+    "region": "US"
+  },
+  "accounts": [
+    {
+      "account_id": "acc-rev-4000",
+      "code": "4000",
+      "name": "Sales Revenue",
+      "type": "REVENUE",
+      "tax_type": null,
+      "description": "Income from sales",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-rev-4010",
+      "code": "4010",
+      "name": "Service Revenue",
+      "type": "REVENUE",
+      "tax_type": null,
+      "description": "Revenue from services",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-rev-4020",
+      "code": "4020",
+      "name": "Interest Income",
+      "type": "REVENUE",
+      "tax_type": null,
+      "description": "Bank interest earned",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-rev-4030",
+      "code": "4030",
+      "name": "Other Income",
+      "type": "REVENUE",
+      "tax_type": null,
+      "description": "Miscellaneous income",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-5000",
+      "code": "5000",
+      "name": "Cost of Goods Sold",
+      "type": "EXPENSE",
+      "tax_type": null,
+      "description": "Direct costs",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6000",
+      "code": "6000",
+      "name": "Advertising & Marketing",
+      "type": "EXPENSE",
+      "tax_type": null,
+      "description": "Marketing expenses",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6010",
+      "code": "6010",
+      "name": "Bank Service Charges",
+      "type": "EXPENSE",
+      "tax_type": null,
+      "description": "Bank fees",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6020",
+      "code": "6020",
+      "name": "Professional Services",
+      "type": "EXPENSE",
+      "tax_type": null,
+      "description": "Legal, accounting, consulting",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6030",
+      "code": "6030",
+      "name": "Depreciation Expense",
+      "type": "EXPENSE",
+      "tax_type": null,
+      "description": "Asset depreciation",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6040",
+      "code": "6040",
+      "name": "Office Supplies",
+      "type": "EXPENSE",
+      "tax_type": null,
+      "description": "Office supplies and expenses",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6050",
+      "code": "6050",
+      "name": "Rent Expense",
+      "type": "EXPENSE",
+      "tax_type": null,
+      "description": "Office and facility rent",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6060",
+      "code": "6060",
+      "name": "Software & Subscriptions",
+      "type": "EXPENSE",
+      "tax_type": null,
+      "description": "Software licences",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6070",
+      "code": "6070",
+      "name": "Telephone & Internet",
+      "type": "EXPENSE",
+      "tax_type": null,
+      "description": "Communication costs",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6080",
+      "code": "6080",
+      "name": "Travel Expense",
+      "type": "EXPENSE",
+      "tax_type": null,
+      "description": "Business travel",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6090",
+      "code": "6090",
+      "name": "Utilities",
+      "type": "EXPENSE",
+      "tax_type": null,
+      "description": "Electricity, water, gas",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-7000",
+      "code": "7000",
+      "name": "Wages & Salaries",
+      "type": "EXPENSE",
+      "tax_type": null,
+      "description": "Employee compensation",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-7010",
+      "code": "7010",
+      "name": "Payroll Taxes",
+      "type": "EXPENSE",
+      "tax_type": null,
+      "description": "Employer payroll taxes",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-7020",
+      "code": "7020",
+      "name": "401(k) Contributions",
+      "type": "EXPENSE",
+      "tax_type": null,
+      "description": "Retirement plan contributions",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-7030",
+      "code": "7030",
+      "name": "Health Insurance",
+      "type": "EXPENSE",
+      "tax_type": null,
+      "description": "Employee health benefits",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-cur-1100",
+      "code": "1100",
+      "name": "Accounts Receivable",
+      "type": "CURRENT",
+      "tax_type": null,
+      "description": "Trade receivables",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-cur-1200",
+      "code": "1200",
+      "name": "Prepaid Expenses",
+      "type": "CURRENT",
+      "tax_type": null,
+      "description": "Prepaid items",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-fix-1500",
+      "code": "1500",
+      "name": "Furniture & Fixtures",
+      "type": "FIXED",
+      "tax_type": null,
+      "description": "Office furniture",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-fix-1510",
+      "code": "1510",
+      "name": "Computer Equipment",
+      "type": "FIXED",
+      "tax_type": null,
+      "description": "IT hardware",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-liab-2000",
+      "code": "2000",
+      "name": "Accounts Payable",
+      "type": "LIABILITY",
+      "tax_type": null,
+      "description": "Trade payables",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-liab-2100",
+      "code": "2100",
+      "name": "Sales Tax Payable",
+      "type": "LIABILITY",
+      "tax_type": null,
+      "description": "Sales tax collected",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-liab-2200",
+      "code": "2200",
+      "name": "Payroll Liabilities",
+      "type": "LIABILITY",
+      "tax_type": null,
+      "description": "Payroll taxes owed",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-liab-2300",
+      "code": "2300",
+      "name": "401(k) Payable",
+      "type": "LIABILITY",
+      "tax_type": null,
+      "description": "Retirement contributions owed",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-bank-1000",
+      "code": "1000",
+      "name": "Checking Account",
+      "type": "BANK",
+      "tax_type": null,
+      "description": "Main checking account",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-bank-1010",
+      "code": "1010",
+      "name": "Savings Account",
+      "type": "BANK",
+      "tax_type": null,
+      "description": "Business savings",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-eq-3000",
+      "code": "3000",
+      "name": "Common Stock",
+      "type": "EQUITY",
+      "tax_type": null,
+      "description": "Issued stock",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-eq-3100",
+      "code": "3100",
+      "name": "Retained Earnings",
+      "type": "EQUITY",
+      "tax_type": null,
+      "description": "Accumulated earnings",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-rev-9999",
+      "code": "9999",
+      "name": "Old Sales Account",
+      "type": "REVENUE",
+      "tax_type": null,
+      "description": "Archived account - DO NOT USE",
+      "status": "ARCHIVED"
+    }
+  ],
+  "tax_rates": [
+    {
+      "name": "Tax on Sales",
+      "tax_type": "TAX",
+      "rate": 0,
+      "status": "ACTIVE",
+      "description": "Sales tax (rate varies by jurisdiction)"
+    },
+    {
+      "name": "Tax Exempt",
+      "tax_type": "EXEMPTOUTPUT",
+      "rate": 0,
+      "status": "ACTIVE",
+      "description": "Exempt from sales tax"
+    },
+    {
+      "name": "No Tax",
+      "tax_type": "NONE",
+      "rate": 0,
+      "status": "ACTIVE",
+      "description": "No sales tax applicable"
+    }
+  ]
+}

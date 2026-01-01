@@ -1,0 +1,380 @@
+{
+  "_meta": {
+    "description": "UK Chart of Accounts with VAT tax types",
+    "tenant_id": "company-uk-001",
+    "region": "UK"
+  },
+  "accounts": [
+    {
+      "account_id": "acc-rev-4000",
+      "code": "4000",
+      "name": "Sales",
+      "type": "REVENUE",
+      "tax_type": "OUTPUT2",
+      "description": "Income from sales of goods and services",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-rev-4010",
+      "code": "4010",
+      "name": "Service Revenue",
+      "type": "REVENUE",
+      "tax_type": "OUTPUT2",
+      "description": "Revenue from services rendered",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-rev-4020",
+      "code": "4020",
+      "name": "Interest Income",
+      "type": "REVENUE",
+      "tax_type": "EXEMPTOUTPUT",
+      "description": "Bank interest (exempt from VAT)",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-rev-4030",
+      "code": "4030",
+      "name": "Zero-Rated Sales",
+      "type": "REVENUE",
+      "tax_type": "ZERORATEDOUTPUT",
+      "description": "Food, books, children's clothing",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-rev-4040",
+      "code": "4040",
+      "name": "Export Sales",
+      "type": "REVENUE",
+      "tax_type": "ZERORATEDOUTPUT",
+      "description": "Sales to overseas customers",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-rev-4050",
+      "code": "4050",
+      "name": "Reduced Rate Sales",
+      "type": "REVENUE",
+      "tax_type": "RROUTPUT",
+      "description": "Energy, mobility aids (5%)",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-5000",
+      "code": "5000",
+      "name": "Cost of Sales",
+      "type": "EXPENSE",
+      "tax_type": "INPUT2",
+      "description": "Direct costs of goods sold",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6000",
+      "code": "6000",
+      "name": "Advertising & Marketing",
+      "type": "EXPENSE",
+      "tax_type": "INPUT2",
+      "description": "Advertising and promotional costs",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6010",
+      "code": "6010",
+      "name": "Bank Charges",
+      "type": "EXPENSE",
+      "tax_type": "EXEMPTINPUT",
+      "description": "Bank fees (VAT exempt)",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6020",
+      "code": "6020",
+      "name": "Professional Fees",
+      "type": "EXPENSE",
+      "tax_type": "INPUT2",
+      "description": "Accountants, lawyers, consultants",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6030",
+      "code": "6030",
+      "name": "Depreciation",
+      "type": "EXPENSE",
+      "tax_type": "NONE",
+      "description": "Depreciation of fixed assets",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6040",
+      "code": "6040",
+      "name": "Office Expenses",
+      "type": "EXPENSE",
+      "tax_type": "INPUT2",
+      "description": "General office supplies",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6050",
+      "code": "6050",
+      "name": "Rent",
+      "type": "EXPENSE",
+      "tax_type": "EXEMPTINPUT",
+      "description": "Office rent (often exempt)",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6060",
+      "code": "6060",
+      "name": "Software & Subscriptions",
+      "type": "EXPENSE",
+      "tax_type": "INPUT2",
+      "description": "Software licences and subscriptions",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6070",
+      "code": "6070",
+      "name": "Telephone & Internet",
+      "type": "EXPENSE",
+      "tax_type": "INPUT2",
+      "description": "Communication costs",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6080",
+      "code": "6080",
+      "name": "Travel & Subsistence",
+      "type": "EXPENSE",
+      "tax_type": "INPUT2",
+      "description": "Business travel expenses",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-6090",
+      "code": "6090",
+      "name": "Training",
+      "type": "EXPENSE",
+      "tax_type": "ZERORATEDINPUT",
+      "description": "Education and training (zero-rated)",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-7000",
+      "code": "7000",
+      "name": "Wages & Salaries",
+      "type": "EXPENSE",
+      "tax_type": "NONE",
+      "description": "Employee wages",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-7010",
+      "code": "7010",
+      "name": "Employer NI Contributions",
+      "type": "EXPENSE",
+      "tax_type": "NONE",
+      "description": "Employer National Insurance",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-7020",
+      "code": "7020",
+      "name": "Pension Contributions",
+      "type": "EXPENSE",
+      "tax_type": "NONE",
+      "description": "Employer pension contributions",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-exp-7030",
+      "code": "7030",
+      "name": "Energy Costs",
+      "type": "EXPENSE",
+      "tax_type": "RRINPUT",
+      "description": "Electricity and gas (5% reduced rate)",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-cur-1100",
+      "code": "1100",
+      "name": "Trade Debtors",
+      "type": "CURRENT",
+      "tax_type": null,
+      "description": "Accounts receivable",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-cur-1200",
+      "code": "1200",
+      "name": "Prepayments",
+      "type": "CURRENT",
+      "tax_type": null,
+      "description": "Prepaid expenses",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-fix-0010",
+      "code": "0010",
+      "name": "Office Equipment",
+      "type": "FIXED",
+      "tax_type": null,
+      "description": "Office furniture and equipment",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-fix-0020",
+      "code": "0020",
+      "name": "Computer Equipment",
+      "type": "FIXED",
+      "tax_type": null,
+      "description": "IT hardware",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-liab-2100",
+      "code": "2100",
+      "name": "Trade Creditors",
+      "type": "LIABILITY",
+      "tax_type": null,
+      "description": "Accounts payable",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-liab-2200",
+      "code": "2200",
+      "name": "VAT Liability",
+      "type": "LIABILITY",
+      "tax_type": null,
+      "description": "VAT owed to HMRC",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-liab-2210",
+      "code": "2210",
+      "name": "PAYE Liability",
+      "type": "LIABILITY",
+      "tax_type": null,
+      "description": "PAYE and NI owed to HMRC",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-liab-2220",
+      "code": "2220",
+      "name": "Pension Liability",
+      "type": "LIABILITY",
+      "tax_type": null,
+      "description": "Pension contributions owed",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-bank-1000",
+      "code": "1000",
+      "name": "Current Account",
+      "type": "BANK",
+      "tax_type": null,
+      "description": "Main business current account",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-bank-1010",
+      "code": "1010",
+      "name": "Savings Account",
+      "type": "BANK",
+      "tax_type": null,
+      "description": "Business savings account",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-eq-3000",
+      "code": "3000",
+      "name": "Share Capital",
+      "type": "EQUITY",
+      "tax_type": null,
+      "description": "Issued share capital",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-eq-3100",
+      "code": "3100",
+      "name": "Retained Earnings",
+      "type": "EQUITY",
+      "tax_type": null,
+      "description": "Accumulated profits",
+      "status": "ACTIVE"
+    },
+    {
+      "account_id": "acc-rev-9999",
+      "code": "9999",
+      "name": "Old Sales Account",
+      "type": "REVENUE",
+      "tax_type": "OUTPUT2",
+      "description": "Archived account - DO NOT USE",
+      "status": "ARCHIVED"
+    }
+  ],
+  "tax_rates": [
+    {
+      "name": "20% (VAT on Income)",
+      "tax_type": "OUTPUT2",
+      "rate": 20,
+      "status": "ACTIVE",
+      "description": "Standard rate VAT on sales"
+    },
+    {
+      "name": "20% (VAT on Expenses)",
+      "tax_type": "INPUT2",
+      "rate": 20,
+      "status": "ACTIVE",
+      "description": "Standard rate VAT on purchases"
+    },
+    {
+      "name": "Zero Rated Income",
+      "tax_type": "ZERORATEDOUTPUT",
+      "rate": 0,
+      "status": "ACTIVE",
+      "description": "Food, books, children's clothing"
+    },
+    {
+      "name": "Zero Rated Expenses",
+      "tax_type": "ZERORATEDINPUT",
+      "rate": 0,
+      "status": "ACTIVE",
+      "description": "Zero-rated purchases"
+    },
+    {
+      "name": "Exempt Income",
+      "tax_type": "EXEMPTOUTPUT",
+      "rate": 0,
+      "status": "ACTIVE",
+      "description": "Financial services, insurance"
+    },
+    {
+      "name": "Exempt Expenses",
+      "tax_type": "EXEMPTINPUT",
+      "rate": 0,
+      "status": "ACTIVE",
+      "description": "VAT exempt purchases"
+    },
+    {
+      "name": "5% (Reduced Rate Income)",
+      "tax_type": "RROUTPUT",
+      "rate": 5,
+      "status": "ACTIVE",
+      "description": "Energy, mobility aids"
+    },
+    {
+      "name": "5% (Reduced Rate Expenses)",
+      "tax_type": "RRINPUT",
+      "rate": 5,
+      "status": "ACTIVE",
+      "description": "Reduced rate purchases"
+    },
+    {
+      "name": "No VAT",
+      "tax_type": "NONE",
+      "rate": 0,
+      "status": "ACTIVE",
+      "description": "Outside scope of VAT"
+    }
+  ]
+}

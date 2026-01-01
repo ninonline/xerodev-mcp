@@ -1,0 +1,269 @@
+{
+  "_meta": {
+    "description": "Sample quotes for UK tenant",
+    "tenant_id": "company-uk-001",
+    "count": 10
+  },
+  "quotes": [
+    {
+      "quote_id": "quote-001",
+      "quote_number": "QU-0001",
+      "contact": {
+        "contact_id": "contact-001"
+      },
+      "date": "2025-12-19",
+      "expiry_date": "2026-01-18",
+      "status": "ACCEPTED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "System Integration",
+          "quantity": 6,
+          "unit_amount": 782.1,
+          "account_code": "4020",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 4692.6,
+      "total_tax": 0,
+      "total": 4692.6,
+      "title": "Development Estimate",
+      "summary": "Adduco patior vilicus comprehendo caput antea."
+    },
+    {
+      "quote_id": "quote-002",
+      "quote_number": "QU-0002",
+      "contact": {
+        "contact_id": "contact-014"
+      },
+      "date": "2025-12-23",
+      "expiry_date": "2026-01-22",
+      "status": "DECLINED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Cloud Infrastructure Setup",
+          "quantity": 6,
+          "unit_amount": 736.63,
+          "account_code": "4040",
+          "tax_type": "ZERORATEDOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 4419.78,
+      "total_tax": 0,
+      "total": 4419.78,
+      "title": "Consulting Engagement",
+      "summary": "Curis tantum placeat enim atqui ait sortitus studio maiores."
+    },
+    {
+      "quote_id": "quote-003",
+      "quote_number": "QU-0003",
+      "contact": {
+        "contact_id": "contact-005"
+      },
+      "date": "2025-12-27",
+      "expiry_date": "2026-01-26",
+      "status": "SENT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Marketing Services",
+          "quantity": 8,
+          "unit_amount": 109.02,
+          "account_code": "4030",
+          "tax_type": "ZERORATEDOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 872.16,
+      "total_tax": 0,
+      "total": 872.16,
+      "title": "Project Proposal",
+      "summary": "Deputo temporibus delego adipisci demoror depromo cernuus sequi depulso cur."
+    },
+    {
+      "quote_id": "quote-004",
+      "quote_number": "QU-0004",
+      "contact": {
+        "contact_id": "contact-004"
+      },
+      "date": "2025-12-27",
+      "expiry_date": "2026-01-26",
+      "status": "SENT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Content Writing",
+          "quantity": 3,
+          "unit_amount": 196.76,
+          "account_code": "4010",
+          "tax_type": "OUTPUT2"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 590.28,
+      "total_tax": 118.06,
+      "total": 708.34,
+      "title": "Consulting Engagement",
+      "summary": "Impedit vehemens collum."
+    },
+    {
+      "quote_id": "quote-005",
+      "quote_number": "QU-0005",
+      "contact": {
+        "contact_id": "contact-014"
+      },
+      "date": "2025-12-24",
+      "expiry_date": "2026-01-23",
+      "status": "DECLINED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "SEO Services",
+          "quantity": 3,
+          "unit_amount": 315.64,
+          "account_code": "4000",
+          "tax_type": "OUTPUT2"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 946.92,
+      "total_tax": 189.38,
+      "total": 1136.3,
+      "title": "Project Proposal",
+      "summary": "Arcus bardus caelum vulnero."
+    },
+    {
+      "quote_id": "quote-006",
+      "quote_number": "QU-0006",
+      "contact": {
+        "contact_id": "contact-003"
+      },
+      "date": "2025-12-28",
+      "expiry_date": "2026-01-27",
+      "status": "SENT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Data Analysis",
+          "quantity": 1,
+          "unit_amount": 516.22,
+          "account_code": "4040",
+          "tax_type": "ZERORATEDOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 516.22,
+      "total_tax": 0,
+      "total": 516.22,
+      "title": "Project Proposal",
+      "summary": "Cubo quasi eveniet tantillus vero vorago votum."
+    },
+    {
+      "quote_id": "quote-007",
+      "quote_number": "QU-0007",
+      "contact": {
+        "contact_id": "contact-014"
+      },
+      "date": "2025-12-16",
+      "expiry_date": "2026-01-15",
+      "status": "DECLINED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Technical Support",
+          "quantity": 6,
+          "unit_amount": 129.46,
+          "account_code": "4020",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 776.76,
+      "total_tax": 0,
+      "total": 776.76,
+      "title": "Service Quote",
+      "summary": "Aveho uter fugiat aut admitto curso."
+    },
+    {
+      "quote_id": "quote-008",
+      "quote_number": "QU-0008",
+      "contact": {
+        "contact_id": "contact-008"
+      },
+      "date": "2025-12-21",
+      "expiry_date": "2026-01-20",
+      "status": "DECLINED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Training and Workshops",
+          "quantity": 2,
+          "unit_amount": 332.28,
+          "account_code": "4010",
+          "tax_type": "OUTPUT2"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 664.56,
+      "total_tax": 132.91,
+      "total": 797.47,
+      "title": "Consulting Engagement",
+      "summary": "Quaerat statua statim."
+    },
+    {
+      "quote_id": "quote-009",
+      "quote_number": "QU-0009",
+      "contact": {
+        "contact_id": "contact-005"
+      },
+      "date": "2025-12-26",
+      "expiry_date": "2026-01-25",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Security Audit",
+          "quantity": 7,
+          "unit_amount": 591.81,
+          "account_code": "4040",
+          "tax_type": "ZERORATEDOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 4142.67,
+      "total_tax": 0,
+      "total": 4142.67,
+      "title": "Consulting Engagement",
+      "summary": "Vomica torrens defluo cilicium ocer aequitas."
+    },
+    {
+      "quote_id": "quote-010",
+      "quote_number": "QU-0010",
+      "contact": {
+        "contact_id": "contact-017"
+      },
+      "date": "2025-12-28",
+      "expiry_date": "2026-01-27",
+      "status": "SENT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Data Analysis",
+          "quantity": 1,
+          "unit_amount": 897.29,
+          "account_code": "4040",
+          "tax_type": "ZERORATEDOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 897.29,
+      "total_tax": 0,
+      "total": 897.29,
+      "title": "Consulting Engagement",
+      "summary": "Virtus spoliatio turba temperantia chirographum clibanus corrumpo ait vereor cattus."
+    }
+  ]
+}

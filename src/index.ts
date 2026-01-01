@@ -69,6 +69,42 @@ import {
   CreateBankTransactionSchema,
   handleCreateBankTransaction,
 } from './tools/crud/create-bank-transaction.js';
+import {
+  GetInvoiceSchema,
+  handleGetInvoice,
+} from './tools/crud/get-invoice.js';
+import {
+  GetContactSchema,
+  handleGetContact,
+} from './tools/crud/get-contact.js';
+import {
+  ListInvoicesSchema,
+  handleListInvoices,
+} from './tools/crud/list-invoices.js';
+import {
+  ListContactsSchema,
+  handleListContacts,
+} from './tools/crud/list-contacts.js';
+import {
+  GetAuthorizationUrlSchema,
+  handleGetAuthorizationUrl,
+} from './tools/oauth/get-authorization-url.js';
+import {
+  ExchangeAuthCodeSchema,
+  handleExchangeAuthCode,
+} from './tools/oauth/exchange-auth-code.js';
+import {
+  ListConnectionsSchema,
+  handleListConnections,
+} from './tools/oauth/list-connections.js';
+import {
+  RefreshConnectionSchema,
+  handleRefreshConnection,
+} from './tools/oauth/refresh-connection.js';
+import {
+  RevokeConnectionSchema,
+  handleRevokeConnection,
+} from './tools/oauth/revoke-connection.js';
 
 const SERVER_NAME = 'xerodev-mcp';
 const SERVER_VERSION = '0.1.0';
@@ -611,6 +647,127 @@ Always include idempotency_key to prevent duplicates on retry.`,
     }
   );
 
+  // Register get_invoice tool
+  server.tool(
+    'get_invoice',
+    `Fetches a single invoice by ID from the Xero organisation.
+
+**USE CASES:**
+- Retrieve invoice details after creation
+- Check invoice status before applying payment
+- Verify invoice totals and line items
+
+**RETURNS:**
+Full invoice details including contact, line items, totals, status, and currency.`,
+    {
+      tenant_id: z.string().describe('Target tenant ID'),
+      invoice_id: z.string().describe('Invoice ID to fetch'),
+      verbosity: z.enum(['silent', 'compact', 'diagnostic', 'debug']).default('diagnostic'),
+    },
+    async (args) => {
+      const parsed = GetInvoiceSchema.parse(args);
+      const result = await handleGetInvoice(parsed, adapter);
+      return {
+        content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }],
+      };
+    }
+  );
+
+  // Register get_contact tool
+  server.tool(
+    'get_contact',
+    `Fetches a single contact by ID from the Xero organisation.
+
+**USE CASES:**
+- Retrieve contact details before creating invoice
+- Verify contact exists and is active
+- Get contact addresses and phone numbers
+
+**RETURNS:**
+Full contact details including name, email, addresses, phones, customer/supplier flags.`,
+    {
+      tenant_id: z.string().describe('Target tenant ID'),
+      contact_id: z.string().describe('Contact ID to fetch'),
+      verbosity: z.enum(['silent', 'compact', 'diagnostic', 'debug']).default('diagnostic'),
+    },
+    async (args) => {
+      const parsed = GetContactSchema.parse(args);
+      const result = await handleGetContact(parsed, adapter);
+      return {
+        content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }],
+      };
+    }
+  );
+
+  // Register list_invoices tool
+  server.tool(
+    'list_invoices',
+    `Lists invoices from the Xero organisation with optional filters.
+
+**FILTERS:**
+- status: DRAFT, SUBMITTED, AUTHORISED, PAID, VOIDED
+- type: ACCREC (sales invoices) or ACCPAY (bills)
+- contact_id: Filter by specific contact
+- from_date/to_date: Date range (YYYY-MM-DD)
+
+**PAGINATION:**
+- page: Page number (starts at 1)
+- page_size: Items per page (max 100, default 20)`,
+    {
+      tenant_id: z.string().describe('Target tenant ID'),
+      status: z.enum(['DRAFT', 'SUBMITTED', 'AUTHORISED', 'PAID', 'VOIDED']).optional()
+        .describe('Filter by invoice status'),
+      type: z.enum(['ACCREC', 'ACCPAY']).optional()
+        .describe('Filter by invoice type'),
+      contact_id: z.string().optional().describe('Filter by contact ID'),
+      from_date: z.string().optional().describe('Filter from date (YYYY-MM-DD)'),
+      to_date: z.string().optional().describe('Filter to date (YYYY-MM-DD)'),
+      page: z.number().int().positive().default(1).describe('Page number'),
+      page_size: z.number().int().positive().max(100).default(20).describe('Items per page'),
+      verbosity: z.enum(['silent', 'compact', 'diagnostic', 'debug']).default('diagnostic'),
+    },
+    async (args) => {
+      const parsed = ListInvoicesSchema.parse(args);
+      const result = await handleListInvoices(parsed, adapter);
+      return {
+        content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }],
+      };
+    }
+  );
+
+  // Register list_contacts tool
+  server.tool(
+    'list_contacts',
+    `Lists contacts from the Xero organisation with optional filters.
+
+**FILTERS:**
+- status: ACTIVE or ARCHIVED
+- is_customer: Filter to customers only
+- is_supplier: Filter to suppliers only
+- search: Search by name or email (case-insensitive)
+
+**PAGINATION:**
+- page: Page number (starts at 1)
+- page_size: Items per page (max 100, default 20)`,
+    {
+      tenant_id: z.string().describe('Target tenant ID'),
+      status: z.enum(['ACTIVE', 'ARCHIVED']).optional().describe('Filter by status'),
+      is_customer: z.boolean().optional().describe('Filter to customers only'),
+      is_supplier: z.boolean().optional().describe('Filter to suppliers only'),
+      search: z.string().optional().describe('Search by name or email'),
+      page: z.number().int().positive().default(1).describe('Page number'),
+      page_size: z.number().int().positive().max(100).default(20).describe('Items per page'),
+      verbosity: z.enum(['silent', 'compact', 'diagnostic', 'debug']).default('diagnostic'),
+    },
+    async (args) => {
+      const parsed = ListContactsSchema.parse(args);
+      const result = await handleListContacts(parsed, adapter);
+      return {
+        content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }],
+      };
+    }
+  );
+
   // Register get_audit_log tool
   server.tool(
     'get_audit_log',
@@ -639,6 +796,135 @@ Use this to:
     }
   );
 
+  // Register get_authorization_url tool (OAuth step 1)
+  server.tool(
+    'get_authorization_url',
+    `Generates a Xero OAuth 2.0 authorization URL for the user to visit in their browser.
+
+**STEP 1 OF OAUTH FLOW:**
+Call this tool first to get the authorization URL, then visit it in your browser.
+
+**WHAT HAPPENS NEXT:**
+1. User visits the returned URL in a web browser
+2. User logs into Xero (if not already logged in)
+3. User selects which Xero organisation(s) to authorize
+4. Xero redirects to the callback URL with an authorization code
+5. User copies the full callback URL
+6. User calls \`exchange_auth_code\` with the callback URL`,
+    {
+      scopes: z.array(z.string()).optional().describe('OAuth scopes to request'),
+      verbosity: z.enum(['silent', 'compact', 'diagnostic', 'debug']).default('diagnostic'),
+    },
+    async (args) => {
+      const parsed = GetAuthorizationUrlSchema.parse(args);
+      const result = await handleGetAuthorizationUrl(parsed, adapter);
+      return {
+        content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }],
+      };
+    }
+  );
+
+  // Register exchange_auth_code tool (OAuth step 2)
+  server.tool(
+    'exchange_auth_code',
+    `Exchanges the OAuth authorization code (from callback URL) for access tokens and stores them securely.
+
+**STEP 2 OF OAUTH FLOW:**
+After calling \`get_authorization_url\` and completing authorization in the browser, call this with the callback URL.
+
+**HOW TO GET THE CALLBACK URL:**
+1. Visit the authorization URL from \`get_authorization_url\`
+2. Log in to Xero and select organisations to authorize
+3. After authorization, Xero redirects to your redirect URI
+4. The URL in your browser bar is the callback URL - copy the entire URL
+5. Pass that URL to this tool as \`callback_url\``,
+    {
+      callback_url: z.string().describe('The full callback URL from the browser after authorization'),
+      verbosity: z.enum(['silent', 'compact', 'diagnostic', 'debug']).default('diagnostic'),
+    },
+    async (args) => {
+      const parsed = ExchangeAuthCodeSchema.parse(args);
+      const result = await handleExchangeAuthCode(parsed, adapter);
+      return {
+        content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }],
+      };
+    }
+  );
+
+  // Register list_connections tool
+  server.tool(
+    'list_connections',
+    `Lists all stored Xero tenant connections from the database.
+
+**USE AFTER OAUTH:**
+Call this after completing the OAuth flow to see all available connections.
+
+**CONNECTION STATUSES:**
+- active: Tokens are valid and ready to use
+- expired: Tokens have expired and need refresh
+- revoked: Connection has been removed`,
+    {
+      include_inactive: z.boolean().default(false).describe('Include expired and revoked connections'),
+      verbosity: z.enum(['silent', 'compact', 'diagnostic', 'debug']).default('diagnostic'),
+    },
+    async (args) => {
+      const parsed = ListConnectionsSchema.parse(args);
+      const result = await handleListConnections(parsed, adapter);
+      return {
+        content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }],
+      };
+    }
+  );
+
+  // Register refresh_connection tool
+  server.tool(
+    'refresh_connection',
+    `Manually refreshes OAuth tokens for a stored connection.
+
+**WHEN TO USE:**
+- Token refresh is automatic during API calls
+- Use this tool to manually refresh if you suspect tokens are stale
+- Use after a connection is marked as 'expired'
+
+**Note:** Token refresh happens automatically during normal API calls.`,
+    {
+      tenant_id: z.string().describe('The tenant ID to refresh tokens for'),
+      verbosity: z.enum(['silent', 'compact', 'diagnostic', 'debug']).default('diagnostic'),
+    },
+    async (args) => {
+      const parsed = RefreshConnectionSchema.parse(args);
+      const result = await handleRefreshConnection(parsed, adapter);
+      return {
+        content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }],
+      };
+    }
+  );
+
+  // Register revoke_connection tool
+  server.tool(
+    'revoke_connection',
+    `Removes a stored Xero tenant connection from the database.
+
+**WHEN TO USE:**
+- You want to disconnect a Xero organisation
+- You need to re-authorize a connection (revoke then re-authorize)
+- Cleaning up old/unused connections
+
+**WARNING:**
+This operation cannot be undone. After revoking, you must complete the OAuth flow again to reconnect.`,
+    {
+      tenant_id: z.string().describe('The tenant ID to revoke'),
+      verbosity: z.enum(['silent', 'compact', 'diagnostic', 'debug']).default('diagnostic'),
+    },
+    async (args) => {
+      const parsed = RevokeConnectionSchema.parse(args);
+      const result = await handleRevokeConnection(parsed, adapter);
+      return {
+        content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }],
+      };
+    }
+  );
+
   // Connect via stdio transport (for Docker MCP Toolkit compatibility)
   const transport = new StdioServerTransport();
 
@@ -646,7 +932,7 @@ Use this to:
 
   await server.connect(transport);
 
-  console.error(`[${SERVER_NAME}] Ready. Registered 16 tools:`);
+  console.error(`[${SERVER_NAME}] Ready. Registered 21 tools:`);
   console.error(`  - get_mcp_capabilities`);
   console.error(`  - switch_tenant_context`);
   console.error(`  - validate_schema_match`);
@@ -662,7 +948,16 @@ Use this to:
   console.error(`  - create_credit_note`);
   console.error(`  - create_payment`);
   console.error(`  - create_bank_transaction`);
+  console.error(`  - get_invoice`);
+  console.error(`  - get_contact`);
+  console.error(`  - list_invoices`);
+  console.error(`  - list_contacts`);
   console.error(`  - get_audit_log`);
+  console.error(`  - get_authorization_url`);
+  console.error(`  - exchange_auth_code`);
+  console.error(`  - list_connections`);
+  console.error(`  - refresh_connection`);
+  console.error(`  - revoke_connection`);
 
   // Handle shutdown
   process.on('SIGINT', () => {

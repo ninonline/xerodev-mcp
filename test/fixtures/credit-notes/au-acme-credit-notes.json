@@ -1,202 +1,217 @@
 {
   "_meta": {
-    "description": "Credit notes for AU tenant with GST",
+    "description": "Sample credit notes for AU tenant",
     "tenant_id": "acme-au-001",
-    "count": 8,
-    "scenarios": ["customer refunds", "supplier credits", "partial credits", "voided credits"]
+    "count": 8
   },
   "credit_notes": [
     {
       "credit_note_id": "cn-001",
       "credit_note_number": "CN-0001",
       "type": "ACCRECCREDIT",
-      "contact": { "contact_id": "contact-001" },
-      "date": "2025-01-18",
+      "contact": {
+        "contact_id": "contact-017"
+      },
+      "date": "2025-12-05",
       "status": "AUTHORISED",
       "line_amount_types": "Exclusive",
       "line_items": [
         {
-          "description": "Discount on consulting services - loyalty bonus",
+          "description": "Discount applied",
           "quantity": 1,
-          "unit_amount": 500.00,
+          "unit_amount": 280.74,
           "account_code": "200",
           "tax_type": "OUTPUT"
         }
       ],
       "currency_code": "AUD",
-      "sub_total": 500.00,
-      "total_tax": 50.00,
-      "total": 550.00,
-      "remaining_credit": 550.00,
-      "reference": "Loyalty discount - INV-001"
+      "sub_total": 280.74,
+      "total_tax": 28.07,
+      "total": 308.81,
+      "remaining_credit": 308.81,
+      "reference": "Ref: 1JN0CKSZ"
     },
     {
       "credit_note_id": "cn-002",
       "credit_note_number": "CN-0002",
       "type": "ACCRECCREDIT",
-      "contact": { "contact_id": "contact-002" },
-      "date": "2025-01-17",
-      "status": "DRAFT",
+      "contact": {
+        "contact_id": "contact-008"
+      },
+      "date": "2025-12-27",
+      "status": "AUTHORISED",
       "line_amount_types": "Exclusive",
       "line_items": [
         {
-          "description": "Refund for cancelled project phase",
-          "quantity": 10,
-          "unit_amount": 200.00,
-          "account_code": "200",
-          "tax_type": "OUTPUT"
+          "description": "Credit adjustment",
+          "quantity": 1,
+          "unit_amount": 260.96,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
         }
       ],
       "currency_code": "AUD",
-      "sub_total": 2000.00,
-      "total_tax": 200.00,
-      "total": 2200.00,
-      "remaining_credit": 2200.00,
-      "reference": "Phase 3 cancellation"
+      "sub_total": 260.96,
+      "total_tax": 0,
+      "total": 260.96,
+      "remaining_credit": 260.96,
+      "reference": "Ref: GCMC6LY1"
     },
     {
       "credit_note_id": "cn-003",
       "credit_note_number": "CN-0003",
       "type": "ACCPAYCREDIT",
-      "contact": { "contact_id": "contact-011" },
-      "date": "2025-01-15",
-      "status": "AUTHORISED",
+      "contact": {
+        "contact_id": "contact-013"
+      },
+      "date": "2025-12-01",
+      "status": "DRAFT",
       "line_amount_types": "Exclusive",
       "line_items": [
         {
-          "description": "Credit for returned equipment",
-          "quantity": 2,
-          "unit_amount": 750.00,
-          "account_code": "429",
-          "tax_type": "INPUT"
-        }
-      ],
-      "currency_code": "AUD",
-      "sub_total": 1500.00,
-      "total_tax": 150.00,
-      "total": 1650.00,
-      "remaining_credit": 825.00,
-      "reference": "Equipment return - PO-2025-001"
-    },
-    {
-      "credit_note_id": "cn-004",
-      "credit_note_number": "CN-0004",
-      "type": "ACCRECCREDIT",
-      "contact": { "contact_id": "contact-003" },
-      "date": "2025-01-10",
-      "status": "PAID",
-      "line_amount_types": "Exclusive",
-      "line_items": [
-        {
-          "description": "Overcharge correction",
+          "description": "Credit adjustment",
           "quantity": 1,
-          "unit_amount": 330.00,
-          "account_code": "200",
+          "unit_amount": 160.73,
+          "account_code": "220",
           "tax_type": "OUTPUT"
         }
       ],
       "currency_code": "AUD",
-      "sub_total": 330.00,
-      "total_tax": 33.00,
-      "total": 363.00,
-      "remaining_credit": 0.00,
-      "reference": "Billing correction - INV-005"
+      "sub_total": 160.73,
+      "total_tax": 16.07,
+      "total": 176.8,
+      "remaining_credit": 176.8,
+      "reference": "Ref: FNB9Z6G2"
+    },
+    {
+      "credit_note_id": "cn-004",
+      "credit_note_number": "CN-0004",
+      "type": "ACCPAYCREDIT",
+      "contact": {
+        "contact_id": "contact-020"
+      },
+      "date": "2025-12-19",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Returned goods credit",
+          "quantity": 1,
+          "unit_amount": 67,
+          "account_code": "220",
+          "tax_type": "OUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 67,
+      "total_tax": 6.7,
+      "total": 73.7,
+      "remaining_credit": 73.7,
+      "reference": "Ref: 5IVPQEYR"
     },
     {
       "credit_note_id": "cn-005",
       "credit_note_number": "CN-0005",
-      "type": "ACCPAYCREDIT",
-      "contact": { "contact_id": "contact-012" },
-      "date": "2025-01-12",
+      "type": "ACCRECCREDIT",
+      "contact": {
+        "contact_id": "contact-013"
+      },
+      "date": "2025-12-15",
       "status": "AUTHORISED",
       "line_amount_types": "Exclusive",
       "line_items": [
         {
-          "description": "Supplier volume discount",
+          "description": "Refund for services",
           "quantity": 1,
-          "unit_amount": 1000.00,
-          "account_code": "300",
-          "tax_type": "INPUT"
+          "unit_amount": 116.07,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
         }
       ],
       "currency_code": "AUD",
-      "sub_total": 1000.00,
-      "total_tax": 100.00,
-      "total": 1100.00,
-      "remaining_credit": 1100.00,
-      "reference": "Q4 2024 volume discount"
+      "sub_total": 116.07,
+      "total_tax": 0,
+      "total": 116.07,
+      "remaining_credit": 116.07,
+      "reference": "Ref: 2L5I2AP0"
     },
     {
       "credit_note_id": "cn-006",
       "credit_note_number": "CN-0006",
       "type": "ACCRECCREDIT",
-      "contact": { "contact_id": "contact-004" },
-      "date": "2025-01-08",
-      "status": "VOIDED",
+      "contact": {
+        "contact_id": "contact-013"
+      },
+      "date": "2025-12-15",
+      "status": "AUTHORISED",
       "line_amount_types": "Exclusive",
       "line_items": [
         {
-          "description": "Cancelled credit note",
+          "description": "Discount applied",
           "quantity": 1,
-          "unit_amount": 250.00,
-          "account_code": "200",
-          "tax_type": "OUTPUT"
+          "unit_amount": 213.53,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
         }
       ],
       "currency_code": "AUD",
-      "sub_total": 250.00,
-      "total_tax": 25.00,
-      "total": 275.00,
-      "remaining_credit": 0.00,
-      "reference": "Voided - issued in error"
+      "sub_total": 213.53,
+      "total_tax": 0,
+      "total": 213.53,
+      "remaining_credit": 213.53,
+      "reference": "Ref: QVPQZ0EW"
     },
     {
       "credit_note_id": "cn-007",
       "credit_note_number": "CN-0007",
       "type": "ACCRECCREDIT",
-      "contact": { "contact_id": "contact-005" },
-      "date": "2025-01-19",
+      "contact": {
+        "contact_id": "contact-003"
+      },
+      "date": "2025-12-18",
       "status": "DRAFT",
       "line_amount_types": "Exclusive",
       "line_items": [
         {
-          "description": "Service level credit",
-          "quantity": 4,
-          "unit_amount": 150.00,
+          "description": "Returned goods credit",
+          "quantity": 1,
+          "unit_amount": 274.49,
+          "account_code": "220",
+          "tax_type": "OUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 274.49,
+      "total_tax": 27.45,
+      "total": 301.94,
+      "remaining_credit": 301.94,
+      "reference": "Ref: KHYLKJBH"
+    },
+    {
+      "credit_note_id": "cn-008",
+      "credit_note_number": "CN-0008",
+      "type": "ACCRECCREDIT",
+      "contact": {
+        "contact_id": "contact-008"
+      },
+      "date": "2025-12-12",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Refund for services",
+          "quantity": 1,
+          "unit_amount": 122.81,
           "account_code": "200",
           "tax_type": "OUTPUT"
         }
       ],
       "currency_code": "AUD",
-      "sub_total": 600.00,
-      "total_tax": 60.00,
-      "total": 660.00,
-      "remaining_credit": 660.00,
-      "reference": "SLA breach compensation"
-    },
-    {
-      "credit_note_id": "cn-008",
-      "credit_note_number": "CN-0008",
-      "type": "ACCPAYCREDIT",
-      "contact": { "contact_id": "contact-013" },
-      "date": "2025-01-16",
-      "status": "AUTHORISED",
-      "line_amount_types": "Exclusive",
-      "line_items": [
-        {
-          "description": "Damaged goods return credit",
-          "quantity": 5,
-          "unit_amount": 120.00,
-          "account_code": "310",
-          "tax_type": "INPUT"
-        }
-      ],
-      "currency_code": "AUD",
-      "sub_total": 600.00,
-      "total_tax": 60.00,
-      "total": 660.00,
-      "remaining_credit": 660.00,
-      "reference": "Goods return - Shipment #4521"
+      "sub_total": 122.81,
+      "total_tax": 12.28,
+      "total": 135.09,
+      "remaining_credit": 135.09,
+      "reference": "Ref: GCIBZOBL"
     }
   ]
 }

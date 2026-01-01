@@ -1,264 +1,269 @@
 {
   "_meta": {
-    "description": "Quotes for AU tenant with GST",
+    "description": "Sample quotes for AU tenant",
     "tenant_id": "acme-au-001",
-    "count": 10,
-    "scenarios": ["draft proposals", "sent quotes", "accepted quotes", "expired quotes"]
+    "count": 10
   },
   "quotes": [
     {
       "quote_id": "quote-001",
       "quote_number": "QU-0001",
-      "contact": { "contact_id": "contact-001" },
-      "date": "2025-01-10",
-      "expiry_date": "2025-02-10",
+      "contact": {
+        "contact_id": "contact-011"
+      },
+      "date": "2025-12-23",
+      "expiry_date": "2026-01-22",
       "status": "SENT",
       "line_amount_types": "Exclusive",
       "line_items": [
         {
-          "description": "Website redesign - Discovery phase",
-          "quantity": 20,
-          "unit_amount": 175.00,
-          "account_code": "200",
-          "tax_type": "OUTPUT"
-        },
-        {
-          "description": "Website redesign - Implementation",
-          "quantity": 60,
-          "unit_amount": 175.00,
-          "account_code": "200",
-          "tax_type": "OUTPUT"
+          "description": "Website Development",
+          "quantity": 9,
+          "unit_amount": 309.66,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
         }
       ],
       "currency_code": "AUD",
-      "sub_total": 14000.00,
-      "total_tax": 1400.00,
-      "total": 15400.00,
-      "title": "Website Redesign Proposal",
-      "summary": "Complete website redesign including discovery, design, and implementation phases.",
-      "terms": "50% deposit required. Balance due on completion."
+      "sub_total": 2786.94,
+      "total_tax": 0,
+      "total": 2786.94,
+      "title": "Service Quote",
+      "summary": "Degusto ultio ratione alioqui valetudo vehemens."
     },
     {
       "quote_id": "quote-002",
       "quote_number": "QU-0002",
-      "contact": { "contact_id": "contact-003" },
-      "date": "2025-01-12",
-      "expiry_date": "2025-02-12",
-      "status": "DRAFT",
-      "line_amount_types": "Exclusive",
-      "line_items": [
-        {
-          "description": "Monthly retainer - IT support",
-          "quantity": 12,
-          "unit_amount": 2500.00,
-          "account_code": "200",
-          "tax_type": "OUTPUT"
-        }
-      ],
-      "currency_code": "AUD",
-      "sub_total": 30000.00,
-      "total_tax": 3000.00,
-      "total": 33000.00,
-      "title": "Annual IT Support Retainer",
-      "summary": "12-month IT support retainer including helpdesk and on-site support."
-    },
-    {
-      "quote_id": "quote-003",
-      "quote_number": "QU-0003",
-      "contact": { "contact_id": "contact-002" },
-      "date": "2025-01-05",
-      "expiry_date": "2025-01-20",
-      "status": "ACCEPTED",
-      "line_amount_types": "Exclusive",
-      "line_items": [
-        {
-          "description": "Cloud migration consulting",
-          "quantity": 40,
-          "unit_amount": 200.00,
-          "account_code": "200",
-          "tax_type": "OUTPUT"
-        }
-      ],
-      "currency_code": "AUD",
-      "sub_total": 8000.00,
-      "total_tax": 800.00,
-      "total": 8800.00,
-      "title": "Cloud Migration Project"
-    },
-    {
-      "quote_id": "quote-004",
-      "quote_number": "QU-0004",
-      "contact": { "contact_id": "contact-004" },
-      "date": "2024-12-01",
-      "expiry_date": "2024-12-31",
+      "contact": {
+        "contact_id": "contact-010"
+      },
+      "date": "2025-12-19",
+      "expiry_date": "2026-01-18",
       "status": "DECLINED",
       "line_amount_types": "Exclusive",
       "line_items": [
         {
-          "description": "Security audit and penetration testing",
-          "quantity": 1,
-          "unit_amount": 15000.00,
-          "account_code": "200",
+          "description": "Graphic Design",
+          "quantity": 10,
+          "unit_amount": 477.6,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 4776,
+      "total_tax": 0,
+      "total": 4776,
+      "title": "Project Proposal",
+      "summary": "Tardus aequus thema corrigo canonicus turpis sono voluptas trepide spero."
+    },
+    {
+      "quote_id": "quote-003",
+      "quote_number": "QU-0003",
+      "contact": {
+        "contact_id": "contact-007"
+      },
+      "date": "2025-12-27",
+      "expiry_date": "2026-01-26",
+      "status": "SENT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Software Development",
+          "quantity": 9,
+          "unit_amount": 908.14,
+          "account_code": "220",
           "tax_type": "OUTPUT"
         }
       ],
       "currency_code": "AUD",
-      "sub_total": 15000.00,
-      "total_tax": 1500.00,
-      "total": 16500.00,
-      "title": "Security Assessment"
+      "sub_total": 8173.26,
+      "total_tax": 817.33,
+      "total": 8990.59,
+      "title": "Development Estimate",
+      "summary": "Artificiose ait sustineo beatus capitulus aliquid autem degusto."
+    },
+    {
+      "quote_id": "quote-004",
+      "quote_number": "QU-0004",
+      "contact": {
+        "contact_id": "contact-016"
+      },
+      "date": "2025-12-22",
+      "expiry_date": "2026-01-21",
+      "status": "DECLINED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Content Writing",
+          "quantity": 1,
+          "unit_amount": 535.04,
+          "account_code": "220",
+          "tax_type": "OUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 535.04,
+      "total_tax": 53.5,
+      "total": 588.54,
+      "title": "Development Estimate",
+      "summary": "Valens dolore pauci nam vulgivagus tergo turba."
     },
     {
       "quote_id": "quote-005",
       "quote_number": "QU-0005",
-      "contact": { "contact_id": "contact-005" },
-      "date": "2025-01-08",
-      "expiry_date": "2025-02-08",
-      "status": "INVOICED",
+      "contact": {
+        "contact_id": "contact-005"
+      },
+      "date": "2025-12-24",
+      "expiry_date": "2026-01-23",
+      "status": "SENT",
       "line_amount_types": "Exclusive",
       "line_items": [
         {
-          "description": "Data analytics dashboard development",
-          "quantity": 80,
-          "unit_amount": 150.00,
-          "account_code": "200",
-          "tax_type": "OUTPUT"
+          "description": "SEO Services",
+          "quantity": 6,
+          "unit_amount": 217.73,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
         }
       ],
       "currency_code": "AUD",
-      "sub_total": 12000.00,
-      "total_tax": 1200.00,
-      "total": 13200.00,
-      "title": "Analytics Dashboard"
+      "sub_total": 1306.38,
+      "total_tax": 0,
+      "total": 1306.38,
+      "title": "Development Estimate",
+      "summary": "Arbitro tergo texo qui."
     },
     {
       "quote_id": "quote-006",
       "quote_number": "QU-0006",
-      "contact": { "contact_id": "contact-006" },
-      "date": "2025-01-14",
-      "expiry_date": "2025-02-14",
-      "status": "SENT",
-      "line_amount_types": "Exclusive",
-      "line_items": [
-        {
-          "description": "Mobile app development - iOS",
-          "quantity": 100,
-          "unit_amount": 180.00,
-          "account_code": "200",
-          "tax_type": "OUTPUT"
-        },
-        {
-          "description": "Mobile app development - Android",
-          "quantity": 100,
-          "unit_amount": 180.00,
-          "account_code": "200",
-          "tax_type": "OUTPUT"
-        }
-      ],
-      "currency_code": "AUD",
-      "sub_total": 36000.00,
-      "total_tax": 3600.00,
-      "total": 39600.00,
-      "title": "Mobile App Development"
-    },
-    {
-      "quote_id": "quote-007",
-      "quote_number": "QU-0007",
-      "contact": { "contact_id": "contact-007" },
-      "date": "2025-01-15",
-      "expiry_date": "2025-02-15",
-      "status": "DRAFT",
-      "line_amount_types": "Exclusive",
-      "line_items": [
-        {
-          "description": "API integration consulting",
-          "quantity": 24,
-          "unit_amount": 200.00,
-          "account_code": "200",
-          "tax_type": "OUTPUT"
-        }
-      ],
-      "currency_code": "AUD",
-      "sub_total": 4800.00,
-      "total_tax": 480.00,
-      "total": 5280.00,
-      "title": "API Integration Services"
-    },
-    {
-      "quote_id": "quote-008",
-      "quote_number": "QU-0008",
-      "contact": { "contact_id": "contact-008" },
-      "date": "2025-01-13",
-      "expiry_date": "2025-02-13",
-      "status": "SENT",
-      "line_amount_types": "Exclusive",
-      "line_items": [
-        {
-          "description": "Staff training - Cloud technologies",
-          "quantity": 3,
-          "unit_amount": 3000.00,
-          "account_code": "200",
-          "tax_type": "OUTPUT"
-        }
-      ],
-      "currency_code": "AUD",
-      "sub_total": 9000.00,
-      "total_tax": 900.00,
-      "total": 9900.00,
-      "title": "Cloud Training Program"
-    },
-    {
-      "quote_id": "quote-009",
-      "quote_number": "QU-0009",
-      "contact": { "contact_id": "contact-009" },
-      "date": "2025-01-11",
-      "expiry_date": "2025-02-11",
+      "contact": {
+        "contact_id": "contact-002"
+      },
+      "date": "2025-12-21",
+      "expiry_date": "2026-01-20",
       "status": "ACCEPTED",
       "line_amount_types": "Exclusive",
       "line_items": [
         {
-          "description": "Database optimisation",
-          "quantity": 16,
-          "unit_amount": 225.00,
+          "description": "Marketing Services",
+          "quantity": 4,
+          "unit_amount": 158.69,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 634.76,
+      "total_tax": 0,
+      "total": 634.76,
+      "title": "Project Proposal",
+      "summary": "Ratione crebro vesper aptus officia crur."
+    },
+    {
+      "quote_id": "quote-007",
+      "quote_number": "QU-0007",
+      "contact": {
+        "contact_id": "contact-006"
+      },
+      "date": "2025-12-16",
+      "expiry_date": "2026-01-15",
+      "status": "SENT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Consulting Services",
+          "quantity": 7,
+          "unit_amount": 458.17,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 3207.19,
+      "total_tax": 0,
+      "total": 3207.19,
+      "title": "Service Quote",
+      "summary": "Audacia fugit tametsi tollo bos confero."
+    },
+    {
+      "quote_id": "quote-008",
+      "quote_number": "QU-0008",
+      "contact": {
+        "contact_id": "contact-006"
+      },
+      "date": "2025-12-16",
+      "expiry_date": "2026-01-15",
+      "status": "SENT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "SEO Services",
+          "quantity": 10,
+          "unit_amount": 201.89,
           "account_code": "200",
           "tax_type": "OUTPUT"
         }
       ],
       "currency_code": "AUD",
-      "sub_total": 3600.00,
-      "total_tax": 360.00,
-      "total": 3960.00,
-      "title": "Database Performance Optimisation"
+      "sub_total": 2018.9,
+      "total_tax": 201.89,
+      "total": 2220.79,
+      "title": "Project Proposal",
+      "summary": "Adficio vindico communis."
+    },
+    {
+      "quote_id": "quote-009",
+      "quote_number": "QU-0009",
+      "contact": {
+        "contact_id": "contact-016"
+      },
+      "date": "2025-12-16",
+      "expiry_date": "2026-01-15",
+      "status": "SENT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Consulting Services",
+          "quantity": 6,
+          "unit_amount": 666.83,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 4000.98,
+      "total_tax": 0,
+      "total": 4000.98,
+      "title": "Consulting Engagement",
+      "summary": "Confugo degusto cotidie thesis viduo cunabula delinquo sufficio aureus."
     },
     {
       "quote_id": "quote-010",
       "quote_number": "QU-0010",
-      "contact": { "contact_id": "contact-010" },
-      "date": "2025-01-16",
-      "expiry_date": "2025-02-16",
-      "status": "DRAFT",
+      "contact": {
+        "contact_id": "contact-002"
+      },
+      "date": "2025-12-27",
+      "expiry_date": "2026-01-26",
+      "status": "SENT",
       "line_amount_types": "Exclusive",
       "line_items": [
         {
-          "description": "DevOps implementation",
-          "quantity": 60,
-          "unit_amount": 190.00,
-          "account_code": "200",
-          "tax_type": "OUTPUT"
-        },
-        {
-          "description": "CI/CD pipeline setup",
-          "quantity": 20,
-          "unit_amount": 190.00,
+          "description": "Consulting Services",
+          "quantity": 5,
+          "unit_amount": 112.88,
           "account_code": "200",
           "tax_type": "OUTPUT"
         }
       ],
       "currency_code": "AUD",
-      "sub_total": 15200.00,
-      "total_tax": 1520.00,
-      "total": 16720.00,
-      "title": "DevOps Transformation"
+      "sub_total": 564.4,
+      "total_tax": 56.44,
+      "total": 620.84,
+      "title": "Consulting Engagement",
+      "summary": "Volutabrum eaque tego acquiro comburo assumenda dignissimos verto."
     }
   ]
 }

@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "description": "United States tenant with SALES_TAX tax system",
+    "region": "US",
+    "currency": "USD",
+    "use_cases": [
+      "Test SALES_TAX calculations",
+      "Test US tax types",
+      "Validate US Chart of Accounts"
+    ]
+  },
+  "tenant_id": "startup-us-001",
+  "xero_tenant_id": "6073a965-687f-4551-9643-2c6a96a97f01",
+  "org_name": "TechStart Inc",
+  "region": "US",
+  "currency": "USD",
+  "tax_system": "SALES_TAX",
+  "granted_scopes": [
+    "accounting.transactions",
+    "accounting.contacts",
+    "accounting.settings",
+    "offline_access"
+  ],
+  "connection_status": "active"
+}

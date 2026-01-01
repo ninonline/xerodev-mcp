@@ -1,0 +1,664 @@
+{
+  "_meta": {
+    "description": "Sample invoices for US tenant",
+    "tenant_id": "startup-us-001",
+    "count": 20
+  },
+  "invoices": [
+    {
+      "invoice_id": "inv-001",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-007"
+      },
+      "date": "2025-12-07",
+      "due_date": "2026-01-06",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Cloud Infrastructure Setup",
+          "quantity": 14,
+          "unit_amount": 412.12,
+          "account_code": "4020",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Cloud Infrastructure Setup",
+          "quantity": 12,
+          "unit_amount": 325.44,
+          "account_code": "4020",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 9674.96,
+      "total_tax": 0,
+      "total": 9674.96
+    },
+    {
+      "invoice_id": "inv-002",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-010"
+      },
+      "date": "2025-12-20",
+      "due_date": "2026-01-19",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Graphic Design",
+          "quantity": 17,
+          "unit_amount": 232.67,
+          "account_code": "4010",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Marketing Services",
+          "quantity": 17,
+          "unit_amount": 415.38,
+          "account_code": "4010",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 11016.85,
+      "total_tax": 0,
+      "total": 11016.85
+    },
+    {
+      "invoice_id": "inv-003",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-008"
+      },
+      "date": "2025-12-05",
+      "due_date": "2026-01-04",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Data Analysis",
+          "quantity": 6,
+          "unit_amount": 258.54,
+          "account_code": "4000",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Technical Support",
+          "quantity": 8,
+          "unit_amount": 164.85,
+          "account_code": "4000",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 2870.04,
+      "total_tax": 0,
+      "total": 2870.04
+    },
+    {
+      "invoice_id": "inv-004",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-003"
+      },
+      "date": "2025-12-19",
+      "due_date": "2026-01-18",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Consulting Services",
+          "quantity": 15,
+          "unit_amount": 431.7,
+          "account_code": "4000",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Software Development",
+          "quantity": 10,
+          "unit_amount": 340.82,
+          "account_code": "4000",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Content Writing",
+          "quantity": 8,
+          "unit_amount": 458.4,
+          "account_code": "4000",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 13550.9,
+      "total_tax": 0,
+      "total": 13550.9
+    },
+    {
+      "invoice_id": "inv-005",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-017"
+      },
+      "date": "2025-12-19",
+      "due_date": "2026-01-18",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Consulting Services",
+          "quantity": 16,
+          "unit_amount": 368.65,
+          "account_code": "4020",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Software Development",
+          "quantity": 12,
+          "unit_amount": 71.17,
+          "account_code": "4020",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Technical Support",
+          "quantity": 1,
+          "unit_amount": 294.31,
+          "account_code": "4020",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 7046.75,
+      "total_tax": 0,
+      "total": 7046.75
+    },
+    {
+      "invoice_id": "inv-006",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-001"
+      },
+      "date": "2025-12-20",
+      "due_date": "2026-01-19",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Graphic Design",
+          "quantity": 15,
+          "unit_amount": 326.21,
+          "account_code": "4010",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "SEO Services",
+          "quantity": 9,
+          "unit_amount": 139.07,
+          "account_code": "4010",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Graphic Design",
+          "quantity": 7,
+          "unit_amount": 283.34,
+          "account_code": "4010",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 8128.16,
+      "total_tax": 0,
+      "total": 8128.16
+    },
+    {
+      "invoice_id": "inv-007",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-015"
+      },
+      "date": "2025-12-11",
+      "due_date": "2026-01-10",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Security Audit",
+          "quantity": 6,
+          "unit_amount": 55.11,
+          "account_code": "4030",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Technical Support",
+          "quantity": 13,
+          "unit_amount": 119.72,
+          "account_code": "4030",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 1887.02,
+      "total_tax": 0,
+      "total": 1887.02
+    },
+    {
+      "invoice_id": "inv-008",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-018"
+      },
+      "date": "2025-12-08",
+      "due_date": "2026-01-07",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Marketing Services",
+          "quantity": 15,
+          "unit_amount": 78.96,
+          "account_code": "4020",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "SEO Services",
+          "quantity": 11,
+          "unit_amount": 179.89,
+          "account_code": "4020",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "SEO Services",
+          "quantity": 2,
+          "unit_amount": 390.75,
+          "account_code": "4020",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 3944.69,
+      "total_tax": 0,
+      "total": 3944.69
+    },
+    {
+      "invoice_id": "inv-009",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-003"
+      },
+      "date": "2025-12-28",
+      "due_date": "2026-01-27",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Security Audit",
+          "quantity": 18,
+          "unit_amount": 137.74,
+          "account_code": "4030",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Project Management",
+          "quantity": 20,
+          "unit_amount": 185.65,
+          "account_code": "4030",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Data Analysis",
+          "quantity": 4,
+          "unit_amount": 246.76,
+          "account_code": "4030",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 7179.36,
+      "total_tax": 0,
+      "total": 7179.36
+    },
+    {
+      "invoice_id": "inv-010",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-007"
+      },
+      "date": "2025-12-03",
+      "due_date": "2026-01-02",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Content Writing",
+          "quantity": 5,
+          "unit_amount": 68.65,
+          "account_code": "4030",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 343.25,
+      "total_tax": 0,
+      "total": 343.25
+    },
+    {
+      "invoice_id": "inv-011",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-020"
+      },
+      "date": "2025-12-21",
+      "due_date": "2026-01-20",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Website Development",
+          "quantity": 10,
+          "unit_amount": 270.22,
+          "account_code": "4020",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Content Writing",
+          "quantity": 5,
+          "unit_amount": 77.66,
+          "account_code": "4020",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Software Development",
+          "quantity": 13,
+          "unit_amount": 457.62,
+          "account_code": "4020",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 9039.56,
+      "total_tax": 0,
+      "total": 9039.56
+    },
+    {
+      "invoice_id": "inv-012",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-010"
+      },
+      "date": "2025-12-11",
+      "due_date": "2026-01-10",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "SEO Services",
+          "quantity": 5,
+          "unit_amount": 181.49,
+          "account_code": "4030",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 907.45,
+      "total_tax": 0,
+      "total": 907.45
+    },
+    {
+      "invoice_id": "inv-013",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-007"
+      },
+      "date": "2025-11-30",
+      "due_date": "2025-12-30",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Content Writing",
+          "quantity": 2,
+          "unit_amount": 133.88,
+          "account_code": "4020",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "System Integration",
+          "quantity": 12,
+          "unit_amount": 69.94,
+          "account_code": "4020",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Website Development",
+          "quantity": 19,
+          "unit_amount": 351.09,
+          "account_code": "4020",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 7777.75,
+      "total_tax": 0,
+      "total": 7777.75
+    },
+    {
+      "invoice_id": "inv-014",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-002"
+      },
+      "date": "2025-12-19",
+      "due_date": "2026-01-18",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Security Audit",
+          "quantity": 18,
+          "unit_amount": 409,
+          "account_code": "4030",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 7362,
+      "total_tax": 0,
+      "total": 7362
+    },
+    {
+      "invoice_id": "inv-015",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-010"
+      },
+      "date": "2025-12-10",
+      "due_date": "2026-01-09",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Security Audit",
+          "quantity": 18,
+          "unit_amount": 479.23,
+          "account_code": "4000",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Technical Support",
+          "quantity": 6,
+          "unit_amount": 462.54,
+          "account_code": "4000",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Consulting Services",
+          "quantity": 3,
+          "unit_amount": 298.62,
+          "account_code": "4000",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 12297.24,
+      "total_tax": 0,
+      "total": 12297.24
+    },
+    {
+      "invoice_id": "inv-016",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-011"
+      },
+      "date": "2025-12-25",
+      "due_date": "2026-01-24",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Data Analysis",
+          "quantity": 8,
+          "unit_amount": 319.4,
+          "account_code": "4010",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "SEO Services",
+          "quantity": 1,
+          "unit_amount": 265.5,
+          "account_code": "4010",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 2820.7,
+      "total_tax": 0,
+      "total": 2820.7
+    },
+    {
+      "invoice_id": "inv-017",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-016"
+      },
+      "date": "2025-12-04",
+      "due_date": "2026-01-03",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Security Audit",
+          "quantity": 17,
+          "unit_amount": 327.63,
+          "account_code": "4000",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Cloud Infrastructure Setup",
+          "quantity": 2,
+          "unit_amount": 126.09,
+          "account_code": "4000",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 5821.89,
+      "total_tax": 0,
+      "total": 5821.89
+    },
+    {
+      "invoice_id": "inv-018",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-001"
+      },
+      "date": "2025-11-30",
+      "due_date": "2025-12-30",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Graphic Design",
+          "quantity": 20,
+          "unit_amount": 393.59,
+          "account_code": "4000",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Content Writing",
+          "quantity": 6,
+          "unit_amount": 169.66,
+          "account_code": "4000",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Data Analysis",
+          "quantity": 5,
+          "unit_amount": 396.25,
+          "account_code": "4000",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 10871.01,
+      "total_tax": 0,
+      "total": 10871.01
+    },
+    {
+      "invoice_id": "inv-019",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-010"
+      },
+      "date": "2025-12-26",
+      "due_date": "2026-01-25",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Consulting Services",
+          "quantity": 17,
+          "unit_amount": 278.08,
+          "account_code": "4010",
+          "tax_type": "NONE"
+        },
+        {
+          "description": "Training and Workshops",
+          "quantity": 8,
+          "unit_amount": 395.2,
+          "account_code": "4010",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 7888.96,
+      "total_tax": 0,
+      "total": 7888.96
+    },
+    {
+      "invoice_id": "inv-020",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-018"
+      },
+      "date": "2025-12-25",
+      "due_date": "2026-01-24",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Data Analysis",
+          "quantity": 2,
+          "unit_amount": 70.65,
+          "account_code": "4030",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 141.3,
+      "total_tax": 0,
+      "total": 141.3
+    }
+  ]
+}

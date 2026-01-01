@@ -1,368 +1,429 @@
 {
   "_meta": {
-    "description": "Bank transactions for AU tenant with GST",
+    "description": "Sample bank transactions for AU tenant",
     "tenant_id": "acme-au-001",
-    "count": 15,
-    "scenarios": ["receive money", "spend money", "prepayments", "overpayments", "reconciled transactions"]
+    "count": 15
   },
   "bank_transactions": [
     {
       "bank_transaction_id": "bt-001",
       "type": "RECEIVE",
-      "contact": { "contact_id": "contact-001" },
-      "bank_account": { "account_id": "acc-bank-001" },
-      "date": "2025-01-15",
+      "contact": {
+        "contact_id": "contact-017"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-091"
+      },
+      "date": "2025-12-22",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 389.97,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 389.97,
+      "total_tax": 0,
+      "total": 389.97,
+      "reference": "Ref: EZ90KM",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-002",
+      "type": "SPEND",
+      "contact": {
+        "contact_id": "contact-010"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-091"
+      },
+      "date": "2025-12-21",
       "status": "AUTHORISED",
       "line_amount_types": "Exclusive",
       "line_items": [
         {
-          "description": "Payment received - INV-001",
+          "description": "Software subscription",
           "quantity": 1,
-          "unit_amount": 1650.00,
+          "unit_amount": 229.01,
+          "account_code": "450",
+          "tax_type": "INPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 229.01,
+      "total_tax": 22.9,
+      "total": 251.91,
+      "reference": "Ref: UZ9RZV",
+      "is_reconciled": true
+    },
+    {
+      "bank_transaction_id": "bt-003",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-005"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-091"
+      },
+      "date": "2025-12-28",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 296.39,
           "account_code": "200",
           "tax_type": "OUTPUT"
         }
       ],
       "currency_code": "AUD",
-      "sub_total": 1650.00,
-      "total_tax": 0.00,
-      "total": 1650.00,
-      "reference": "EFT Receipt",
+      "sub_total": 296.39,
+      "total_tax": 29.64,
+      "total": 326.03,
+      "reference": "Ref: Y0HZD1",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-004",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-004"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-090"
+      },
+      "date": "2025-12-23",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 284.37,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 284.37,
+      "total_tax": 0,
+      "total": 284.37,
+      "reference": "Ref: DLO314",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-005",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-016"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-091"
+      },
+      "date": "2025-12-17",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 316.57,
+          "account_code": "200",
+          "tax_type": "OUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 316.57,
+      "total_tax": 31.66,
+      "total": 348.23,
+      "reference": "Ref: LD4S7O",
       "is_reconciled": true
     },
     {
-      "bank_transaction_id": "bt-002",
+      "bank_transaction_id": "bt-006",
       "type": "SPEND",
-      "contact": { "contact_id": "contact-011" },
-      "bank_account": { "account_id": "acc-bank-001" },
-      "date": "2025-01-14",
+      "contact": {
+        "contact_id": "contact-020"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-090"
+      },
+      "date": "2025-12-14",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Software subscription",
+          "quantity": 1,
+          "unit_amount": 99.74,
+          "account_code": "480",
+          "tax_type": "BASEXCLUDED"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 99.74,
+      "total_tax": 0,
+      "total": 99.74,
+      "reference": "Ref: NU9NGV",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-007",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-005"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-091"
+      },
+      "date": "2025-11-30",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 355.66,
+          "account_code": "200",
+          "tax_type": "OUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 355.66,
+      "total_tax": 35.57,
+      "total": 391.23,
+      "reference": "Ref: A0GVDB",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-008",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-018"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-090"
+      },
+      "date": "2025-12-09",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 197.63,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 197.63,
+      "total_tax": 0,
+      "total": 197.63,
+      "reference": "Ref: JLJCBZ",
+      "is_reconciled": true
+    },
+    {
+      "bank_transaction_id": "bt-009",
+      "type": "SPEND",
+      "contact": {
+        "contact_id": "contact-004"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-091"
+      },
+      "date": "2025-12-03",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Utilities payment",
+          "quantity": 1,
+          "unit_amount": 186.02,
+          "account_code": "450",
+          "tax_type": "INPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 186.02,
+      "total_tax": 18.6,
+      "total": 204.62,
+      "reference": "Ref: KC8QHL",
+      "is_reconciled": true
+    },
+    {
+      "bank_transaction_id": "bt-010",
+      "type": "SPEND",
+      "contact": {
+        "contact_id": "contact-003"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-090"
+      },
+      "date": "2025-12-01",
       "status": "AUTHORISED",
       "line_amount_types": "Exclusive",
       "line_items": [
         {
           "description": "Office supplies",
           "quantity": 1,
-          "unit_amount": 245.00,
-          "account_code": "429",
-          "tax_type": "INPUT"
-        }
-      ],
-      "currency_code": "AUD",
-      "sub_total": 245.00,
-      "total_tax": 24.50,
-      "total": 269.50,
-      "reference": "Officeworks - January",
-      "is_reconciled": true
-    },
-    {
-      "bank_transaction_id": "bt-003",
-      "type": "SPEND",
-      "contact": { "contact_id": "contact-012" },
-      "bank_account": { "account_id": "acc-bank-001" },
-      "date": "2025-01-16",
-      "status": "AUTHORISED",
-      "line_amount_types": "Exclusive",
-      "line_items": [
-        {
-          "description": "Software subscription - Annual",
-          "quantity": 1,
-          "unit_amount": 1200.00,
-          "account_code": "404",
-          "tax_type": "INPUT"
-        }
-      ],
-      "currency_code": "AUD",
-      "sub_total": 1200.00,
-      "total_tax": 120.00,
-      "total": 1320.00,
-      "reference": "Annual license renewal",
-      "is_reconciled": false
-    },
-    {
-      "bank_transaction_id": "bt-004",
-      "type": "RECEIVE",
-      "contact": { "contact_id": "contact-002" },
-      "bank_account": { "account_id": "acc-bank-001" },
-      "date": "2025-01-17",
-      "status": "AUTHORISED",
-      "line_amount_types": "Exclusive",
-      "line_items": [
-        {
-          "description": "Consulting payment",
-          "quantity": 1,
-          "unit_amount": 3300.00,
-          "account_code": "200",
-          "tax_type": "OUTPUT"
-        }
-      ],
-      "currency_code": "AUD",
-      "sub_total": 3300.00,
-      "total_tax": 0.00,
-      "total": 3300.00,
-      "reference": "Direct deposit",
-      "is_reconciled": true
-    },
-    {
-      "bank_transaction_id": "bt-005",
-      "type": "RECEIVE-PREPAYMENT",
-      "contact": { "contact_id": "contact-003" },
-      "bank_account": { "account_id": "acc-bank-001" },
-      "date": "2025-01-18",
-      "status": "AUTHORISED",
-      "line_amount_types": "Exclusive",
-      "line_items": [
-        {
-          "description": "Project deposit - 50%",
-          "quantity": 1,
-          "unit_amount": 5000.00,
-          "account_code": "200",
-          "tax_type": "OUTPUT"
-        }
-      ],
-      "currency_code": "AUD",
-      "sub_total": 5000.00,
-      "total_tax": 500.00,
-      "total": 5500.00,
-      "reference": "Project Alpha deposit",
-      "is_reconciled": false
-    },
-    {
-      "bank_transaction_id": "bt-006",
-      "type": "SPEND",
-      "bank_account": { "account_id": "acc-bank-001" },
-      "date": "2025-01-13",
-      "status": "AUTHORISED",
-      "line_amount_types": "Exclusive",
-      "line_items": [
-        {
-          "description": "Bank fees",
-          "quantity": 1,
-          "unit_amount": 15.00,
-          "account_code": "404",
+          "unit_amount": 205.8,
+          "account_code": "480",
           "tax_type": "BASEXCLUDED"
         }
       ],
       "currency_code": "AUD",
-      "sub_total": 15.00,
-      "total_tax": 0.00,
-      "total": 15.00,
-      "reference": "Monthly account fee",
-      "is_reconciled": true
-    },
-    {
-      "bank_transaction_id": "bt-007",
-      "type": "SPEND",
-      "contact": { "contact_id": "contact-013" },
-      "bank_account": { "account_id": "acc-bank-001" },
-      "date": "2025-01-19",
-      "status": "AUTHORISED",
-      "line_amount_types": "Exclusive",
-      "line_items": [
-        {
-          "description": "Cloud hosting - January",
-          "quantity": 1,
-          "unit_amount": 450.00,
-          "account_code": "404",
-          "tax_type": "INPUT"
-        }
-      ],
-      "currency_code": "AUD",
-      "sub_total": 450.00,
-      "total_tax": 45.00,
-      "total": 495.00,
-      "reference": "AWS monthly",
+      "sub_total": 205.8,
+      "total_tax": 0,
+      "total": 205.8,
+      "reference": "Ref: LXVEWX",
       "is_reconciled": false
     },
     {
-      "bank_transaction_id": "bt-008",
+      "bank_transaction_id": "bt-011",
       "type": "RECEIVE",
-      "contact": { "contact_id": "contact-004" },
-      "bank_account": { "account_id": "acc-bank-001" },
-      "date": "2025-01-20",
+      "contact": {
+        "contact_id": "contact-001"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-091"
+      },
+      "date": "2025-12-12",
       "status": "DRAFT",
       "line_amount_types": "Exclusive",
       "line_items": [
         {
-          "description": "Service payment",
+          "description": "Customer payment received",
           "quantity": 1,
-          "unit_amount": 880.00,
-          "account_code": "200",
-          "tax_type": "OUTPUT"
+          "unit_amount": 325.98,
+          "account_code": "260",
+          "tax_type": "EXEMPTOUTPUT"
         }
       ],
       "currency_code": "AUD",
-      "sub_total": 880.00,
-      "total_tax": 0.00,
-      "total": 880.00,
-      "is_reconciled": false
-    },
-    {
-      "bank_transaction_id": "bt-009",
-      "type": "RECEIVE-OVERPAYMENT",
-      "contact": { "contact_id": "contact-005" },
-      "bank_account": { "account_id": "acc-bank-001" },
-      "date": "2025-01-21",
-      "status": "AUTHORISED",
-      "line_amount_types": "Exclusive",
-      "line_items": [
-        {
-          "description": "Customer overpayment",
-          "quantity": 1,
-          "unit_amount": 200.00,
-          "account_code": "200",
-          "tax_type": "OUTPUT"
-        }
-      ],
-      "currency_code": "AUD",
-      "sub_total": 200.00,
-      "total_tax": 20.00,
-      "total": 220.00,
-      "reference": "Overpayment - INV-008",
-      "is_reconciled": false
-    },
-    {
-      "bank_transaction_id": "bt-010",
-      "type": "SPEND",
-      "contact": { "contact_id": "contact-014" },
-      "bank_account": { "account_id": "acc-bank-001" },
-      "date": "2025-01-22",
-      "status": "AUTHORISED",
-      "line_amount_types": "Exclusive",
-      "line_items": [
-        {
-          "description": "Insurance premium - Q1",
-          "quantity": 1,
-          "unit_amount": 2500.00,
-          "account_code": "478",
-          "tax_type": "BASEXCLUDED"
-        }
-      ],
-      "currency_code": "AUD",
-      "sub_total": 2500.00,
-      "total_tax": 0.00,
-      "total": 2500.00,
-      "reference": "Professional indemnity",
-      "is_reconciled": true
-    },
-    {
-      "bank_transaction_id": "bt-011",
-      "type": "SPEND-PREPAYMENT",
-      "contact": { "contact_id": "contact-015" },
-      "bank_account": { "account_id": "acc-bank-001" },
-      "date": "2025-01-12",
-      "status": "AUTHORISED",
-      "line_amount_types": "Exclusive",
-      "line_items": [
-        {
-          "description": "Prepaid rent - February",
-          "quantity": 1,
-          "unit_amount": 4500.00,
-          "account_code": "469",
-          "tax_type": "INPUT"
-        }
-      ],
-      "currency_code": "AUD",
-      "sub_total": 4500.00,
-      "total_tax": 450.00,
-      "total": 4950.00,
-      "reference": "Office rent prepayment",
+      "sub_total": 325.98,
+      "total_tax": 0,
+      "total": 325.98,
+      "reference": "Ref: P2ADL4",
       "is_reconciled": true
     },
     {
       "bank_transaction_id": "bt-012",
       "type": "RECEIVE",
-      "contact": { "contact_id": "contact-006" },
-      "bank_account": { "account_id": "acc-bank-001" },
-      "date": "2025-01-23",
+      "contact": {
+        "contact_id": "contact-005"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-090"
+      },
+      "date": "2025-12-13",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 104.5,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "AUD",
+      "sub_total": 104.5,
+      "total_tax": 0,
+      "total": 104.5,
+      "reference": "Ref: QWB2UZ",
+      "is_reconciled": true
+    },
+    {
+      "bank_transaction_id": "bt-013",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-004"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-091"
+      },
+      "date": "2025-12-13",
       "status": "AUTHORISED",
       "line_amount_types": "Exclusive",
       "line_items": [
         {
-          "description": "Retainer payment",
+          "description": "Customer payment received",
           "quantity": 1,
-          "unit_amount": 2500.00,
+          "unit_amount": 296.22,
           "account_code": "200",
           "tax_type": "OUTPUT"
         }
       ],
       "currency_code": "AUD",
-      "sub_total": 2500.00,
-      "total_tax": 0.00,
-      "total": 2500.00,
-      "reference": "Monthly retainer",
-      "is_reconciled": false
-    },
-    {
-      "bank_transaction_id": "bt-013",
-      "type": "SPEND",
-      "contact": { "contact_id": "contact-016" },
-      "bank_account": { "account_id": "acc-bank-001" },
-      "date": "2025-01-11",
-      "status": "DELETED",
-      "line_amount_types": "Exclusive",
-      "line_items": [
-        {
-          "description": "Cancelled payment",
-          "quantity": 1,
-          "unit_amount": 350.00,
-          "account_code": "429",
-          "tax_type": "INPUT"
-        }
-      ],
-      "currency_code": "AUD",
-      "sub_total": 350.00,
-      "total_tax": 35.00,
-      "total": 385.00,
-      "reference": "Deleted - duplicate",
+      "sub_total": 296.22,
+      "total_tax": 29.62,
+      "total": 325.84,
+      "reference": "Ref: UT4L2P",
       "is_reconciled": false
     },
     {
       "bank_transaction_id": "bt-014",
-      "type": "SPEND",
-      "contact": { "contact_id": "contact-017" },
-      "bank_account": { "account_id": "acc-bank-001" },
-      "date": "2025-01-24",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-018"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-090"
+      },
+      "date": "2025-12-19",
       "status": "AUTHORISED",
       "line_amount_types": "Exclusive",
       "line_items": [
         {
-          "description": "Staff training course",
-          "quantity": 2,
-          "unit_amount": 750.00,
-          "account_code": "478",
-          "tax_type": "INPUT"
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 446.75,
+          "account_code": "200",
+          "tax_type": "OUTPUT"
         }
       ],
       "currency_code": "AUD",
-      "sub_total": 1500.00,
-      "total_tax": 150.00,
-      "total": 1650.00,
-      "reference": "Cloud certification training",
+      "sub_total": 446.75,
+      "total_tax": 44.68,
+      "total": 491.43,
+      "reference": "Ref: 5SOYUF",
       "is_reconciled": false
     },
     {
       "bank_transaction_id": "bt-015",
       "type": "RECEIVE",
-      "contact": { "contact_id": "contact-007" },
-      "bank_account": { "account_id": "acc-bank-001" },
-      "date": "2025-01-25",
-      "status": "DRAFT",
+      "contact": {
+        "contact_id": "contact-016"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-090"
+      },
+      "date": "2025-12-05",
+      "status": "AUTHORISED",
       "line_amount_types": "Exclusive",
       "line_items": [
         {
-          "description": "Project milestone payment",
+          "description": "Customer payment received",
           "quantity": 1,
-          "unit_amount": 7700.00,
-          "account_code": "200",
-          "tax_type": "OUTPUT"
+          "unit_amount": 279.62,
+          "account_code": "210",
+          "tax_type": "EXEMPTOUTPUT"
         }
       ],
       "currency_code": "AUD",
-      "sub_total": 7700.00,
-      "total_tax": 0.00,
-      "total": 7700.00,
-      "reference": "Milestone 2 complete",
-      "is_reconciled": false
+      "sub_total": 279.62,
+      "total_tax": 0,
+      "total": 279.62,
+      "reference": "Ref: 5WWHRW",
+      "is_reconciled": true
     }
   ]
 }

@@ -1,0 +1,269 @@
+{
+  "_meta": {
+    "description": "Sample quotes for US tenant",
+    "tenant_id": "startup-us-001",
+    "count": 10
+  },
+  "quotes": [
+    {
+      "quote_id": "quote-001",
+      "quote_number": "QU-0001",
+      "contact": {
+        "contact_id": "contact-020"
+      },
+      "date": "2025-12-18",
+      "expiry_date": "2026-01-17",
+      "status": "ACCEPTED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Security Audit",
+          "quantity": 8,
+          "unit_amount": 584.1,
+          "account_code": "4020",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 4672.8,
+      "total_tax": 0,
+      "total": 4672.8,
+      "title": "Consulting Engagement",
+      "summary": "Delego contra totidem necessitatibus deporto cupiditas annus."
+    },
+    {
+      "quote_id": "quote-002",
+      "quote_number": "QU-0002",
+      "contact": {
+        "contact_id": "contact-017"
+      },
+      "date": "2025-12-27",
+      "expiry_date": "2026-01-26",
+      "status": "ACCEPTED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Consulting Services",
+          "quantity": 4,
+          "unit_amount": 598.42,
+          "account_code": "4030",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 2393.68,
+      "total_tax": 0,
+      "total": 2393.68,
+      "title": "Development Estimate",
+      "summary": "Cubicularis vereor debilito certe cotidie cogito caritas."
+    },
+    {
+      "quote_id": "quote-003",
+      "quote_number": "QU-0003",
+      "contact": {
+        "contact_id": "contact-010"
+      },
+      "date": "2025-12-26",
+      "expiry_date": "2026-01-25",
+      "status": "SENT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Software Development",
+          "quantity": 5,
+          "unit_amount": 301.5,
+          "account_code": "4020",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 1507.5,
+      "total_tax": 0,
+      "total": 1507.5,
+      "title": "Consulting Engagement",
+      "summary": "Vero aer vero delego beatae creta thorax recusandae dedecor."
+    },
+    {
+      "quote_id": "quote-004",
+      "quote_number": "QU-0004",
+      "contact": {
+        "contact_id": "contact-012"
+      },
+      "date": "2025-12-28",
+      "expiry_date": "2026-01-27",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Business Analysis",
+          "quantity": 10,
+          "unit_amount": 340.99,
+          "account_code": "4000",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 3409.9,
+      "total_tax": 0,
+      "total": 3409.9,
+      "title": "Service Quote",
+      "summary": "Vicinus decumbo brevis fugit apto quas quis bis quas."
+    },
+    {
+      "quote_id": "quote-005",
+      "quote_number": "QU-0005",
+      "contact": {
+        "contact_id": "contact-018"
+      },
+      "date": "2025-12-26",
+      "expiry_date": "2026-01-25",
+      "status": "ACCEPTED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Graphic Design",
+          "quantity": 1,
+          "unit_amount": 770.58,
+          "account_code": "4030",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 770.58,
+      "total_tax": 0,
+      "total": 770.58,
+      "title": "Development Estimate",
+      "summary": "Alias delinquo clamo tonsor absconditus claudeo tener voluptatem soluta."
+    },
+    {
+      "quote_id": "quote-006",
+      "quote_number": "QU-0006",
+      "contact": {
+        "contact_id": "contact-008"
+      },
+      "date": "2025-12-22",
+      "expiry_date": "2026-01-21",
+      "status": "SENT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Data Analysis",
+          "quantity": 4,
+          "unit_amount": 618.15,
+          "account_code": "4010",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 2472.6,
+      "total_tax": 0,
+      "total": 2472.6,
+      "title": "Consulting Engagement",
+      "summary": "Vestrum voluptatibus cresco neque decerno certe tepidus."
+    },
+    {
+      "quote_id": "quote-007",
+      "quote_number": "QU-0007",
+      "contact": {
+        "contact_id": "contact-018"
+      },
+      "date": "2025-12-23",
+      "expiry_date": "2026-01-22",
+      "status": "DECLINED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Graphic Design",
+          "quantity": 9,
+          "unit_amount": 586.98,
+          "account_code": "4000",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 5282.82,
+      "total_tax": 0,
+      "total": 5282.82,
+      "title": "Development Estimate",
+      "summary": "Ultio virgo saepe."
+    },
+    {
+      "quote_id": "quote-008",
+      "quote_number": "QU-0008",
+      "contact": {
+        "contact_id": "contact-003"
+      },
+      "date": "2025-12-27",
+      "expiry_date": "2026-01-26",
+      "status": "ACCEPTED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Training and Workshops",
+          "quantity": 6,
+          "unit_amount": 934.03,
+          "account_code": "4010",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 5604.18,
+      "total_tax": 0,
+      "total": 5604.18,
+      "title": "Project Proposal",
+      "summary": "Cupiditas vergo canonicus arma."
+    },
+    {
+      "quote_id": "quote-009",
+      "quote_number": "QU-0009",
+      "contact": {
+        "contact_id": "contact-004"
+      },
+      "date": "2025-12-27",
+      "expiry_date": "2026-01-26",
+      "status": "ACCEPTED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "SEO Services",
+          "quantity": 10,
+          "unit_amount": 914.44,
+          "account_code": "4010",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 9144.4,
+      "total_tax": 0,
+      "total": 9144.4,
+      "title": "Consulting Engagement",
+      "summary": "Chirographum bos demergo theologus."
+    },
+    {
+      "quote_id": "quote-010",
+      "quote_number": "QU-0010",
+      "contact": {
+        "contact_id": "contact-011"
+      },
+      "date": "2025-12-18",
+      "expiry_date": "2026-01-17",
+      "status": "ACCEPTED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Security Audit",
+          "quantity": 6,
+          "unit_amount": 766.4,
+          "account_code": "4010",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "USD",
+      "sub_total": 4598.4,
+      "total_tax": 0,
+      "total": 4598.4,
+      "title": "Service Quote",
+      "summary": "Appositus desino celer tardus thermae."
+    }
+  ]
+}

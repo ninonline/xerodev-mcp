@@ -1,0 +1,515 @@
+{
+  "_meta": {
+    "description": "Sample contacts for UK tenant",
+    "tenant_id": "company-uk-001",
+    "count": 20
+  },
+  "contacts": [
+    {
+      "contact_id": "contact-001",
+      "name": "Bernhard Limited",
+      "first_name": "Ova",
+      "last_name": "Fritsch",
+      "email": "ova.fritsch@bernhardlimited.co.uk",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "142 Vicente Ville",
+          "city": "Sunderland",
+          "region": "TYN",
+          "postal_code": "DN97 5DK",
+          "country": "United Kingdom"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "+44 7064 163517"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-002",
+      "name": "Lockman, Group",
+      "first_name": "Narciso",
+      "last_name": "Nolan",
+      "email": "narciso.nolan@lockmangroup.co.uk",
+      "is_customer": true,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "354 The Avenue",
+          "city": "Wrexham",
+          "region": "WAL",
+          "postal_code": "UT59 7II",
+          "country": "United Kingdom"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "+44 4843 374063"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-003",
+      "name": "Heller Holdings",
+      "first_name": "Kelli",
+      "last_name": "Kirlin-Beahan",
+      "email": "kelli.kirlin-beahan@hellerholdings.co.uk",
+      "is_customer": true,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "294 Sycamore Street",
+          "city": "Wrexham",
+          "region": "WAL",
+          "postal_code": "DG48 2DM",
+          "country": "United Kingdom"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "+44 8604 728141"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-004",
+      "name": "Pfeffer, Group",
+      "first_name": "Talon",
+      "last_name": "Hermiston",
+      "email": "talon.hermiston@pfeffergroup.co.uk",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "289 Yew Tree Close",
+          "city": "Newcastle",
+          "region": "TYN",
+          "postal_code": "MH40 5ZT",
+          "country": "United Kingdom"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "+44 9355 217466"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-005",
+      "name": "Marquardt Services",
+      "first_name": "Gino",
+      "last_name": "Jones",
+      "email": "gino.jones@marquardtservic.co.uk",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "212 Vine Street",
+          "city": "Gateshead",
+          "region": "TYN",
+          "postal_code": "YM5 7UA",
+          "country": "United Kingdom"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "+44 8507 848763"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-006",
+      "name": "Leannon Services",
+      "first_name": "Maybelle",
+      "last_name": "Balistreri",
+      "email": "maybelle.balistreri@leannonservices.co.uk",
+      "is_customer": true,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "375 The Paddock",
+          "city": "Newcastle",
+          "region": "TYN",
+          "postal_code": "DA46 3NX",
+          "country": "United Kingdom"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "+44 4032 498437"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-007",
+      "name": "Reynolds Holdings",
+      "first_name": "Ariel",
+      "last_name": "Hansen",
+      "email": "ariel.hansen@reynoldsholding.co.uk",
+      "is_customer": false,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "415 O'Keefe Roads",
+          "city": "Greenwich",
+          "region": "LND",
+          "postal_code": "BA8 5QM",
+          "country": "United Kingdom"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "+44 3100 744347"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-008",
+      "name": "Gusikowski, Limited",
+      "first_name": "Kenyon",
+      "last_name": "Sipes",
+      "email": "kenyon.sipes@gusikowskilimit.co.uk",
+      "is_customer": true,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "280 Ziemann Rue",
+          "city": "Newry",
+          "region": "NIR",
+          "postal_code": "DV49 7NV",
+          "country": "United Kingdom"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "+44 2040 770738"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-009",
+      "name": "Dibbert Services",
+      "first_name": "Casper",
+      "last_name": "Ward",
+      "email": "casper.ward@dibbertservices.co.uk",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "160 Stanton Trace",
+          "city": "Cardiff",
+          "region": "WAL",
+          "postal_code": "UG33 9NN",
+          "country": "United Kingdom"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "+44 2487 852927"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-010",
+      "name": "Berge LLP",
+      "first_name": "Lindsay",
+      "last_name": "Halvorson",
+      "email": "lindsay.halvorson@bergellp.co.uk",
+      "is_customer": false,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "382 W Main",
+          "city": "Newcastle",
+          "region": "TYN",
+          "postal_code": "UN37 3KA",
+          "country": "United Kingdom"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "+44 2434 913904"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-011",
+      "name": "Bahringer, Ltd",
+      "first_name": "Janiya",
+      "last_name": "White",
+      "email": "janiya.white@bahringerltd.co.uk",
+      "is_customer": false,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "158 Paucek Well",
+          "city": "Swansea",
+          "region": "WAL",
+          "postal_code": "TM65 9MX",
+          "country": "United Kingdom"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "+44 8282 170456"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-012",
+      "name": "Koepp Ltd",
+      "first_name": "Pearline",
+      "last_name": "Labadie",
+      "email": "pearline.labadie@koeppltd.co.uk",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "209 Etha Manor",
+          "city": "Belfast",
+          "region": "NIR",
+          "postal_code": "MQ69 1OZ",
+          "country": "United Kingdom"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "+44 6490 506891"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-013",
+      "name": "Pollich Ltd",
+      "first_name": "Harrison",
+      "last_name": "McLaughlin",
+      "email": "harrison.mclaughlin@pollichltd.co.uk",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "259 New Lane",
+          "city": "London",
+          "region": "LND",
+          "postal_code": "EH1 3ZL",
+          "country": "United Kingdom"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "+44 6846 145746"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-014",
+      "name": "O'Keefe Limited",
+      "first_name": "Paige",
+      "last_name": "McLaughlin",
+      "email": "paige.mclaughlin@okeefelimited.co.uk",
+      "is_customer": true,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "425 Tre Row",
+          "city": "Liverpool",
+          "region": "MER",
+          "postal_code": "QN67 4HB",
+          "country": "United Kingdom"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "+44 6304 765640"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-015",
+      "name": "Feeney Holdings",
+      "first_name": "Lexie",
+      "last_name": "Kunze",
+      "email": "lexie.kunze@feeneyholdings.co.uk",
+      "is_customer": true,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "131 Mosciski Crossroad",
+          "city": "Birmingham",
+          "region": "WMD",
+          "postal_code": "EU60 1WQ",
+          "country": "United Kingdom"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "+44 7279 517916"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-016",
+      "name": "Moore Limited",
+      "first_name": "Dejah",
+      "last_name": "Frami",
+      "email": "dejah.frami@moorelimited.co.uk",
+      "is_customer": false,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "487 Ferry Greens",
+          "city": "Sunderland",
+          "region": "TYN",
+          "postal_code": "DL13 8NQ",
+          "country": "United Kingdom"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "+44 2336 390944"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-017",
+      "name": "Zboncak, Ltd",
+      "first_name": "Bernie",
+      "last_name": "Keebler",
+      "email": "bernie.keebler@zboncakltd.co.uk",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "93 VonRueden Green",
+          "city": "Wolverhampton",
+          "region": "WMD",
+          "postal_code": "TO79 4WA",
+          "country": "United Kingdom"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "+44 5175 903983"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-018",
+      "name": "Balistreri, PLC",
+      "first_name": "Cora",
+      "last_name": "Halvorson",
+      "email": "cora.halvorson@balistreriplc.co.uk",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "249 Ritchie Rue",
+          "city": "Dundee",
+          "region": "SCT",
+          "postal_code": "OD50 6LP",
+          "country": "United Kingdom"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "+44 9791 368064"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-019",
+      "name": "Old Supplier Co",
+      "email": "defunct@oldsupplier.com",
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "is_customer": false,
+      "is_supplier": true,
+      "status": "ARCHIVED",
+      "addresses": [],
+      "phones": []
+    },
+    {
+      "contact_id": "contact-020",
+      "name": "Test Customer",
+      "email": "test@example.com",
+      "first_name": "Test",
+      "last_name": "User",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "155 Dare Passage",
+          "city": "Manchester",
+          "region": "MAN",
+          "postal_code": "QB93 2SP",
+          "country": "United Kingdom"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "+44 2832 913113"
+        }
+      ]
+    }
+  ]
+}

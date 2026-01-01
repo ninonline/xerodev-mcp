@@ -6,7 +6,7 @@ import { clearSimulation, handleSimulateNetwork } from '../../../src/tools/chaos
 describe('create_bank_transaction', () => {
   let adapter: XeroMockAdapter;
   const tenantId = 'acme-au-001';
-  const validBankAccountId = 'acc-027'; // Bank account
+  const validBankAccountId = 'acc-bank-090'; // Bank account (code 090)
   const validContactId = 'contact-001';
   const validAccountCode = '200'; // Revenue account
 

@@ -92,7 +92,12 @@ export interface ShadowStateRow {
 export function createStatements(database: Database.Database): {
   getTenant: Database.Statement<[string], TenantRow>;
   getAllTenants: Database.Statement<[], TenantRow>;
+  getAllTenantsIncludingInactive: Database.Statement<[], TenantRow>;
   insertTenant: Database.Statement;
+  updateTenantTokens: Database.Statement;
+  updateTenantStatus: Database.Statement;
+  updateLastSynced: Database.Statement;
+  deleteTenant: Database.Statement;
   getShadowState: Database.Statement<[string, string], ShadowStateRow>;
   getShadowStateByCode: Database.Statement<[string, string], ShadowStateRow>;
   upsertShadowState: Database.Statement;
@@ -106,9 +111,34 @@ export function createStatements(database: Database.Database): {
     getAllTenants: database.prepare<[], TenantRow>(
       'SELECT * FROM tenants WHERE connection_status = \'active\''
     ),
+    getAllTenantsIncludingInactive: database.prepare<[], TenantRow>(
+      'SELECT * FROM tenants'
+    ),
     insertTenant: database.prepare(
-      `INSERT INTO tenants (tenant_id, tenant_name, access_token, refresh_token, token_expires_at, granted_scopes, xero_region)
-       VALUES (@tenant_id, @tenant_name, @access_token, @refresh_token, @token_expires_at, @granted_scopes, @xero_region)`
+      `INSERT INTO tenants (tenant_id, tenant_name, access_token, refresh_token, token_expires_at, granted_scopes, xero_region, connection_status)
+       VALUES (@tenant_id, @tenant_name, @access_token, @refresh_token, @token_expires_at, @granted_scopes, @xero_region, @connection_status)`
+    ),
+    updateTenantTokens: database.prepare(
+      `UPDATE tenants
+       SET access_token = @access_token,
+           refresh_token = @refresh_token,
+           token_expires_at = @token_expires_at,
+           last_synced_at = strftime('%s', 'now')
+       WHERE tenant_id = @tenant_id`
+    ),
+    updateTenantStatus: database.prepare(
+      `UPDATE tenants
+       SET connection_status = @connection_status,
+           last_synced_at = strftime('%s', 'now')
+       WHERE tenant_id = @tenant_id`
+    ),
+    updateLastSynced: database.prepare(
+      `UPDATE tenants
+       SET last_synced_at = strftime('%s', 'now')
+       WHERE tenant_id = @tenant_id`
+    ),
+    deleteTenant: database.prepare(
+      `DELETE FROM tenants WHERE tenant_id = @tenant_id`
     ),
 
     // Shadow state operations

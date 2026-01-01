@@ -25,6 +25,8 @@ import type {
   PaymentFilter,
   BankTransactionFilter,
 } from './adapter-interface.js';
+import { getDatabase, type TenantRow, createStatements } from '../core/db/index.js';
+import { getSecurityGuard } from '../core/security.js';
 
 // ============================================================================
 // Configuration
@@ -41,6 +43,19 @@ interface StoredTokens {
   refreshToken: string;
   expiresAt: number;
   tenantId: string;
+}
+
+/**
+ * Connection info returned from database
+ */
+export interface ConnectionInfo {
+  tenant_id: string;
+  tenant_name: string | null;
+  connection_status: 'active' | 'expired' | 'revoked';
+  xero_region: string | null;
+  granted_scopes: string;
+  created_at: number;
+  last_synced_at: number | null;
 }
 
 // ============================================================================
@@ -241,6 +256,9 @@ export class XeroLiveAdapter implements XeroAdapter {
   private config: XeroConfig;
   private tokenStore: Map<string, StoredTokens> = new Map();
   private tenantCache: Map<string, TenantContext> = new Map();
+  private security = getSecurityGuard();
+  private db;
+  private statements: ReturnType<typeof createStatements>;
 
   constructor() {
     // Load configuration from environment
@@ -271,7 +289,187 @@ export class XeroLiveAdapter implements XeroAdapter {
       ],
     });
 
-    console.error('[XeroLiveAdapter] Initialised with Xero API client');
+    // Initialize database
+    this.db = getDatabase();
+    this.statements = createStatements(this.db);
+
+    // Load stored tokens from database
+    this.loadStoredTokens();
+
+    console.error('[XeroLiveAdapter] Initialised with Xero API client and loaded stored connections');
+  }
+
+  /**
+   * Exposes the XeroClient for OAuth tools
+   */
+  getXeroClient(): XeroClient {
+    return this.xero;
+  }
+
+  /**
+   * Loads encrypted tokens from database into memory
+   */
+  private loadStoredTokens(): void {
+    try {
+      const rows = this.statements.getAllTenantsIncludingInactive.all();
+      for (const row of rows) {
+        try {
+          const decryptedAccess = this.security.decrypt(row.access_token);
+          const decryptedRefresh = this.security.decrypt(row.refresh_token);
+          this.tokenStore.set(row.tenant_id, {
+            accessToken: decryptedAccess,
+            refreshToken: decryptedRefresh,
+            expiresAt: row.token_expires_at,
+            tenantId: row.tenant_id,
+          });
+        } catch (error) {
+          console.error(`[XeroLiveAdapter] Failed to decrypt tokens for tenant '${row.tenant_id}': ${error}`);
+        }
+      }
+      console.error(`[XeroLiveAdapter] Loaded ${this.tokenStore.size} stored connection(s) from database`);
+    } catch (error) {
+      console.error(`[XeroLiveAdapter] Failed to load tokens from database: ${error}`);
+    }
+  }
+
+  /**
+   * Gets all stored connections from database
+   */
+  getConnections(): ConnectionInfo[] {
+    try {
+      const rows = this.statements.getAllTenantsIncludingInactive.all() as TenantRow[];
+      return rows.map(row => ({
+        tenant_id: row.tenant_id,
+        tenant_name: row.tenant_name,
+        connection_status: row.connection_status,
+        xero_region: row.xero_region,
+        granted_scopes: row.granted_scopes,
+        created_at: row.created_at,
+        last_synced_at: row.last_synced_at,
+      }));
+    } catch (error) {
+      console.error(`[XeroLiveAdapter] Failed to get connections: ${error}`);
+      return [];
+    }
+  }
+
+  /**
+   * Stores tokens from OAuth callback to database (encrypted)
+   */
+  storeTokensFromCallback(
+    tenantId: string,
+    tenantName: string,
+    accessToken: string,
+    refreshToken: string,
+    expiresAt: number,
+    scopes: string[],
+    region: string
+  ): void {
+    try {
+      const encryptedAccess = this.security.encrypt(accessToken);
+      const encryptedRefresh = this.security.encrypt(refreshToken);
+
+      this.statements.insertTenant.run({
+        tenant_id: tenantId,
+        tenant_name: tenantName,
+        access_token: encryptedAccess,
+        refresh_token: encryptedRefresh,
+        token_expires_at: expiresAt,
+        granted_scopes: JSON.stringify(scopes),
+        xero_region: region,
+        connection_status: 'active',
+      });
+
+      // Also store in memory
+      this.tokenStore.set(tenantId, {
+        accessToken,
+        refreshToken,
+        expiresAt,
+        tenantId,
+      });
+
+      console.error(`[XeroLiveAdapter] Stored tokens for tenant '${tenantId}' (${tenantName})`);
+    } catch (error) {
+      throw new Error(`Failed to store tokens: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  }
+
+  /**
+   * Refreshes tokens for a tenant and persists to database
+   */
+  async refreshConnection(tenantId: string): Promise<{ success: boolean; error?: string }> {
+    try {
+      const stored = this.tokenStore.get(tenantId);
+      if (!stored) {
+        return { success: false, error: `No tokens found for tenant '${tenantId}'` };
+      }
+
+      // Set current tokens on client
+      this.xero.setTokenSet({
+        access_token: stored.accessToken,
+        refresh_token: stored.refreshToken,
+        expires_at: stored.expiresAt,
+        token_type: 'Bearer',
+      });
+
+      // Refresh
+      const newTokens = await this.xero.refreshToken();
+
+      const updated: StoredTokens = {
+        accessToken: newTokens.access_token!,
+        refreshToken: newTokens.refresh_token!,
+        expiresAt: newTokens.expires_at!,
+        tenantId,
+      };
+
+      // Update memory
+      this.tokenStore.set(tenantId, updated);
+
+      // Update database
+      const encryptedAccess = this.security.encrypt(updated.accessToken);
+      const encryptedRefresh = this.security.encrypt(updated.refreshToken);
+
+      this.statements.updateTenantTokens.run({
+        tenant_id: tenantId,
+        access_token: encryptedAccess,
+        refresh_token: encryptedRefresh,
+        token_expires_at: updated.expiresAt,
+      });
+
+      console.error(`[XeroLiveAdapter] Refreshed tokens for tenant '${tenantId}'`);
+      return { success: true };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      console.error(`[XeroLiveAdapter] Failed to refresh tokens for '${tenantId}': ${message}`);
+
+      // Mark as expired
+      try {
+        this.statements.updateTenantStatus.run({
+          tenant_id: tenantId,
+          connection_status: 'expired',
+        });
+      } catch {}
+
+      return { success: false, error: message };
+    }
+  }
+
+  /**
+   * Revokes/removes a connection
+   */
+  revokeConnection(tenantId: string): { success: boolean; error?: string } {
+    try {
+      this.statements.deleteTenant.run({ tenant_id: tenantId });
+      this.tokenStore.delete(tenantId);
+      this.tenantCache.delete(tenantId);
+      console.error(`[XeroLiveAdapter] Revoked connection for tenant '${tenantId}'`);
+      return { success: true };
+    } catch (error) {
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error',
+      };
+    }
   }
 
   getMode(): 'mock' | 'live' {

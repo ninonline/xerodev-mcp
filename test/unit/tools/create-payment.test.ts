@@ -7,7 +7,7 @@ describe('create_payment', () => {
   let adapter: XeroMockAdapter;
   const tenantId = 'acme-au-001';
   const validInvoiceId = 'inv-001';
-  const validAccountId = 'acc-027'; // Bank account
+  const validAccountId = 'acc-bank-090'; // Bank account (code 090)
 
   beforeAll(() => {
     adapter = new XeroMockAdapter();

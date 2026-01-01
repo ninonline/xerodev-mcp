@@ -1,0 +1,515 @@
+{
+  "_meta": {
+    "description": "Sample contacts for US tenant",
+    "tenant_id": "startup-us-001",
+    "count": 20
+  },
+  "contacts": [
+    {
+      "contact_id": "contact-001",
+      "name": "Mayert, Co",
+      "first_name": "Suzanne",
+      "last_name": "Leannon",
+      "email": "suzanne.leannon@mayertco.com",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "173 N Center Street",
+          "city": "Jacksonville",
+          "region": "FL",
+          "postal_code": "76792",
+          "country": "United States"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "(206) 876-3330"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-002",
+      "name": "Hilpert, Corp",
+      "first_name": "Myrtie",
+      "last_name": "Miller",
+      "email": "myrtie.miller@hilpertcorp.com",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "13 German Courts",
+          "city": "Tacoma",
+          "region": "WA",
+          "postal_code": "29910",
+          "country": "United States"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "(685) 798-3427"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-003",
+      "name": "Ankunding, LP",
+      "first_name": "Gordon",
+      "last_name": "Murazik",
+      "email": "gordon.murazik@ankundinglp.com",
+      "is_customer": true,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "493 Stracke Street",
+          "city": "Orlando",
+          "region": "FL",
+          "postal_code": "79185",
+          "country": "United States"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "(748) 732-6711"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-004",
+      "name": "Nader LP",
+      "first_name": "Carley",
+      "last_name": "Raynor",
+      "email": "carley.raynor@naderlp.com",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "294 E Broad Street",
+          "city": "San Jose",
+          "region": "CA",
+          "postal_code": "19624",
+          "country": "United States"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "(720) 948-6872"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-005",
+      "name": "Lueilwitz Inc",
+      "first_name": "Jedediah",
+      "last_name": "Hills",
+      "email": "jedediah.hills@lueilwitzinc.com",
+      "is_customer": true,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "136 Cross Lane",
+          "city": "Aurora",
+          "region": "IL",
+          "postal_code": "94258",
+          "country": "United States"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "(471) 955-2678"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-006",
+      "name": "McDermott Co",
+      "first_name": "Raegan",
+      "last_name": "Larkin",
+      "email": "raegan.larkin@mcdermottco.com",
+      "is_customer": false,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "194 O'Conner Lodge",
+          "city": "San Antonio",
+          "region": "TX",
+          "postal_code": "24513",
+          "country": "United States"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "(921) 386-1541"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-007",
+      "name": "Lueilwitz, Co",
+      "first_name": "Elmira",
+      "last_name": "Heathcote",
+      "email": "elmira.heathcote@lueilwitzco.com",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "56 Euna Cliff",
+          "city": "Austin",
+          "region": "TX",
+          "postal_code": "16566",
+          "country": "United States"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "(865) 619-7980"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-008",
+      "name": "Huels Inc",
+      "first_name": "Lucile",
+      "last_name": "Beier",
+      "email": "lucile.beier@huelsinc.com",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "168 Grange Road",
+          "city": "Jacksonville",
+          "region": "FL",
+          "postal_code": "37728",
+          "country": "United States"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "(789) 731-5680"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-009",
+      "name": "Kuhlman, Company",
+      "first_name": "Roxane",
+      "last_name": "Schinner",
+      "email": "roxane.schinner@kuhlmancompany.com",
+      "is_customer": false,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "203 Marsh Lane",
+          "city": "Miami",
+          "region": "FL",
+          "postal_code": "32080",
+          "country": "United States"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "(798) 622-8942"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-010",
+      "name": "Botsford Company",
+      "first_name": "Gardner",
+      "last_name": "Pagac-Dicki",
+      "email": "gardner.pagac-dicki@botsfordcompany.com",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "169 Rohan Pine",
+          "city": "Springfield",
+          "region": "MA",
+          "postal_code": "37673",
+          "country": "United States"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "(218) 585-8927"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-011",
+      "name": "Wunsch, Inc",
+      "first_name": "Lexus",
+      "last_name": "Leuschke",
+      "email": "lexus.leuschke@wunschinc.com",
+      "is_customer": true,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "457 Abshire Row",
+          "city": "Buffalo",
+          "region": "NY",
+          "postal_code": "89767",
+          "country": "United States"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "(723) 775-9174"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-012",
+      "name": "Oberbrunner, LLC",
+      "first_name": "Ervin",
+      "last_name": "Kunde",
+      "email": "ervin.kunde@oberbrunnerllc.com",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "34 Xander Terrace",
+          "city": "Springfield",
+          "region": "MA",
+          "postal_code": "69088",
+          "country": "United States"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "(297) 616-8718"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-013",
+      "name": "Krajcik Company",
+      "first_name": "Kyle",
+      "last_name": "Johns",
+      "email": "kyle.johns@krajcikcompany.com",
+      "is_customer": true,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "96 Schmitt Rest",
+          "city": "Rochester",
+          "region": "NY",
+          "postal_code": "10531",
+          "country": "United States"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "(983) 790-8163"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-014",
+      "name": "Halvorson Corporation",
+      "first_name": "Troy",
+      "last_name": "Rowe",
+      "email": "troy.rowe@halvorsoncorpor.com",
+      "is_customer": false,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "345 Clarence Road",
+          "city": "Chicago",
+          "region": "IL",
+          "postal_code": "80927",
+          "country": "United States"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "(334) 293-6591"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-015",
+      "name": "Walter Corporation",
+      "first_name": "Elise",
+      "last_name": "Hermiston",
+      "email": "elise.hermiston@waltercorporati.com",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "448 O'Kon Route",
+          "city": "Durham",
+          "region": "NC",
+          "postal_code": "65241",
+          "country": "United States"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "(418) 816-8491"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-016",
+      "name": "Schultz, Co",
+      "first_name": "Ibrahim",
+      "last_name": "Howell",
+      "email": "ibrahim.howell@schultzco.com",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "269 Sister Point",
+          "city": "Boulder",
+          "region": "CO",
+          "postal_code": "42630",
+          "country": "United States"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "(521) 212-9635"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-017",
+      "name": "Schneider LLC",
+      "first_name": "Ruth",
+      "last_name": "Walker",
+      "email": "ruth.walker@schneiderllc.com",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "330 Hoyt Brook",
+          "city": "Greensboro",
+          "region": "NC",
+          "postal_code": "74522",
+          "country": "United States"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "(497) 364-3009"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-018",
+      "name": "Prohaska, Inc",
+      "first_name": "Landen",
+      "last_name": "Murazik",
+      "email": "landen.murazik@prohaskainc.com",
+      "is_customer": true,
+      "is_supplier": true,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "397 Kestrel Close",
+          "city": "Austin",
+          "region": "TX",
+          "postal_code": "78279",
+          "country": "United States"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "(565) 294-7632"
+        }
+      ]
+    },
+    {
+      "contact_id": "contact-019",
+      "name": "Old Supplier Co",
+      "email": "defunct@oldsupplier.com",
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "is_customer": false,
+      "is_supplier": true,
+      "status": "ARCHIVED",
+      "addresses": [],
+      "phones": []
+    },
+    {
+      "contact_id": "contact-020",
+      "name": "Test Customer",
+      "email": "test@example.com",
+      "first_name": "Test",
+      "last_name": "User",
+      "is_customer": true,
+      "is_supplier": false,
+      "status": "ACTIVE",
+      "addresses": [
+        {
+          "type": "STREET",
+          "line1": "137 Ridge Road",
+          "city": "Los Angeles",
+          "region": "CA",
+          "postal_code": "15521",
+          "country": "United States"
+        }
+      ],
+      "phones": [
+        {
+          "type": "DEFAULT",
+          "number": "(356) 929-8869"
+        }
+      ]
+    }
+  ]
+}

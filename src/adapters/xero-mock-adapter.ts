@@ -1,4 +1,4 @@
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type {
@@ -98,103 +98,118 @@ export class XeroMockAdapter implements XeroAdapter {
   }
 
   private loadFixtures(): void {
-    // Load tenant fixtures
+    // Load all tenant fixtures dynamically
     const tenantsDir = join(FIXTURES_PATH, 'tenants');
     if (existsSync(tenantsDir)) {
-      const tenantFile = join(tenantsDir, 'au-acme-gst.json');
-      if (existsSync(tenantFile)) {
-        const tenant = JSON.parse(readFileSync(tenantFile, 'utf-8')) as TenantFixture;
+      const tenantFiles = readdirSync(tenantsDir).filter(f => f.endsWith('.json'));
+      for (const tenantFile of tenantFiles) {
+        const tenantPath = join(tenantsDir, tenantFile);
+        const tenant = JSON.parse(readFileSync(tenantPath, 'utf-8')) as TenantFixture;
         this.tenants.set(tenant.tenant_id, tenant);
       }
     }
 
-    // Load accounts and tax rates
+    // Load accounts and tax rates for all tenants
     const accountsDir = join(FIXTURES_PATH, 'accounts');
     if (existsSync(accountsDir)) {
-      const accountsFile = join(accountsDir, 'au-chart-of-accounts.json');
-      if (existsSync(accountsFile)) {
-        const data = JSON.parse(readFileSync(accountsFile, 'utf-8')) as AccountsFixture;
+      const accountFiles = readdirSync(accountsDir).filter(f => f.endsWith('.json'));
+      for (const file of accountFiles) {
+        const data = JSON.parse(readFileSync(join(accountsDir, file), 'utf-8')) as AccountsFixture;
         const tenantId = data._meta.tenant_id;
         this.accounts.set(tenantId, data.accounts);
         this.taxRates.set(tenantId, data.tax_rates);
       }
     }
 
-    // Load contacts
+    // Load contacts for all tenants
     const contactsDir = join(FIXTURES_PATH, 'contacts');
     if (existsSync(contactsDir)) {
-      const contactsFile = join(contactsDir, 'au-acme-contacts.json');
-      if (existsSync(contactsFile)) {
-        const data = JSON.parse(readFileSync(contactsFile, 'utf-8')) as ContactsFixture;
+      const contactFiles = readdirSync(contactsDir).filter(f => f.endsWith('.json'));
+      for (const file of contactFiles) {
+        const data = JSON.parse(readFileSync(join(contactsDir, file), 'utf-8')) as ContactsFixture;
         const tenantId = data._meta.tenant_id;
         this.contacts.set(tenantId, data.contacts);
       }
     }
 
-    // Load invoices
+    // Load invoices for all tenants
     const invoicesDir = join(FIXTURES_PATH, 'invoices');
     if (existsSync(invoicesDir)) {
-      const invoicesFile = join(invoicesDir, 'au-acme-valid.json');
-      if (existsSync(invoicesFile)) {
-        const data = JSON.parse(readFileSync(invoicesFile, 'utf-8')) as InvoicesFixture;
+      const invoiceFiles = readdirSync(invoicesDir).filter(f => f.endsWith('.json'));
+      for (const file of invoiceFiles) {
+        const data = JSON.parse(readFileSync(join(invoicesDir, file), 'utf-8')) as InvoicesFixture;
         const tenantId = data._meta.tenant_id;
         this.invoices.set(tenantId, data.invoices);
       }
     }
 
-    // Load quotes
+    // Load quotes for all tenants
     const quotesDir = join(FIXTURES_PATH, 'quotes');
     if (existsSync(quotesDir)) {
-      const quotesFile = join(quotesDir, 'au-acme-quotes.json');
-      if (existsSync(quotesFile)) {
-        const data = JSON.parse(readFileSync(quotesFile, 'utf-8')) as QuotesFixture;
+      const quoteFiles = readdirSync(quotesDir).filter(f => f.endsWith('.json'));
+      for (const file of quoteFiles) {
+        const data = JSON.parse(readFileSync(join(quotesDir, file), 'utf-8')) as QuotesFixture;
         const tenantId = data._meta.tenant_id;
         this.quotes.set(tenantId, data.quotes);
       }
     }
 
-    // Load credit notes
+    // Load credit notes for all tenants
     const creditNotesDir = join(FIXTURES_PATH, 'credit-notes');
     if (existsSync(creditNotesDir)) {
-      const creditNotesFile = join(creditNotesDir, 'au-acme-credit-notes.json');
-      if (existsSync(creditNotesFile)) {
-        const data = JSON.parse(readFileSync(creditNotesFile, 'utf-8')) as CreditNotesFixture;
+      const creditNoteFiles = readdirSync(creditNotesDir).filter(f => f.endsWith('.json'));
+      for (const file of creditNoteFiles) {
+        const data = JSON.parse(readFileSync(join(creditNotesDir, file), 'utf-8')) as CreditNotesFixture;
         const tenantId = data._meta.tenant_id;
         this.creditNotes.set(tenantId, data.credit_notes);
       }
     }
 
-    // Load payments
+    // Load payments for all tenants
     const paymentsDir = join(FIXTURES_PATH, 'payments');
     if (existsSync(paymentsDir)) {
-      const paymentsFile = join(paymentsDir, 'au-acme-payments.json');
-      if (existsSync(paymentsFile)) {
-        const data = JSON.parse(readFileSync(paymentsFile, 'utf-8')) as PaymentsFixture;
+      const paymentFiles = readdirSync(paymentsDir).filter(f => f.endsWith('.json'));
+      for (const file of paymentFiles) {
+        const data = JSON.parse(readFileSync(join(paymentsDir, file), 'utf-8')) as PaymentsFixture;
         const tenantId = data._meta.tenant_id;
         this.payments.set(tenantId, data.payments);
       }
     }
 
-    // Load bank transactions
+    // Load bank transactions for all tenants
     const bankTransactionsDir = join(FIXTURES_PATH, 'bank-transactions');
     if (existsSync(bankTransactionsDir)) {
-      const bankTransactionsFile = join(bankTransactionsDir, 'au-acme-bank-transactions.json');
-      if (existsSync(bankTransactionsFile)) {
-        const data = JSON.parse(readFileSync(bankTransactionsFile, 'utf-8')) as BankTransactionsFixture;
+      const bankTxFiles = readdirSync(bankTransactionsDir).filter(f => f.endsWith('.json'));
+      for (const file of bankTxFiles) {
+        const data = JSON.parse(readFileSync(join(bankTransactionsDir, file), 'utf-8')) as BankTransactionsFixture;
         const tenantId = data._meta.tenant_id;
         this.bankTransactions.set(tenantId, data.bank_transactions);
       }
     }
 
-    const tenantId = 'acme-au-001';
+    // Log summary for all loaded tenants
+    let totalAccounts = 0;
+    let totalContacts = 0;
+    let totalInvoices = 0;
+    let totalQuotes = 0;
+    let totalCreditNotes = 0;
+    let totalPayments = 0;
+    let totalBankTx = 0;
+
+    for (const tenantId of this.tenants.keys()) {
+      totalAccounts += this.accounts.get(tenantId)?.length ?? 0;
+      totalContacts += this.contacts.get(tenantId)?.length ?? 0;
+      totalInvoices += this.invoices.get(tenantId)?.length ?? 0;
+      totalQuotes += this.quotes.get(tenantId)?.length ?? 0;
+      totalCreditNotes += this.creditNotes.get(tenantId)?.length ?? 0;
+      totalPayments += this.payments.get(tenantId)?.length ?? 0;
+      totalBankTx += this.bankTransactions.get(tenantId)?.length ?? 0;
+    }
+
     console.error(`[XeroMockAdapter] Loaded ${this.tenants.size} tenant(s), ` +
-      `${this.accounts.get(tenantId)?.length ?? 0} accounts, ` +
-      `${this.contacts.get(tenantId)?.length ?? 0} contacts, ` +
-      `${this.invoices.get(tenantId)?.length ?? 0} invoices, ` +
-      `${this.quotes.get(tenantId)?.length ?? 0} quotes, ` +
-      `${this.creditNotes.get(tenantId)?.length ?? 0} credit notes, ` +
-      `${this.payments.get(tenantId)?.length ?? 0} payments, ` +
-      `${this.bankTransactions.get(tenantId)?.length ?? 0} bank transactions`);
+      `${totalAccounts} accounts, ${totalContacts} contacts, ${totalInvoices} invoices, ` +
+      `${totalQuotes} quotes, ${totalCreditNotes} credit notes, ${totalPayments} payments, ` +
+      `${totalBankTx} bank transactions`);
   }
 
   async getTenants(): Promise<Array<{ tenant_id: string; tenant_name: string; region: string }>> {

@@ -1,0 +1,608 @@
+{
+  "_meta": {
+    "description": "Sample invoices for UK tenant",
+    "tenant_id": "company-uk-001",
+    "count": 20
+  },
+  "invoices": [
+    {
+      "invoice_id": "inv-001",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-005"
+      },
+      "date": "2025-12-09",
+      "due_date": "2026-01-08",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Graphic Design",
+          "quantity": 10,
+          "unit_amount": 162.34,
+          "account_code": "4030",
+          "tax_type": "ZERORATEDOUTPUT"
+        },
+        {
+          "description": "System Integration",
+          "quantity": 8,
+          "unit_amount": 282.02,
+          "account_code": "4030",
+          "tax_type": "ZERORATEDOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 3879.56,
+      "total_tax": 0,
+      "total": 3879.56
+    },
+    {
+      "invoice_id": "inv-002",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-018"
+      },
+      "date": "2025-12-17",
+      "due_date": "2026-01-16",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Training and Workshops",
+          "quantity": 10,
+          "unit_amount": 213.02,
+          "account_code": "4040",
+          "tax_type": "ZERORATEDOUTPUT"
+        },
+        {
+          "description": "Website Development",
+          "quantity": 2,
+          "unit_amount": 91.4,
+          "account_code": "4040",
+          "tax_type": "ZERORATEDOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 2313,
+      "total_tax": 0,
+      "total": 2313
+    },
+    {
+      "invoice_id": "inv-003",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-002"
+      },
+      "date": "2025-12-20",
+      "due_date": "2026-01-19",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Graphic Design",
+          "quantity": 1,
+          "unit_amount": 50.85,
+          "account_code": "4050",
+          "tax_type": "RROUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 50.85,
+      "total_tax": 2.54,
+      "total": 53.39
+    },
+    {
+      "invoice_id": "inv-004",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-018"
+      },
+      "date": "2025-12-03",
+      "due_date": "2026-01-02",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Business Analysis",
+          "quantity": 16,
+          "unit_amount": 464.61,
+          "account_code": "4050",
+          "tax_type": "RROUTPUT"
+        },
+        {
+          "description": "SEO Services",
+          "quantity": 1,
+          "unit_amount": 156.18,
+          "account_code": "4050",
+          "tax_type": "RROUTPUT"
+        },
+        {
+          "description": "System Integration",
+          "quantity": 11,
+          "unit_amount": 134.53,
+          "account_code": "4050",
+          "tax_type": "RROUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 9069.77,
+      "total_tax": 453.49,
+      "total": 9523.26
+    },
+    {
+      "invoice_id": "inv-005",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-002"
+      },
+      "date": "2025-12-25",
+      "due_date": "2026-01-24",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "SEO Services",
+          "quantity": 4,
+          "unit_amount": 427.29,
+          "account_code": "4030",
+          "tax_type": "ZERORATEDOUTPUT"
+        },
+        {
+          "description": "Business Analysis",
+          "quantity": 10,
+          "unit_amount": 322.5,
+          "account_code": "4030",
+          "tax_type": "ZERORATEDOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 4934.16,
+      "total_tax": 0,
+      "total": 4934.16
+    },
+    {
+      "invoice_id": "inv-006",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-002"
+      },
+      "date": "2025-12-24",
+      "due_date": "2026-01-23",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Training and Workshops",
+          "quantity": 1,
+          "unit_amount": 184.83,
+          "account_code": "4020",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 184.83,
+      "total_tax": 0,
+      "total": 184.83
+    },
+    {
+      "invoice_id": "inv-007",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-005"
+      },
+      "date": "2025-12-03",
+      "due_date": "2026-01-02",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Business Analysis",
+          "quantity": 2,
+          "unit_amount": 468.64,
+          "account_code": "4020",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Business Analysis",
+          "quantity": 14,
+          "unit_amount": 200.92,
+          "account_code": "4020",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Content Writing",
+          "quantity": 9,
+          "unit_amount": 298.95,
+          "account_code": "4020",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 6440.71,
+      "total_tax": 0,
+      "total": 6440.71
+    },
+    {
+      "invoice_id": "inv-008",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-008"
+      },
+      "date": "2025-12-03",
+      "due_date": "2026-01-02",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Website Development",
+          "quantity": 10,
+          "unit_amount": 93.41,
+          "account_code": "4010",
+          "tax_type": "OUTPUT2"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 934.1,
+      "total_tax": 186.82,
+      "total": 1120.92
+    },
+    {
+      "invoice_id": "inv-009",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-006"
+      },
+      "date": "2025-12-09",
+      "due_date": "2026-01-08",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Data Analysis",
+          "quantity": 4,
+          "unit_amount": 135.11,
+          "account_code": "4010",
+          "tax_type": "OUTPUT2"
+        },
+        {
+          "description": "Graphic Design",
+          "quantity": 20,
+          "unit_amount": 272.31,
+          "account_code": "4010",
+          "tax_type": "OUTPUT2"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 5986.64,
+      "total_tax": 1197.33,
+      "total": 7183.97
+    },
+    {
+      "invoice_id": "inv-010",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-018"
+      },
+      "date": "2025-12-22",
+      "due_date": "2026-01-21",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Technical Support",
+          "quantity": 4,
+          "unit_amount": 469.21,
+          "account_code": "4030",
+          "tax_type": "ZERORATEDOUTPUT"
+        },
+        {
+          "description": "Software Development",
+          "quantity": 1,
+          "unit_amount": 132.25,
+          "account_code": "4030",
+          "tax_type": "ZERORATEDOUTPUT"
+        },
+        {
+          "description": "Data Analysis",
+          "quantity": 20,
+          "unit_amount": 276.01,
+          "account_code": "4030",
+          "tax_type": "ZERORATEDOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 7529.29,
+      "total_tax": 0,
+      "total": 7529.29
+    },
+    {
+      "invoice_id": "inv-011",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-013"
+      },
+      "date": "2025-12-05",
+      "due_date": "2026-01-04",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Cloud Infrastructure Setup",
+          "quantity": 16,
+          "unit_amount": 179.96,
+          "account_code": "4030",
+          "tax_type": "ZERORATEDOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 2879.36,
+      "total_tax": 0,
+      "total": 2879.36
+    },
+    {
+      "invoice_id": "inv-012",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-013"
+      },
+      "date": "2025-12-11",
+      "due_date": "2026-01-10",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Training and Workshops",
+          "quantity": 2,
+          "unit_amount": 211.97,
+          "account_code": "4020",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 423.94,
+      "total_tax": 0,
+      "total": 423.94
+    },
+    {
+      "invoice_id": "inv-013",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-013"
+      },
+      "date": "2025-12-17",
+      "due_date": "2026-01-16",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Software Development",
+          "quantity": 11,
+          "unit_amount": 140.05,
+          "account_code": "4020",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Cloud Infrastructure Setup",
+          "quantity": 2,
+          "unit_amount": 104.49,
+          "account_code": "4020",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 1749.53,
+      "total_tax": 0,
+      "total": 1749.53
+    },
+    {
+      "invoice_id": "inv-014",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-013"
+      },
+      "date": "2025-12-22",
+      "due_date": "2026-01-21",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Training and Workshops",
+          "quantity": 1,
+          "unit_amount": 451.67,
+          "account_code": "4020",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Business Analysis",
+          "quantity": 12,
+          "unit_amount": 472.46,
+          "account_code": "4020",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 6121.19,
+      "total_tax": 0,
+      "total": 6121.19
+    },
+    {
+      "invoice_id": "inv-015",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-003"
+      },
+      "date": "2025-12-19",
+      "due_date": "2026-01-18",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Marketing Services",
+          "quantity": 3,
+          "unit_amount": 67.65,
+          "account_code": "4020",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 202.95,
+      "total_tax": 0,
+      "total": 202.95
+    },
+    {
+      "invoice_id": "inv-016",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-018"
+      },
+      "date": "2025-12-11",
+      "due_date": "2026-01-10",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Data Analysis",
+          "quantity": 14,
+          "unit_amount": 369.89,
+          "account_code": "4010",
+          "tax_type": "OUTPUT2"
+        },
+        {
+          "description": "Technical Support",
+          "quantity": 12,
+          "unit_amount": 249.69,
+          "account_code": "4010",
+          "tax_type": "OUTPUT2"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 8174.74,
+      "total_tax": 1634.95,
+      "total": 9809.69
+    },
+    {
+      "invoice_id": "inv-017",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-014"
+      },
+      "date": "2025-12-06",
+      "due_date": "2026-01-05",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "SEO Services",
+          "quantity": 12,
+          "unit_amount": 195.44,
+          "account_code": "4020",
+          "tax_type": "EXEMPTOUTPUT"
+        },
+        {
+          "description": "Data Analysis",
+          "quantity": 9,
+          "unit_amount": 391.87,
+          "account_code": "4020",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 5872.11,
+      "total_tax": 0,
+      "total": 5872.11
+    },
+    {
+      "invoice_id": "inv-018",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-003"
+      },
+      "date": "2025-12-05",
+      "due_date": "2026-01-04",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Software Development",
+          "quantity": 4,
+          "unit_amount": 306.65,
+          "account_code": "4010",
+          "tax_type": "OUTPUT2"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 1226.6,
+      "total_tax": 245.32,
+      "total": 1471.92
+    },
+    {
+      "invoice_id": "inv-019",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-013"
+      },
+      "date": "2025-12-16",
+      "due_date": "2026-01-15",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Marketing Services",
+          "quantity": 15,
+          "unit_amount": 418.62,
+          "account_code": "4050",
+          "tax_type": "RROUTPUT"
+        },
+        {
+          "description": "Software Development",
+          "quantity": 2,
+          "unit_amount": 415.7,
+          "account_code": "4050",
+          "tax_type": "RROUTPUT"
+        },
+        {
+          "description": "Business Analysis",
+          "quantity": 20,
+          "unit_amount": 311.91,
+          "account_code": "4050",
+          "tax_type": "RROUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 13348.9,
+      "total_tax": 667.45,
+      "total": 14016.35
+    },
+    {
+      "invoice_id": "inv-020",
+      "type": "ACCREC",
+      "contact": {
+        "contact_id": "contact-020"
+      },
+      "date": "2025-11-30",
+      "due_date": "2025-12-30",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Cloud Infrastructure Setup",
+          "quantity": 8,
+          "unit_amount": 199.36,
+          "account_code": "4030",
+          "tax_type": "ZERORATEDOUTPUT"
+        },
+        {
+          "description": "Business Analysis",
+          "quantity": 1,
+          "unit_amount": 290.43,
+          "account_code": "4030",
+          "tax_type": "ZERORATEDOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 1885.31,
+      "total_tax": 0,
+      "total": 1885.31
+    }
+  ]
+}

@@ -1,0 +1,429 @@
+{
+  "_meta": {
+    "description": "Sample bank transactions for UK tenant",
+    "tenant_id": "company-uk-001",
+    "count": 15
+  },
+  "bank_transactions": [
+    {
+      "bank_transaction_id": "bt-001",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-018"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-25",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 162.01,
+          "account_code": "4000",
+          "tax_type": "OUTPUT2"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 162.01,
+      "total_tax": 32.4,
+      "total": 194.41,
+      "reference": "Ref: KXQEQK",
+      "is_reconciled": true
+    },
+    {
+      "bank_transaction_id": "bt-002",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-007"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1010"
+      },
+      "date": "2025-12-21",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 398.42,
+          "account_code": "4050",
+          "tax_type": "RROUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 398.42,
+      "total_tax": 19.92,
+      "total": 418.34,
+      "reference": "Ref: EA8GFZ",
+      "is_reconciled": true
+    },
+    {
+      "bank_transaction_id": "bt-003",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-006"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-03",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 385.6,
+          "account_code": "4030",
+          "tax_type": "ZERORATEDOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 385.6,
+      "total_tax": 0,
+      "total": 385.6,
+      "reference": "Ref: 3HFQHN",
+      "is_reconciled": true
+    },
+    {
+      "bank_transaction_id": "bt-004",
+      "type": "SPEND",
+      "contact": {
+        "contact_id": "contact-014"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-11",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Utilities payment",
+          "quantity": 1,
+          "unit_amount": 415.91,
+          "account_code": "6030",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 415.91,
+      "total_tax": 0,
+      "total": 415.91,
+      "reference": "Ref: FQ9BRE",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-005",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-016"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1010"
+      },
+      "date": "2025-12-22",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 214.76,
+          "account_code": "4010",
+          "tax_type": "OUTPUT2"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 214.76,
+      "total_tax": 42.95,
+      "total": 257.71,
+      "reference": "Ref: LXAZO3",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-006",
+      "type": "SPEND",
+      "contact": {
+        "contact_id": "contact-013"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-03",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Software subscription",
+          "quantity": 1,
+          "unit_amount": 129.34,
+          "account_code": "6050",
+          "tax_type": "EXEMPTINPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 129.34,
+      "total_tax": 0,
+      "total": 129.34,
+      "reference": "Ref: ZX9WPT",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-007",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-016"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1010"
+      },
+      "date": "2025-12-18",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 335.78,
+          "account_code": "4020",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 335.78,
+      "total_tax": 0,
+      "total": 335.78,
+      "reference": "Ref: LH66T6",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-008",
+      "type": "SPEND",
+      "contact": {
+        "contact_id": "contact-012"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-04",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Utilities payment",
+          "quantity": 1,
+          "unit_amount": 103.12,
+          "account_code": "7030",
+          "tax_type": "RRINPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 103.12,
+      "total_tax": 5.16,
+      "total": 108.28,
+      "reference": "Ref: GRASZR",
+      "is_reconciled": true
+    },
+    {
+      "bank_transaction_id": "bt-009",
+      "type": "SPEND",
+      "contact": {
+        "contact_id": "contact-012"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-29",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Software subscription",
+          "quantity": 1,
+          "unit_amount": 481.87,
+          "account_code": "6040",
+          "tax_type": "INPUT2"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 481.87,
+      "total_tax": 96.37,
+      "total": 578.24,
+      "reference": "Ref: NNOWCF",
+      "is_reconciled": true
+    },
+    {
+      "bank_transaction_id": "bt-010",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-007"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1010"
+      },
+      "date": "2025-12-14",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 454.02,
+          "account_code": "4050",
+          "tax_type": "RROUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 454.02,
+      "total_tax": 22.7,
+      "total": 476.72,
+      "reference": "Ref: 305TTN",
+      "is_reconciled": true
+    },
+    {
+      "bank_transaction_id": "bt-011",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-002"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-07",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 180.52,
+          "account_code": "4020",
+          "tax_type": "EXEMPTOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 180.52,
+      "total_tax": 0,
+      "total": 180.52,
+      "reference": "Ref: R6ZI0R",
+      "is_reconciled": false
+    },
+    {
+      "bank_transaction_id": "bt-012",
+      "type": "SPEND",
+      "contact": {
+        "contact_id": "contact-015"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-04",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Software subscription",
+          "quantity": 1,
+          "unit_amount": 297.45,
+          "account_code": "7010",
+          "tax_type": "NONE"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 297.45,
+      "total_tax": 0,
+      "total": 297.45,
+      "reference": "Ref: OYHOAJ",
+      "is_reconciled": true
+    },
+    {
+      "bank_transaction_id": "bt-013",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-011"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-07",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 221.05,
+          "account_code": "4000",
+          "tax_type": "OUTPUT2"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 221.05,
+      "total_tax": 44.21,
+      "total": 265.26,
+      "reference": "Ref: VPUV8U",
+      "is_reconciled": true
+    },
+    {
+      "bank_transaction_id": "bt-014",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-011"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1000"
+      },
+      "date": "2025-12-07",
+      "status": "AUTHORISED",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 286.18,
+          "account_code": "4030",
+          "tax_type": "ZERORATEDOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 286.18,
+      "total_tax": 0,
+      "total": 286.18,
+      "reference": "Ref: XJBLWN",
+      "is_reconciled": true
+    },
+    {
+      "bank_transaction_id": "bt-015",
+      "type": "RECEIVE",
+      "contact": {
+        "contact_id": "contact-007"
+      },
+      "bank_account": {
+        "account_id": "acc-bank-1010"
+      },
+      "date": "2025-12-04",
+      "status": "DRAFT",
+      "line_amount_types": "Exclusive",
+      "line_items": [
+        {
+          "description": "Customer payment received",
+          "quantity": 1,
+          "unit_amount": 260.87,
+          "account_code": "4040",
+          "tax_type": "ZERORATEDOUTPUT"
+        }
+      ],
+      "currency_code": "GBP",
+      "sub_total": 260.87,
+      "total_tax": 0,
+      "total": 260.87,
+      "reference": "Ref: Z1UUQU",
+      "is_reconciled": false
+    }
+  ]
+}
