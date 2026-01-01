@@ -305,14 +305,17 @@ export async function handleCreateInvoice(
   const totalTax = Math.round(subTotal * taxRate * 100) / 100;
   const total = subTotal + totalTax;
 
+  // Default type to ACCREC if not provided
+  const invoiceType: 'ACCREC' | 'ACCPAY' = type || 'ACCREC';
+
   // Create invoice number
-  const invoicePrefix = type === 'ACCREC' ? 'INV' : 'BILL';
+  const invoicePrefix = invoiceType === 'ACCREC' ? 'INV' : 'BILL';
   const invoiceNumber = `${invoicePrefix}-${randomUUID().substring(0, 6).toUpperCase()}`;
 
   const invoice: InvoiceData = {
     invoice_id: `invoice-${randomUUID().substring(0, 8)}`,
     invoice_number: invoiceNumber,
-    type,
+    type: invoiceType,
     contact: { contact_id },
     date: invoiceDate,
     due_date: invoiceDueDate,
@@ -331,7 +334,7 @@ export async function handleCreateInvoice(
     invoiceIdempotencyStore.set(idempotency_key, invoice);
   }
 
-  const typeLabel = type === 'ACCREC' ? 'sales invoice' : 'bill';
+  const typeLabel = invoiceType === 'ACCREC' ? 'sales invoice' : 'bill';
 
   return createResponse({
     success: true,
