@@ -30,8 +30,13 @@
     "testing",
     "accounting"
   ],
-  "author": "",
+  "author": "ninonline",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ninonline/xerodev-mcp.git"
+  },
+  "homepage": "https://github.com/ninonline/xerodev-mcp#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
     "better-sqlite3": "^11.6.0",
