@@ -129,8 +129,8 @@ Three pre-configured tenants with realistic data:
 | Tenant | Region | Tax System | Currency |
 |--------|--------|------------|----------|
 | acme-au-001 | Australia | GST | AUD |
-| uk-ltd-001 | United Kingdom | VAT | GBP |
-| us-startup-001 | United States | Sales Tax | USD |
+| company-uk-001 | United Kingdom | VAT | GBP |
+| startup-us-001 | United States | Sales Tax | USD |
 
 ## Tools Overview
 

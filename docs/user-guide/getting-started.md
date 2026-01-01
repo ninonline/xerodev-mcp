@@ -68,7 +68,7 @@ Call get_mcp_capabilities with verbosity="diagnostic"
 ```
 
 This returns:
-- 3 tenants: acme-au-001 (Australia), uk-ltd-001 (UK), us-startup-001 (US)
+- 3 tenants: acme-au-001 (Australia), company-uk-001 (UK), startup-us-001 (US)
 - 25 tools available
 - Server is in mock mode (safe for testing)
 
@@ -268,13 +268,13 @@ xerodev-mcp includes three pre-configured tenants for testing multi-region scena
 | Tenant | Region | Tax System | Currency |
 |--------|--------|------------|----------|
 | acme-au-001 | Australia | GST (10%) | AUD |
-| uk-ltd-001 | United Kingdom | VAT (20%) | GBP |
-| us-startup-001 | United States | Sales Tax (varies) | USD |
+| company-uk-001 | United Kingdom | VAT (20%) | GBP |
+| startup-us-001 | United States | Sales Tax (varies) | USD |
 
 **Test the same invoice across regions**:
 
 ```
-Call switch_tenant_context to uk-ltd-001
+Call switch_tenant_context to company-uk-001
 Call validate_schema_match with the same payload
 Note the different TaxTypes (UK uses VAT outputs)
 ```

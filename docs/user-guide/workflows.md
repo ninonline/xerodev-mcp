@@ -413,11 +413,11 @@ Call switch_tenant_context with tenant_id="acme-au-001"
 Call validate_schema_match with payload
 
 // United Kingdom
-Call switch_tenant_context with tenant_id="uk-ltd-001"
+Call switch_tenant_context with tenant_id="company-uk-001"
 Call validate_schema_match with same payload
 
 // United States
-Call switch_tenant_context with tenant_id="us-startup-001"
+Call switch_tenant_context with tenant_id="startup-us-001"
 Call validate_schema_match with same payload
 ```
 

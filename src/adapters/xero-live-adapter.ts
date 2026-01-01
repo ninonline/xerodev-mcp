@@ -539,13 +539,14 @@ export class XeroLiveAdapter implements XeroAdapter {
   // Read Methods
   // ============================================================================
 
-  async getTenants(): Promise<Array<{ tenant_id: string; tenant_name: string; region: string }>> {
+  async getTenants(): Promise<Array<{ tenant_id: string; tenant_name: string; region: string; currency: string }>> {
     // For live mode, we need to get tenants from the stored connections
     const tenants = await this.xero.updateTenants();
     return tenants.map(t => ({
       tenant_id: t.tenantId!,
       tenant_name: t.tenantName || 'Unknown',
       region: t.tenantType || 'AU',
+      currency: (t as any).baseCurrency || 'AUD',
     }));
   }
 
@@ -573,7 +574,7 @@ export class XeroLiveAdapter implements XeroAdapter {
       tenant_id: tenantId,
       tenant_name: tenant?.tenant_name || 'Unknown',
       region: tenant?.region || 'AU',
-      currency: 'AUD', // TODO: Get from organisation settings
+      currency: tenant?.currency || 'AUD',
       accounts,
       tax_rates: taxRates,
       contacts,

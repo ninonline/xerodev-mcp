@@ -122,7 +122,7 @@ Call get_mcp_capabilities to see what tools are available.
 
 Expected response should show:
 - Server name: "xerodev-mcp"
-- 21 tools available
+- 25 tools available
 - 3 tenants (AU, UK, US)
 
 ### Test Workflow 1: Validate an Invoice
@@ -227,7 +227,7 @@ echo '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' | \
   docker run --rm -i xerodev-mcp:local
 ```
 
-Expected response: JSON array of 21 tools
+Expected response: JSON array of 25 tools
 
 ### "Module not found" errors
 
@@ -249,7 +249,7 @@ Before testing in a real project:
 - [ ] Docker image builds successfully: `docker build -t xerodev-mcp:local .`
 - [ ] Server responds to tools/list: `echo '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' | docker run --rm -i xerodev-mcp:local`
 - [ ] AI agent is configured with MCP config
-- [ ] get_mcp_capabilities returns 21 tools
+- [ ] get_mcp_capabilities returns 25 tools
 - [ ] Can switch between tenants
 - [ ] Can validate schemas
 

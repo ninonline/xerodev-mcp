@@ -173,7 +173,7 @@ Call get_mcp_capabilities to see available tenants
 **Possible fixes**:
 
 1. **Typo in tenant_id**: Copy exact tenant_id from capabilities
-2. **In mock mode**: Only 3 tenants available (acme-au-001, uk-ltd-001, us-startup-001)
+2. **In mock mode**: Only 3 tenants available (acme-au-001, company-uk-001, startup-us-001)
 3. **In live mode**: Must complete OAuth first
 
 ## OAuth Issues
