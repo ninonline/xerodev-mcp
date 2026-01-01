@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "xerodev-mcp": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--init",
+        "-e", "MCP_MODE=mock",
+        "-e", "LOG_LEVEL=diagnostic",
+        "xerodev-mcp:latest"
+      ],
+      "env": {
+        "MCP_MODE": "mock",
+        "LOG_LEVEL": "diagnostic"
+      }
+    }
+  }
+}
