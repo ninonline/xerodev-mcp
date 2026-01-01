@@ -11,16 +11,15 @@ const LineItemSchema = z.object({
 });
 
 const InvoicePayloadSchema = z.object({
-  type: z.enum(['ACCREC', 'ACCPAY']).optional().default('ACCREC'),
-  contact: z.object({
-    contact_id: z.string(),
-  }),
+  type: z.enum(['ACCREC', 'ACCPAY']).optional(),
+  contact_id: z.string(),
   date: z.string().optional(),
   due_date: z.string().optional(),
-  status: z.enum(['DRAFT', 'SUBMITTED', 'AUTHORISED', 'PAID', 'VOIDED']).optional(),
-  line_amount_types: z.enum(['Exclusive', 'Inclusive', 'NoTax']).optional().default('Exclusive'),
+  reference: z.string().optional(),
+  status: z.enum(['DRAFT', 'SUBMITTED', 'AUTHORISED']).optional(),
+  line_amount_types: z.enum(['Exclusive', 'Inclusive', 'NoTax']).optional(),
   line_items: z.array(LineItemSchema).min(1),
-  currency_code: z.string().optional().default('AUD'),
+  currency_code: z.string().optional(),
 });
 
 export const DryRunSyncSchema = z.object({
@@ -133,8 +132,22 @@ export async function handleDryRunSync(
         continue;
       }
 
+      // Transform flat structure to nested structure for adapter
+      const data = parseResult.data;
+      const adapterPayload: Partial<Invoice> = {
+        type: data.type,
+        contact: { contact_id: data.contact_id },
+        date: data.date,
+        due_date: data.due_date,
+        reference: data.reference,
+        status: data.status,
+        line_amount_types: data.line_amount_types,
+        line_items: data.line_items,
+        currency_code: data.currency_code,
+      };
+
       // Validate against tenant context
-      validationResult = await adapter.validateInvoice(tenant_id, parseResult.data as Partial<Invoice>);
+      validationResult = await adapter.validateInvoice(tenant_id, adapterPayload);
 
       // Calculate estimated total
       if (parseResult.data.line_items) {

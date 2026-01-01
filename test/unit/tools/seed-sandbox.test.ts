@@ -96,8 +96,7 @@ describe('seed_sandbox_data', () => {
       const invoice = result.data.generated[0] as any;
       expect(invoice.invoice_id).toBeDefined();
       expect(invoice.type).toBe('ACCREC');
-      expect(invoice.contact).toBeDefined();
-      expect(invoice.contact.contact_id).toBeDefined();
+      expect(invoice.contact_id).toBeDefined();
       expect(invoice.line_items).toBeDefined();
       expect(invoice.line_items.length).toBeGreaterThan(0);
     });

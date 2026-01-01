@@ -72,7 +72,7 @@ describe('AI Agent Workflow', () => {
       // Step 5: Validate invoice payload
       const invoice = {
         type: 'ACCREC',
-        contact: { contact_id: validContactId },
+        contact_id: validContactId,
         line_items: [{
           description: 'Consulting Services',
           quantity: 10,
@@ -118,7 +118,7 @@ describe('AI Agent Workflow', () => {
       // Step 1: Submit invalid invoice
       const badInvoice = {
         type: 'ACCREC',
-        contact: { contact_id: 'non-existent-contact' },
+        contact_id: 'non-existent-contact',
         line_items: [{
           description: 'Test Service',
           quantity: 1,
@@ -184,7 +184,7 @@ describe('AI Agent Workflow', () => {
       // Step 5: Fix the invoice with valid values
       const fixedInvoice = {
         type: 'ACCREC',
-        contact: { contact_id: validContactId },
+        contact_id: validContactId,
         line_items: [{
           description: 'Test Service',
           quantity: 1,

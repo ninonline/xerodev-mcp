@@ -7,7 +7,7 @@ describe('validate_schema_match', () => {
 
   const validInvoice = {
     type: 'ACCREC',
-    contact: { contact_id: 'contact-001' },
+    contact_id: 'contact-001',
     date: '2025-01-15',
     due_date: '2025-02-15',
     line_items: [{
@@ -154,7 +154,7 @@ describe('validate_schema_match', () => {
           entity_type: 'Invoice',
           payload: {
             ...validInvoice,
-            contact: { contact_id: 'non-existent-contact' },
+            contact_id: 'non-existent-contact',
           },
           verbosity: 'diagnostic',
         },

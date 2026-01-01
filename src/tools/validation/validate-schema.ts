@@ -11,64 +11,51 @@ const LineItemSchema = z.object({
 });
 
 const InvoicePayloadSchema = z.object({
-  type: z.enum(['ACCREC', 'ACCPAY']).optional().default('ACCREC'),
-  contact: z.object({
-    contact_id: z.string(),
-  }),
+  type: z.enum(['ACCREC', 'ACCPAY']).optional(),
+  contact_id: z.string().describe('Contact ID for the invoice'),
   date: z.string().optional(),
   due_date: z.string().optional(),
-  status: z.enum(['DRAFT', 'SUBMITTED', 'AUTHORISED', 'PAID', 'VOIDED']).optional(),
-  line_amount_types: z.enum(['Exclusive', 'Inclusive', 'NoTax']).optional().default('Exclusive'),
+  reference: z.string().optional(),
+  status: z.enum(['DRAFT', 'SUBMITTED', 'AUTHORISED']).optional(),
   line_items: z.array(LineItemSchema).min(1),
-  currency_code: z.string().optional().default('AUD'),
 });
 
 const QuotePayloadSchema = z.object({
-  contact: z.object({
-    contact_id: z.string(),
-  }),
+  contact_id: z.string().describe('Contact ID for the quote recipient'),
   date: z.string().optional(),
   expiry_date: z.string().optional(),
   status: z.enum(['DRAFT', 'SENT', 'ACCEPTED', 'DECLINED', 'INVOICED']).optional(),
-  line_amount_types: z.enum(['Exclusive', 'Inclusive', 'NoTax']).optional().default('Exclusive'),
   line_items: z.array(LineItemSchema).min(1),
-  currency_code: z.string().optional().default('AUD'),
   title: z.string().optional(),
   summary: z.string().optional(),
   terms: z.string().optional(),
+  reference: z.string().optional(),
 });
 
 const CreditNotePayloadSchema = z.object({
-  type: z.enum(['ACCRECCREDIT', 'ACCPAYCREDIT']).optional().default('ACCRECCREDIT'),
-  contact: z.object({
-    contact_id: z.string(),
-  }),
+  type: z.enum(['ACCRECCREDIT', 'ACCPAYCREDIT']).optional(),
+  contact_id: z.string().describe('Contact ID for the credit note'),
   date: z.string().optional(),
   status: z.enum(['DRAFT', 'SUBMITTED', 'AUTHORISED', 'PAID', 'VOIDED']).optional(),
-  line_amount_types: z.enum(['Exclusive', 'Inclusive', 'NoTax']).optional().default('Exclusive'),
   line_items: z.array(LineItemSchema).min(1),
-  currency_code: z.string().optional().default('AUD'),
   reference: z.string().optional(),
 });
 
 const PaymentPayloadSchema = z.object({
-  invoice: z.object({ invoice_id: z.string() }).optional(),
-  credit_note: z.object({ credit_note_id: z.string() }).optional(),
-  account: z.object({ account_id: z.string() }),
+  invoice_id: z.string().optional().describe('Invoice ID to apply payment to'),
+  credit_note_id: z.string().optional().describe('Credit note ID to refund'),
+  account_id: z.string().describe('Bank account ID for the payment'),
   date: z.string().optional(),
   amount: z.number().positive(),
-  currency_code: z.string().optional().default('AUD'),
   reference: z.string().optional(),
 });
 
 const BankTransactionPayloadSchema = z.object({
   type: z.enum(['RECEIVE', 'SPEND', 'RECEIVE-OVERPAYMENT', 'RECEIVE-PREPAYMENT', 'SPEND-OVERPAYMENT', 'SPEND-PREPAYMENT']),
-  contact: z.object({ contact_id: z.string() }).optional(),
-  bank_account: z.object({ account_id: z.string() }),
+  contact_id: z.string().optional().describe('Contact ID (optional for some transaction types)'),
+  bank_account_id: z.string().describe('Bank account ID'),
   date: z.string().optional(),
-  line_amount_types: z.enum(['Exclusive', 'Inclusive', 'NoTax']).optional().default('Exclusive'),
   line_items: z.array(LineItemSchema).min(1),
-  currency_code: z.string().optional().default('AUD'),
   reference: z.string().optional(),
 });
 
@@ -193,25 +180,78 @@ export async function handleValidateSchema(
     if (entity_type === 'Invoice') {
       const validation = validateStructure(InvoicePayloadSchema, 'Invoice');
       if (!validation.isValid) return validation.response!;
-      result = await adapter.validateInvoice(tenant_id, validation.data as Partial<Invoice>);
+      // Transform flat structure to nested structure for adapter
+      const data = validation.data as z.infer<typeof InvoicePayloadSchema>;
+      const adapterPayload: Partial<Invoice> = {
+        type: data.type,
+        contact: { contact_id: data.contact_id },
+        date: data.date,
+        due_date: data.due_date,
+        reference: data.reference,
+        status: data.status,
+        line_items: data.line_items,
+      };
+      result = await adapter.validateInvoice(tenant_id, adapterPayload);
     } else if (entity_type === 'Contact') {
       result = await adapter.validateContact(tenant_id, payload);
     } else if (entity_type === 'Quote') {
       const validation = validateStructure(QuotePayloadSchema, 'Quote');
       if (!validation.isValid) return validation.response!;
-      result = await adapter.validateQuote(tenant_id, validation.data as Partial<Quote>);
+      // Transform flat structure to nested structure for adapter
+      const data = validation.data as z.infer<typeof QuotePayloadSchema>;
+      const adapterPayload: Partial<Quote> = {
+        contact: { contact_id: data.contact_id },
+        date: data.date,
+        expiry_date: data.expiry_date,
+        status: data.status,
+        line_items: data.line_items,
+        title: data.title,
+        summary: data.summary,
+        terms: data.terms,
+      };
+      result = await adapter.validateQuote(tenant_id, adapterPayload);
     } else if (entity_type === 'CreditNote') {
       const validation = validateStructure(CreditNotePayloadSchema, 'CreditNote');
       if (!validation.isValid) return validation.response!;
-      result = await adapter.validateCreditNote(tenant_id, validation.data as Partial<CreditNote>);
+      // Transform flat structure to nested structure for adapter
+      const data = validation.data as z.infer<typeof CreditNotePayloadSchema>;
+      const adapterPayload: Partial<CreditNote> = {
+        type: data.type,
+        contact: { contact_id: data.contact_id },
+        date: data.date,
+        status: data.status,
+        line_items: data.line_items,
+        reference: data.reference,
+      };
+      result = await adapter.validateCreditNote(tenant_id, adapterPayload);
     } else if (entity_type === 'Payment') {
       const validation = validateStructure(PaymentPayloadSchema, 'Payment');
       if (!validation.isValid) return validation.response!;
-      result = await adapter.validatePayment(tenant_id, validation.data as Partial<Payment>);
+      // Transform flat structure to nested structure for adapter
+      const data = validation.data as z.infer<typeof PaymentPayloadSchema>;
+      const adapterPayload: Partial<Payment> = {
+        invoice: data.invoice_id ? { invoice_id: data.invoice_id } : undefined,
+        credit_note: data.credit_note_id ? { credit_note_id: data.credit_note_id } : undefined,
+        account: { account_id: data.account_id },
+        date: data.date,
+        amount: data.amount,
+        reference: data.reference,
+      };
+      result = await adapter.validatePayment(tenant_id, adapterPayload);
     } else if (entity_type === 'BankTransaction') {
       const validation = validateStructure(BankTransactionPayloadSchema, 'BankTransaction');
       if (!validation.isValid) return validation.response!;
-      result = await adapter.validateBankTransaction(tenant_id, validation.data as Partial<BankTransaction>);
+      // Transform flat structure to nested structure for adapter
+      const data = validation.data as z.infer<typeof BankTransactionPayloadSchema>;
+      const adapterPayload: Partial<BankTransaction> = {
+        type: data.type,
+        contact: data.contact_id ? { contact_id: data.contact_id } : undefined,
+        bank_account: { account_id: data.bank_account_id },
+        date: data.date,
+        line_items: data.line_items,
+        reference: data.reference,
+      };
+      result = await adapter.validateBankTransaction(tenant_id, adapterPayload);
     } else {
       throw new Error(`Unsupported entity type: ${entity_type}`);
     }

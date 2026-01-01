@@ -7,7 +7,7 @@ describe('dry_run_sync', () => {
 
   const validInvoice = {
     type: 'ACCREC',
-    contact: { contact_id: 'contact-001' },
+    contact_id: 'contact-001',
     date: '2025-01-15',
     due_date: '2025-02-15',
     line_items: [{
@@ -21,7 +21,7 @@ describe('dry_run_sync', () => {
 
   const invalidInvoice = {
     type: 'ACCREC',
-    contact: { contact_id: 'non-existent' },
+    contact_id: 'non-existent',
     line_items: [{
       description: 'Test',
       quantity: 1,

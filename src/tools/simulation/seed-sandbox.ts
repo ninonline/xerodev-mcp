@@ -200,19 +200,20 @@ export async function handleSeedSandbox(
         });
       }
 
-      const invoice: Partial<Invoice> = {
+      // Generate flat-structure invoice payload for use with validation/create tools
+      const invoicePayload: Record<string, unknown> = {
         invoice_id: invoiceId,
         type: 'ACCREC',
-        contact: { contact_id: contact?.contact_id ?? 'contact-001' },
+        contact_id: contact?.contact_id ?? 'contact-001',
         date: invoiceDate.toISOString().split('T')[0],
         due_date: dueDate.toISOString().split('T')[0],
-        status: status as 'DRAFT' | 'SUBMITTED' | 'AUTHORISED' | 'PAID' | 'VOIDED',
+        status: status,
         line_amount_types: 'Exclusive',
         line_items: lineItems,
         currency_code: context.currency,
       };
 
-      generated.push(invoice);
+      generated.push(invoicePayload);
       sampleIds.push(invoiceId);
     }
   }
@@ -230,8 +231,9 @@ export async function handleSeedSandbox(
   let totalAmount = 0;
   if (entity === 'INVOICES') {
     totalAmount = generated.reduce((sum, inv) => {
-      const invoice = inv as Partial<Invoice>;
-      return sum + (invoice.line_items?.reduce((lineSum, item) => lineSum + item.quantity * item.unit_amount, 0) ?? 0);
+      const invoice = inv as Record<string, unknown>;
+      const lineItems = invoice.line_items as Array<{ quantity: number; unit_amount: number }>;
+      return sum + (lineItems?.reduce((lineSum, item) => lineSum + item.quantity * item.unit_amount, 0) ?? 0);
     }, 0);
   }
 
