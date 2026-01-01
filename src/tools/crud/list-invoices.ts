@@ -165,10 +165,10 @@ export async function handleListInvoices(
 
   // Apply date range filters (adapter may not support these)
   if (from_date) {
-    invoices = invoices.filter(i => i.date >= from_date);
+    invoices = invoices.filter(i => i.date !== undefined && i.date >= from_date);
   }
   if (to_date) {
-    invoices = invoices.filter(i => i.date <= to_date);
+    invoices = invoices.filter(i => i.date !== undefined && i.date <= to_date);
   }
 
   // Apply status filter (adapter may return all)
@@ -189,7 +189,7 @@ export async function handleListInvoices(
   const paginatedInvoices = invoices.slice(startIndex, startIndex + page_size);
 
   // Calculate summary stats
-  const totalValue = paginatedInvoices.reduce((sum, inv) => sum + inv.total, 0);
+  const totalValue = paginatedInvoices.reduce((sum, inv) => sum + (inv.total || 0), 0);
 
   const filterSummary = filtersApplied.length > 0
     ? `Filters: ${filtersApplied.join(', ')}. `

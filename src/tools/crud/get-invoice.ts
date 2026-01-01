@@ -127,6 +127,6 @@ export async function handleGetInvoice(
     verbosity: verbosity as VerbosityLevel,
     executionTimeMs: Date.now() - startTime,
     narrative: `Found ${typeLabel} ${invoice.invoice_id} with status ${invoice.status}. ` +
-      `Total: ${invoice.currency_code} ${invoice.total.toFixed(2)}. Due: ${invoice.due_date}.`,
+      `Total: ${invoice.currency_code || 'N/A'} ${invoice.total?.toFixed(2) || '0.00'}. Due: ${invoice.due_date || 'N/A'}.`,
   });
 }

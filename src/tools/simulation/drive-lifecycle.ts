@@ -244,7 +244,7 @@ export async function handleDriveLifecycle(
     });
   }
 
-  currentState = entity.status;
+  currentState = entity.status || 'UNKNOWN';
 
   // Check if already in target state
   if (currentState === target_state) {

@@ -280,10 +280,10 @@ export class XeroMockAdapter implements XeroAdapter {
       invoices = invoices.filter(i => i.contact.contact_id === filter.contact_id);
     }
     if (filter?.from_date) {
-      invoices = invoices.filter(i => i.date >= filter.from_date!);
+      invoices = invoices.filter(i => i.date !== undefined && i.date >= filter.from_date!);
     }
     if (filter?.to_date) {
-      invoices = invoices.filter(i => i.date <= filter.to_date!);
+      invoices = invoices.filter(i => i.date !== undefined && i.date <= filter.to_date!);
     }
 
     return invoices;
