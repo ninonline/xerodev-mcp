@@ -340,7 +340,7 @@ describe('create_invoice', () => {
         adapter
       );
 
-      const stored = getInvoiceFromIdempotencyStore(key);
+      const stored = getInvoiceFromIdempotencyStore(tenantId, key);
       expect(stored).toBeDefined();
       expect(stored?.type).toBe('ACCREC');
     });

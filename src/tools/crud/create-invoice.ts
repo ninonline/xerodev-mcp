@@ -3,6 +3,7 @@ import { randomUUID } from 'node:crypto';
 import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import { type XeroAdapter } from '../../adapters/adapter-factory.js';
 import { checkSimulation } from '../chaos/simulate-network.js';
+import { getIdempotency, storeIdempotency } from '../../core/idempotency.js';
 
 const LineItemSchema = z.object({
   description: z.string().describe('Line item description'),
@@ -98,9 +99,6 @@ If the same key is used twice, the second call returns the existing invoice.`,
   },
 };
 
-// Store for idempotency (in production, this would be in the database)
-const invoiceIdempotencyStore: Map<string, InvoiceData> = new Map();
-
 interface LineItem {
   description: string;
   quantity: number;
@@ -180,9 +178,9 @@ export async function handleCreateInvoice(
     return response;
   }
 
-  // Check idempotency
+  // Check idempotency (database-backed, per-tenant)
   if (idempotency_key) {
-    const existing = invoiceIdempotencyStore.get(idempotency_key);
+    const existing = getIdempotency(tenant_id, idempotency_key) as InvoiceData | undefined;
     if (existing) {
       const response = createResponse({
         success: true,
@@ -365,9 +363,14 @@ export async function handleCreateInvoice(
     created_at: new Date().toISOString(),
   };
 
-  // Store for idempotency
+  // Store for idempotency (database-backed, per-tenant)
   if (idempotency_key) {
-    invoiceIdempotencyStore.set(idempotency_key, invoice);
+    storeIdempotency({
+      tenant_id: tenant_id,
+      idempotency_key,
+      result_data: invoice,
+      entity_type: 'Invoice',
+    });
   }
 
   const typeLabel = invoiceType === 'ACCREC' ? 'sales invoice' : 'bill';
@@ -396,11 +399,14 @@ function calculateDueDate(date: string, daysToAdd: number): string {
   return d.toISOString().split('T')[0];
 }
 
-// Exported for testing
-export function clearInvoiceIdempotencyStore(): void {
-  invoiceIdempotencyStore.clear();
+// Exported for testing - now uses database-backed store
+export function clearInvoiceIdempotencyStore(tenantId?: string): void {
+  if (tenantId) {
+    const { clearTenantIdempotency } = require('../../core/idempotency.js');
+    clearTenantIdempotency(tenantId);
+  }
 }
 
-export function getInvoiceFromIdempotencyStore(key: string): InvoiceData | undefined {
-  return invoiceIdempotencyStore.get(key);
+export function getInvoiceFromIdempotencyStore(tenantId: string, key: string): InvoiceData | undefined {
+  return getIdempotency(tenantId, key) as InvoiceData | undefined;
 }

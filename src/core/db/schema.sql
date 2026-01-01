@@ -100,3 +100,28 @@ CREATE TABLE IF NOT EXISTS audit_log (
 
 CREATE INDEX IF NOT EXISTS idx_audit_tenant ON audit_log(tenant_id, timestamp DESC);
 CREATE INDEX IF NOT EXISTS idx_audit_request ON audit_log(request_id);
+
+-- ============================================================================
+-- IDEMPOTENCY_STORE TABLE
+-- Prevents duplicate operations when retrying with same idempotency key
+-- ============================================================================
+CREATE TABLE IF NOT EXISTS idempotency_store (
+    id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    -- Key and tenant
+    tenant_id           TEXT NOT NULL,
+    idempotency_key     TEXT NOT NULL,
+
+    -- The stored result (JSON)
+    result_data         TEXT NOT NULL,
+
+    -- Metadata
+    entity_type         TEXT NOT NULL,  -- 'Invoice', 'Contact', etc.
+    created_at          INTEGER NOT NULL DEFAULT (strftime('%s', 'now')),
+    expires_at          INTEGER,        -- Optional expiration
+
+    UNIQUE(tenant_id, idempotency_key)
+);
+
+CREATE INDEX IF NOT EXISTS idx_idempotent_lookup ON idempotency_store(tenant_id, idempotency_key);
+CREATE INDEX IF NOT EXISTS idx_idempotent_expiry ON idempotency_store(expires_at) WHERE expires_at IS NOT NULL;

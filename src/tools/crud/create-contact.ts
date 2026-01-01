@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import { type XeroAdapter } from '../../adapters/adapter-factory.js';
 import { checkSimulation } from '../chaos/simulate-network.js';
+import { getIdempotency, storeIdempotency, clearTenantIdempotency } from '../../core/idempotency.js';
 
 export const CreateContactSchema = z.object({
   tenant_id: z.string().describe('Target tenant ID'),
@@ -57,9 +58,6 @@ If the same key is used twice, the second call returns the existing contact.
     required: ['tenant_id', 'name'],
   },
 };
-
-// Store for idempotency (in production, this would be in the database)
-const contactIdempotencyStore: Map<string, ContactData> = new Map();
 
 interface ContactData {
   contact_id: string;
@@ -123,9 +121,9 @@ export async function handleCreateContact(
     return response;
   }
 
-  // Check idempotency
+  // Check idempotency (database-backed, per-tenant)
   if (idempotency_key) {
-    const existing = contactIdempotencyStore.get(idempotency_key);
+    const existing = getIdempotency(tenant_id, idempotency_key) as ContactData | undefined;
     if (existing) {
       const response = createResponse({
         success: true,
@@ -192,9 +190,14 @@ export async function handleCreateContact(
     created_at: createdContact.created_at || new Date().toISOString(),
   };
 
-  // Store for idempotency
+  // Store for idempotency (database-backed, per-tenant)
   if (idempotency_key) {
-    contactIdempotencyStore.set(idempotency_key, contact);
+    storeIdempotency({
+      tenant_id: tenant_id,
+      idempotency_key,
+      result_data: contact,
+      entity_type: 'Contact',
+    });
   }
 
   const executionTimeMs = Date.now() - startTime;
@@ -213,11 +216,13 @@ export async function handleCreateContact(
   return response;
 }
 
-// Exported for testing
-export function clearContactIdempotencyStore(): void {
-  contactIdempotencyStore.clear();
+// Exported for testing - now uses database-backed store
+export function clearContactIdempotencyStore(tenantId?: string): void {
+  if (tenantId) {
+    clearTenantIdempotency(tenantId);
+  }
 }
 
-export function getContactFromIdempotencyStore(key: string): ContactData | undefined {
-  return contactIdempotencyStore.get(key);
+export function getContactFromIdempotencyStore(tenantId: string, key: string): ContactData | undefined {
+  return getIdempotency(tenantId, key) as ContactData | undefined;
 }

@@ -16,7 +16,7 @@ describe('create_contact', () => {
   });
 
   beforeEach(() => {
-    clearContactIdempotencyStore();
+    clearContactIdempotencyStore(tenantId);
     clearSimulation(tenantId);
   });
 
@@ -164,7 +164,7 @@ describe('create_contact', () => {
         adapter
       );
 
-      const stored = getContactFromIdempotencyStore(key);
+      const stored = getContactFromIdempotencyStore(tenantId, key);
       expect(stored).toBeDefined();
       expect(stored?.name).toBe('Store Test');
     });
