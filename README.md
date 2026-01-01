@@ -5,12 +5,14 @@ An MCP (Model Context Protocol) server for testing and validating Xero integrati
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](https://www.docker.com/)
 [![MCP](https://img.shields.io/badge/MCP-compatible-green.svg)](https://modelcontextprotocol.io/)
+[![Tests](https://img.shields.io/badge/Tests-481%20Passing-brightgreen.svg)](https://github.com/ninonline/xerodev-mcp)
+[![Version](https://img.shields.io/badge/version-0.2.0-blue.svg)](https://github.com/ninonline/xerodev-mcp/releases)
 
 ## Quick Start
 
 ```bash
 # Clone and start with Docker
-git clone https://github.com/xerodev/xerodev-mcp.git
+git clone https://github.com/ninonline/xerodev-mcp.git
 cd xerodev-mcp
 docker compose up
 ```
