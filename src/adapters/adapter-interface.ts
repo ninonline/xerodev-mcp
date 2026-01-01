@@ -20,6 +20,7 @@ export interface Contact {
   status: 'ACTIVE' | 'ARCHIVED';
   addresses?: Address[];
   phones?: Phone[];
+  created_at?: string;  // ISO 8601 timestamp when contact was created
 }
 
 export interface Address {
@@ -67,15 +68,16 @@ export interface Invoice {
   invoice_id: string;
   type: 'ACCREC' | 'ACCPAY';
   contact: { contact_id: string };
-  date: string;
-  due_date: string;
-  status: 'DRAFT' | 'SUBMITTED' | 'AUTHORISED' | 'PAID' | 'VOIDED';
-  line_amount_types: 'Exclusive' | 'Inclusive' | 'NoTax';
+  date?: string;
+  due_date?: string;
+  reference?: string;  // User-provided reference number
+  status?: 'DRAFT' | 'SUBMITTED' | 'AUTHORISED' | 'PAID' | 'VOIDED';
+  line_amount_types?: 'Exclusive' | 'Inclusive' | 'NoTax';
   line_items: LineItem[];
-  currency_code: string;
-  sub_total: number;
-  total_tax: number;
-  total: number;
+  currency_code?: string;
+  sub_total?: number;
+  total_tax?: number;
+  total?: number;
 }
 
 export interface Quote {

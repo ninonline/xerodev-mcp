@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { randomUUID } from 'node:crypto';
 import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import { type XeroAdapter } from '../../adapters/adapter-factory.js';
 import { checkSimulation } from '../chaos/simulate-network.js';
