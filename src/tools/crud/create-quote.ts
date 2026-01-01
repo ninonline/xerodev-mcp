@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { randomUUID } from 'node:crypto';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import { type XeroAdapter } from '../../adapters/adapter-factory.js';
 import { type Quote, type TaxRate } from '../../adapters/adapter-interface.js';
 import { checkSimulation } from '../chaos/simulate-network.js';
@@ -114,7 +114,7 @@ export async function handleCreateQuote(
   // Check for active network simulation
   const simCheck = checkSimulation(tenant_id);
   if (simCheck.shouldFail && simCheck.error) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: simCheck.error.message },
       verbosity: verbosity as VerbosityLevel,
@@ -130,19 +130,23 @@ export async function handleCreateQuote(
       },
       executionTimeMs: Date.now() - startTime,
     });
+    auditLogResponse(response, 'create_quote', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Check idempotency
   if (idempotency_key) {
     const existing = idempotencyStore.get(idempotency_key);
     if (existing) {
-      return createResponse({
+      const response = createResponse({
         success: true,
         data: existing,
         verbosity: verbosity as VerbosityLevel,
         narrative: `Idempotent replay: Returning existing quote ${existing.quote_number} created with same idempotency_key.`,
         executionTimeMs: Date.now() - startTime,
       });
+      auditLogResponse(response, 'create_quote', tenant_id, Date.now() - startTime);
+      return response;
     }
   }
 
@@ -154,7 +158,7 @@ export async function handleCreateQuote(
     // Adapter throws for non-existent tenants
   }
   if (!tenantContext) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: `Tenant '${tenant_id}' not found` },
       verbosity: verbosity as VerbosityLevel,
@@ -169,6 +173,8 @@ export async function handleCreateQuote(
       },
       executionTimeMs: Date.now() - startTime,
     });
+    auditLogResponse(response, 'create_quote', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Build quote payload
@@ -244,7 +250,7 @@ export async function handleCreateQuote(
       };
     }
 
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: {
         error: 'Quote validation failed',
@@ -260,6 +266,8 @@ export async function handleCreateQuote(
       recovery,
       executionTimeMs: Date.now() - startTime,
     });
+    auditLogResponse(response, 'create_quote', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Calculate totals
@@ -287,7 +295,7 @@ export async function handleCreateQuote(
     idempotencyStore.set(idempotency_key, createdQuote);
   }
 
-  return createResponse({
+  const response = createResponse({
     success: true,
     data: createdQuote,
     verbosity: verbosity as VerbosityLevel,
@@ -297,6 +305,8 @@ export async function handleCreateQuote(
     warnings: validation.warnings,
     executionTimeMs: Date.now() - startTime,
   });
+  auditLogResponse(response, 'create_quote', tenant_id, Date.now() - startTime);
+  return response;
 }
 
 // Export for testing

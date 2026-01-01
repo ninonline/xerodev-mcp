@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { randomUUID } from 'node:crypto';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import { type XeroAdapter } from '../../adapters/adapter-factory.js';
 import { type BankTransaction, type TaxRate } from '../../adapters/adapter-interface.js';
 import { checkSimulation } from '../chaos/simulate-network.js';
@@ -110,7 +110,7 @@ export async function handleCreateBankTransaction(
   // Check for active network simulation
   const simCheck = checkSimulation(tenant_id);
   if (simCheck.shouldFail && simCheck.error) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: simCheck.error.message },
       verbosity: verbosity as VerbosityLevel,
@@ -126,19 +126,23 @@ export async function handleCreateBankTransaction(
       },
       executionTimeMs: Date.now() - startTime,
     });
+    auditLogResponse(response, 'create_bank_transaction', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Check idempotency
   if (idempotency_key) {
     const existing = idempotencyStore.get(idempotency_key);
     if (existing) {
-      return createResponse({
+      const response = createResponse({
         success: true,
         data: existing,
         verbosity: verbosity as VerbosityLevel,
         narrative: `Idempotent replay: Returning existing bank transaction ${existing.bank_transaction_id} created with same idempotency_key.`,
         executionTimeMs: Date.now() - startTime,
       });
+      auditLogResponse(response, 'create_bank_transaction', tenant_id, Date.now() - startTime);
+      return response;
     }
   }
 
@@ -150,7 +154,7 @@ export async function handleCreateBankTransaction(
     // Adapter throws for non-existent tenants
   }
   if (!tenantContext) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: `Tenant '${tenant_id}' not found` },
       verbosity: verbosity as VerbosityLevel,
@@ -165,6 +169,8 @@ export async function handleCreateBankTransaction(
       },
       executionTimeMs: Date.now() - startTime,
     });
+    auditLogResponse(response, 'create_bank_transaction', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Determine default tax type based on transaction type
@@ -254,7 +260,7 @@ export async function handleCreateBankTransaction(
       };
     }
 
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: {
         error: 'Bank transaction validation failed',
@@ -270,6 +276,8 @@ export async function handleCreateBankTransaction(
       recovery,
       executionTimeMs: Date.now() - startTime,
     });
+    auditLogResponse(response, 'create_bank_transaction', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Calculate totals
@@ -297,7 +305,7 @@ export async function handleCreateBankTransaction(
     idempotencyStore.set(idempotency_key, createdTransaction);
   }
 
-  return createResponse({
+  const response = createResponse({
     success: true,
     data: createdTransaction,
     verbosity: verbosity as VerbosityLevel,
@@ -307,6 +315,8 @@ export async function handleCreateBankTransaction(
     warnings: validation.warnings,
     executionTimeMs: Date.now() - startTime,
   });
+  auditLogResponse(response, 'create_bank_transaction', tenant_id, Date.now() - startTime);
+  return response;
 }
 
 // Export for testing

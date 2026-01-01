@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import { type XeroAdapter } from '../../adapters/adapter-factory.js';
 import { type Invoice, type Quote, type CreditNote } from '../../adapters/adapter-interface.js';
 
@@ -144,18 +144,20 @@ export async function handleDriveLifecycle(
       validStates = ['DRAFT', 'SUBMITTED', 'AUTHORISED', 'PAID', 'VOIDED'];
       break;
     default:
-      return createResponse({
+      const resp1 = createResponse({
         success: false,
         data: { error: `Unsupported entity type: ${entity_type}` },
         verbosity: verbosity as VerbosityLevel,
         executionTimeMs: Date.now() - startTime,
         narrative: `Entity type '${entity_type}' is not supported for lifecycle transitions.`,
       });
+      auditLogResponse(resp1, 'drive_lifecycle', tenant_id, Date.now() - startTime);
+      return resp1;
   }
 
   // Validate target state
   if (!validStates.includes(target_state)) {
-    return createResponse({
+    const resp2 = createResponse({
       success: false,
       data: {
         error: `Invalid target state '${target_state}' for ${entity_type}`,
@@ -165,12 +167,14 @@ export async function handleDriveLifecycle(
       executionTimeMs: Date.now() - startTime,
       narrative: `Target state '${target_state}' is not valid for ${entity_type}. Valid states: ${validStates.join(', ')}.`,
     });
+    auditLogResponse(resp2, 'drive_lifecycle', tenant_id, Date.now() - startTime);
+    return resp2;
   }
 
   // Check payment requirements for PAID transition
   if (target_state === 'PAID') {
     if (!payment_amount || payment_amount <= 0) {
-      return createResponse({
+      const resp3 = createResponse({
         success: false,
         data: { error: 'payment_amount is required and must be positive when transitioning to PAID' },
         verbosity: verbosity as VerbosityLevel,
@@ -181,9 +185,11 @@ export async function handleDriveLifecycle(
           description: 'Provide payment_amount and payment_account_id',
         },
       });
+      auditLogResponse(resp3, 'drive_lifecycle', tenant_id, Date.now() - startTime);
+      return resp3;
     }
     if (!payment_account_id) {
-      return createResponse({
+      const resp4 = createResponse({
         success: false,
         data: { error: 'payment_account_id is required when transitioning to PAID' },
         verbosity: verbosity as VerbosityLevel,
@@ -198,6 +204,8 @@ export async function handleDriveLifecycle(
           },
         },
       });
+      auditLogResponse(resp4, 'drive_lifecycle', tenant_id, Date.now() - startTime);
+      return resp4;
     }
   }
 
@@ -217,17 +225,19 @@ export async function handleDriveLifecycle(
       entity = creditNotes.find(cn => cn.credit_note_id === entity_id);
     }
   } catch (error) {
-    return createResponse({
+    const resp5 = createResponse({
       success: false,
       data: { error: `Failed to fetch ${entity_type}: ${error instanceof Error ? error.message : 'Unknown error'}` },
       verbosity: verbosity as VerbosityLevel,
       executionTimeMs: Date.now() - startTime,
       narrative: `Could not fetch ${entity_type} with ID '${entity_id}'.`,
     });
+    auditLogResponse(resp5, 'drive_lifecycle', tenant_id, Date.now() - startTime);
+    return resp5;
   }
 
   if (!entity) {
-    return createResponse({
+    const resp6 = createResponse({
       success: false,
       data: { error: `${entity_type} '${entity_id}' not found` },
       verbosity: verbosity as VerbosityLevel,
@@ -242,13 +252,15 @@ export async function handleDriveLifecycle(
         },
       },
     });
+    auditLogResponse(resp6, 'drive_lifecycle', tenant_id, Date.now() - startTime);
+    return resp6;
   }
 
   currentState = entity.status || 'UNKNOWN';
 
   // Check if already in target state
   if (currentState === target_state) {
-    return createResponse({
+    const resp7 = createResponse({
       success: true,
       data: {
         entity_type,
@@ -261,6 +273,8 @@ export async function handleDriveLifecycle(
       executionTimeMs: Date.now() - startTime,
       narrative: `${entity_type} '${entity_id}' is already in state '${target_state}'. No transition needed.`,
     });
+    auditLogResponse(resp7, 'drive_lifecycle', tenant_id, Date.now() - startTime);
+    return resp7;
   }
 
   // Find transition path
@@ -268,7 +282,7 @@ export async function handleDriveLifecycle(
 
   if (!path) {
     const allowedTransitions = transitions[currentState] || [];
-    return createResponse({
+    const resp8 = createResponse({
       success: false,
       data: {
         error: `Cannot transition from '${currentState}' to '${target_state}'`,
@@ -282,6 +296,8 @@ export async function handleDriveLifecycle(
       narrative: `Invalid transition: ${entity_type} cannot go from '${currentState}' to '${target_state}'. ` +
         `Allowed transitions from '${currentState}': ${allowedTransitions.length > 0 ? allowedTransitions.join(', ') : 'none (terminal state)'}.`,
     });
+    auditLogResponse(resp8, 'drive_lifecycle', tenant_id, Date.now() - startTime);
+    return resp8;
   }
 
   // Execute the transition
@@ -337,7 +353,7 @@ export async function handleDriveLifecycle(
       await adapter.updateEntityStatus(tenant_id, entity_type, entity_id, nextState);
     }
   } catch (error) {
-    return createResponse({
+    const resp9 = createResponse({
       success: false,
       data: {
         error: `Failed to apply transition: ${error instanceof Error ? error.message : 'Unknown error'}`,
@@ -347,6 +363,8 @@ export async function handleDriveLifecycle(
       executionTimeMs: Date.now() - startTime,
       narrative: `Transition failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
     });
+    auditLogResponse(resp9, 'drive_lifecycle', tenant_id, Date.now() - startTime);
+    return resp9;
   }
 
   // Build narrative
@@ -361,7 +379,7 @@ export async function handleDriveLifecycle(
     narrative += ` Invoice created from quote (ID: ${result.invoice_created.invoice_id}).`;
   }
 
-  return createResponse({
+  const finalResponse = createResponse({
     success: true,
     data: result,
     verbosity: verbosity as VerbosityLevel,
@@ -369,6 +387,8 @@ export async function handleDriveLifecycle(
     executionTimeMs: Date.now() - startTime,
     narrative,
   });
+  auditLogResponse(finalResponse, 'drive_lifecycle', tenant_id, Date.now() - startTime);
+  return finalResponse;
 }
 
 /**

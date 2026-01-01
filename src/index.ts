@@ -106,6 +106,9 @@ import {
   handleRevokeConnection,
 } from './tools/oauth/revoke-connection.js';
 
+import { initAuditLogging } from './core/mcp-response.js';
+import { logAudit } from './core/audit-logger.js';
+
 const SERVER_NAME = 'xerodev-mcp';
 const SERVER_VERSION = '0.2.0';
 export { SERVER_VERSION };
@@ -116,6 +119,9 @@ export { SERVER_VERSION };
 async function main(): Promise<void> {
   // Log to stderr (stdout is reserved for MCP protocol)
   console.error(`[${SERVER_NAME}] Starting v${SERVER_VERSION}...`);
+
+  // Initialize audit logging
+  initAuditLogging(logAudit);
 
   // Create adapter based on mode
   const mode = process.env.MCP_MODE ?? 'mock';

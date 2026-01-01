@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import { type XeroAdapter, type Invoice } from '../../adapters/adapter-factory.js';
 import { checkSimulation } from '../chaos/simulate-network.js';
 
@@ -57,7 +57,7 @@ export async function handleGetInvoice(
   // Check for active network simulation
   const simCheck = checkSimulation(tenant_id);
   if (simCheck.shouldFail && simCheck.error) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: `Simulated ${simCheck.error.type}: ${simCheck.error.message}` },
       verbosity: verbosity as VerbosityLevel,
@@ -72,13 +72,15 @@ export async function handleGetInvoice(
         },
       },
     });
+    auditLogResponse(response, 'get_invoice', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Verify tenant exists
   try {
     await adapter.getTenantContext(tenant_id);
   } catch {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: `Tenant '${tenant_id}' not found` },
       verbosity: verbosity as VerbosityLevel,
@@ -92,6 +94,8 @@ export async function handleGetInvoice(
         },
       },
     });
+    auditLogResponse(response, 'get_invoice', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Fetch all invoices and find the one we need
@@ -99,7 +103,7 @@ export async function handleGetInvoice(
   const invoice = invoices.find(i => i.invoice_id === invoice_id);
 
   if (!invoice) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: `Invoice '${invoice_id}' not found in tenant ${tenant_id}` },
       verbosity: verbosity as VerbosityLevel,
@@ -114,11 +118,13 @@ export async function handleGetInvoice(
         },
       },
     });
+    auditLogResponse(response, 'get_invoice', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   const typeLabel = invoice.type === 'ACCREC' ? 'sales invoice' : 'bill';
 
-  return createResponse({
+  const response = createResponse({
     success: true,
     data: {
       invoice,
@@ -129,4 +135,6 @@ export async function handleGetInvoice(
     narrative: `Found ${typeLabel} ${invoice.invoice_id} with status ${invoice.status}. ` +
       `Total: ${invoice.currency_code || 'N/A'} ${invoice.total?.toFixed(2) || '0.00'}. Due: ${invoice.due_date || 'N/A'}.`,
   });
+  auditLogResponse(response, 'get_invoice', tenant_id, Date.now() - startTime);
+  return response;
 }

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import type { XeroAdapter } from '../../adapters/adapter-factory.js';
 
 export const ListConnectionsSchema = z.object({
@@ -68,7 +68,7 @@ export async function handleListConnections(
 
   // This tool only works in live mode
   if (adapter.getMode() !== 'live') {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: 'Connection listing is only available in live mode (MCP_MODE=live)' },
       verbosity: verbosity as VerbosityLevel,
@@ -83,18 +83,22 @@ export async function handleListConnections(
         },
       },
     });
+    auditLogResponse(response, 'list_connections', null, Date.now() - startTime);
+    return response;
   }
 
   // Get the live adapter
   const liveAdapter = adapter as any;
   if (typeof liveAdapter.getConnections !== 'function') {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: 'Adapter does not support connection listing' },
       verbosity: verbosity as VerbosityLevel,
       executionTimeMs: Date.now() - startTime,
       narrative: 'The current adapter configuration does not support connection listing.',
     });
+    auditLogResponse(response, 'list_connections', null, Date.now() - startTime);
+    return response;
   }
 
   try {
@@ -127,7 +131,7 @@ export async function handleListConnections(
 
     if (connections.length === 0) {
       narrative += ' No connections found. Complete the OAuth flow by calling get_authorization_url.';
-      return createResponse({
+      const response = createResponse({
         success: true,
         data: { connections: [] },
         verbosity: verbosity as VerbosityLevel,
@@ -142,22 +146,28 @@ export async function handleListConnections(
           },
         },
       });
+      auditLogResponse(response, 'list_connections', null, Date.now() - startTime);
+      return response;
     }
 
-    return createResponse({
+    const response = createResponse({
       success: true,
       data: { connections },
       verbosity: verbosity as VerbosityLevel,
       executionTimeMs: Date.now() - startTime,
       narrative,
     });
+    auditLogResponse(response, 'list_connections', null, Date.now() - startTime);
+    return response;
   } catch (error) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: error instanceof Error ? error.message : 'Unknown error listing connections' },
       verbosity: verbosity as VerbosityLevel,
       executionTimeMs: Date.now() - startTime,
       narrative: 'Failed to retrieve connections from the database.',
     });
+    auditLogResponse(response, 'list_connections', null, Date.now() - startTime);
+    return response;
   }
 }

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import { randomUUID } from 'node:crypto';
 
 export const ReplayIdempotencySchema = z.object({
@@ -194,7 +194,7 @@ export async function handleReplayIdempotency(
     warnings.push('This would cause duplicate resources in a real Xero integration.');
   }
 
-  return createResponse({
+  const response = createResponse({
     success: idempotencyMaintained,
     data,
     verbosity: verbosity as VerbosityLevel,
@@ -205,6 +205,8 @@ export async function handleReplayIdempotency(
       : `Idempotency test FAILED. ${uniqueIds.length} different result IDs were returned for the same key.`,
     warnings: warnings.length > 0 ? warnings : undefined,
   });
+  auditLogResponse(response, 'replay_idempotency', tenant_id, Date.now() - startTime);
+  return response;
 }
 
 function generateResultId(operation: string): string {

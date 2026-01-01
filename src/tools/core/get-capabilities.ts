@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { XeroAdapter } from '../../adapters/adapter-interface.js';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import { SERVER_VERSION } from '../../index.js';
 
 export const GetCapabilitiesSchema = z.object({
@@ -146,11 +146,13 @@ export async function handleGetCapabilities(
   }
   narrative += ' Follow the workflow in guidelines.workflow for best results.';
 
-  return createResponse({
+  const response = createResponse({
     success: true,
     data: capabilities,
     verbosity: args.verbosity as VerbosityLevel,
     executionTimeMs,
     narrative,
   });
+  auditLogResponse(response, 'get_mcp_capabilities', null, executionTimeMs);
+  return response;
 }

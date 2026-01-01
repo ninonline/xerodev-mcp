@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 
 export const SimulateNetworkSchema = z.object({
   tenant_id: z.string().describe('Target tenant ID'),
@@ -190,7 +190,7 @@ export async function handleSimulateNetwork(
   // Clear simulation if duration is 0
   if (duration_seconds === 0) {
     clearSimulation(tenant_id);
-    return createResponse({
+    const clearResponse = createResponse({
       success: true,
       data: {
         tenant_id,
@@ -198,7 +198,7 @@ export async function handleSimulateNetwork(
         duration_seconds: 0,
         failure_rate,
         expires_at: new Date().toISOString(),
-        status: 'cleared',
+        status: 'cleared' as const,
         previous_simulation: existing ? {
           condition: existing.condition,
           request_count: existing.request_count,
@@ -210,6 +210,8 @@ export async function handleSimulateNetwork(
         ? `Cleared ${existing.condition} simulation for tenant ${tenant_id}. ${existing.request_count} requests were affected.`
         : `No active simulation to clear for tenant ${tenant_id}.`,
     });
+    auditLogResponse(clearResponse, 'simulate_network_conditions', tenant_id, Date.now() - startTime);
+    return clearResponse;
   }
 
   // Create new simulation
@@ -232,7 +234,7 @@ export async function handleSimulateNetwork(
     INTERMITTENT: `${Math.round(failure_rate * 100)}% of requests will fail randomly`,
   };
 
-  return createResponse({
+  const activateResponse = createResponse({
     success: true,
     data: {
       tenant_id,
@@ -240,7 +242,7 @@ export async function handleSimulateNetwork(
       duration_seconds,
       failure_rate: simulation.failure_rate,
       expires_at: new Date(expiresAt).toISOString(),
-      status: 'active',
+      status: 'active' as const,
       previous_simulation: existing ? {
         condition: existing.condition,
         request_count: existing.request_count,
@@ -257,4 +259,6 @@ export async function handleSimulateNetwork(
       'Remember to clear the simulation when testing is complete',
     ],
   });
+  auditLogResponse(activateResponse, 'simulate_network_conditions', tenant_id, Date.now() - startTime);
+  return activateResponse;
 }

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { randomUUID } from 'node:crypto';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import { type XeroAdapter } from '../../adapters/adapter-factory.js';
 import { type CreditNote, type TaxRate } from '../../adapters/adapter-interface.js';
 import { checkSimulation } from '../chaos/simulate-network.js';
@@ -107,7 +107,7 @@ export async function handleCreateCreditNote(
   // Check for active network simulation
   const simCheck = checkSimulation(tenant_id);
   if (simCheck.shouldFail && simCheck.error) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: simCheck.error.message },
       verbosity: verbosity as VerbosityLevel,
@@ -123,19 +123,23 @@ export async function handleCreateCreditNote(
       },
       executionTimeMs: Date.now() - startTime,
     });
+    auditLogResponse(response, 'create_credit_note', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Check idempotency
   if (idempotency_key) {
     const existing = idempotencyStore.get(idempotency_key);
     if (existing) {
-      return createResponse({
+      const response = createResponse({
         success: true,
         data: existing,
         verbosity: verbosity as VerbosityLevel,
         narrative: `Idempotent replay: Returning existing credit note ${existing.credit_note_number} created with same idempotency_key.`,
         executionTimeMs: Date.now() - startTime,
       });
+      auditLogResponse(response, 'create_credit_note', tenant_id, Date.now() - startTime);
+      return response;
     }
   }
 
@@ -147,7 +151,7 @@ export async function handleCreateCreditNote(
     // Adapter throws for non-existent tenants
   }
   if (!tenantContext) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: `Tenant '${tenant_id}' not found` },
       verbosity: verbosity as VerbosityLevel,
@@ -162,6 +166,8 @@ export async function handleCreateCreditNote(
       },
       executionTimeMs: Date.now() - startTime,
     });
+    auditLogResponse(response, 'create_credit_note', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Build credit note payload
@@ -233,7 +239,7 @@ export async function handleCreateCreditNote(
       };
     }
 
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: {
         error: 'Credit note validation failed',
@@ -249,6 +255,8 @@ export async function handleCreateCreditNote(
       recovery,
       executionTimeMs: Date.now() - startTime,
     });
+    auditLogResponse(response, 'create_credit_note', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Calculate totals
@@ -278,7 +286,7 @@ export async function handleCreateCreditNote(
     idempotencyStore.set(idempotency_key, createdCreditNote);
   }
 
-  return createResponse({
+  const response = createResponse({
     success: true,
     data: createdCreditNote,
     verbosity: verbosity as VerbosityLevel,
@@ -288,6 +296,8 @@ export async function handleCreateCreditNote(
     warnings: validation.warnings,
     executionTimeMs: Date.now() - startTime,
   });
+  auditLogResponse(response, 'create_credit_note', tenant_id, Date.now() - startTime);
+  return response;
 }
 
 // Export for testing

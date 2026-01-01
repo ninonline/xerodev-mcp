@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import type { XeroAdapter } from '../../adapters/adapter-factory.js';
 
 export const RefreshConnectionSchema = z.object({
@@ -50,32 +50,36 @@ export async function handleRefreshConnection(
 
   // This tool only works in live mode
   if (adapter.getMode() !== 'live') {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: 'Connection refresh is only available in live mode (MCP_MODE=live)' },
       verbosity: verbosity as VerbosityLevel,
       executionTimeMs: Date.now() - startTime,
       narrative: 'The refresh_connection tool requires live mode. Mock mode does not use OAuth tokens.',
     });
+    auditLogResponse(response, 'refresh_connection', null, Date.now() - startTime);
+    return response;
   }
 
   // Get the live adapter
   const liveAdapter = adapter as any;
   if (typeof liveAdapter.refreshConnection !== 'function') {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: 'Adapter does not support connection refresh' },
       verbosity: verbosity as VerbosityLevel,
       executionTimeMs: Date.now() - startTime,
       narrative: 'The current adapter configuration does not support connection refresh.',
     });
+    auditLogResponse(response, 'refresh_connection', null, Date.now() - startTime);
+    return response;
   }
 
   try {
     const result = await liveAdapter.refreshConnection(tenant_id);
 
     if (!result.success) {
-      return createResponse({
+      const response = createResponse({
         success: false,
         data: { error: result.error || 'Failed to refresh connection' },
         verbosity: verbosity as VerbosityLevel,
@@ -90,9 +94,11 @@ export async function handleRefreshConnection(
           },
         },
       });
+      auditLogResponse(response, 'refresh_connection', null, Date.now() - startTime);
+      return response;
     }
 
-    return createResponse({
+    const response = createResponse({
       success: true,
       data: {
         tenant_id,
@@ -103,8 +109,10 @@ export async function handleRefreshConnection(
       executionTimeMs: Date.now() - startTime,
       narrative: `Successfully refreshed tokens for tenant '${tenant_id}'. The connection is now active.`,
     });
+    auditLogResponse(response, 'refresh_connection', null, Date.now() - startTime);
+    return response;
   } catch (error) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: error instanceof Error ? error.message : 'Unknown error refreshing connection' },
       verbosity: verbosity as VerbosityLevel,
@@ -119,5 +127,7 @@ export async function handleRefreshConnection(
         },
       },
     });
+    auditLogResponse(response, 'refresh_connection', null, Date.now() - startTime);
+    return response;
   }
 }

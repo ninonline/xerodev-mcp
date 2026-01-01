@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import type { XeroAdapter } from '../../adapters/adapter-factory.js';
 
 export const RevokeConnectionSchema = z.object({
@@ -53,41 +53,47 @@ export async function handleRevokeConnection(
 
   // This tool only works in live mode
   if (adapter.getMode() !== 'live') {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: 'Connection revocation is only available in live mode (MCP_MODE=live)' },
       verbosity: verbosity as VerbosityLevel,
       executionTimeMs: Date.now() - startTime,
       narrative: 'The revoke_connection tool requires live mode. Mock mode does not have stored connections.',
     });
+    auditLogResponse(response, 'revoke_connection', null, Date.now() - startTime);
+    return response;
   }
 
   // Get the live adapter
   const liveAdapter = adapter as any;
   if (typeof liveAdapter.revokeConnection !== 'function') {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: 'Adapter does not support connection revocation' },
       verbosity: verbosity as VerbosityLevel,
       executionTimeMs: Date.now() - startTime,
       narrative: 'The current adapter configuration does not support connection revocation.',
     });
+    auditLogResponse(response, 'revoke_connection', null, Date.now() - startTime);
+    return response;
   }
 
   try {
     const result = liveAdapter.revokeConnection(tenant_id);
 
     if (!result.success) {
-      return createResponse({
+      const response = createResponse({
         success: false,
         data: { error: result.error || 'Failed to revoke connection' },
         verbosity: verbosity as VerbosityLevel,
         executionTimeMs: Date.now() - startTime,
         narrative: `Failed to revoke connection for tenant '${tenant_id}': ${result.error}`,
       });
+      auditLogResponse(response, 'revoke_connection', null, Date.now() - startTime);
+      return response;
     }
 
-    return createResponse({
+    const response = createResponse({
       success: true,
       data: {
         tenant_id,
@@ -107,13 +113,17 @@ export async function handleRevokeConnection(
         },
       },
     });
+    auditLogResponse(response, 'revoke_connection', null, Date.now() - startTime);
+    return response;
   } catch (error) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: error instanceof Error ? error.message : 'Unknown error revoking connection' },
       verbosity: verbosity as VerbosityLevel,
       executionTimeMs: Date.now() - startTime,
       narrative: `Failed to revoke connection for tenant '${tenant_id}'.`,
     });
+    auditLogResponse(response, 'revoke_connection', null, Date.now() - startTime);
+    return response;
   }
 }

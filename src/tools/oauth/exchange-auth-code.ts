@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import type { XeroAdapter } from '../../adapters/adapter-factory.js';
 import { validateState } from '../../core/oauth-state.js';
 
@@ -74,7 +74,7 @@ export async function handleExchangeAuthCode(
 
   // This tool only works in live mode
   if (adapter.getMode() !== 'live') {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: 'OAuth flow is only available in live mode (MCP_MODE=live)' },
       verbosity: verbosity as VerbosityLevel,
@@ -85,18 +85,22 @@ export async function handleExchangeAuthCode(
         description: 'Continue using mock mode for testing without OAuth',
       },
     });
+    auditLogResponse(response, 'exchange_auth_code', null, Date.now() - startTime);
+    return response;
   }
 
   // Get the live adapter
   const liveAdapter = adapter as any;
   if (typeof liveAdapter.getXeroClient !== 'function') {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: 'Adapter does not support OAuth' },
       verbosity: verbosity as VerbosityLevel,
       executionTimeMs: Date.now() - startTime,
       narrative: 'The current adapter configuration does not support OAuth operations.',
     });
+    auditLogResponse(response, 'exchange_auth_code', null, Date.now() - startTime);
+    return response;
   }
 
   const xero = liveAdapter.getXeroClient();
@@ -107,7 +111,7 @@ export async function handleExchangeAuthCode(
     try {
       parsedUrl = new URL(callback_url);
     } catch {
-      return createResponse({
+      const response = createResponse({
         success: false,
         data: { error: 'Invalid callback URL format' },
         verbosity: verbosity as VerbosityLevel,
@@ -122,6 +126,8 @@ export async function handleExchangeAuthCode(
           },
         },
       });
+      auditLogResponse(response, 'exchange_auth_code', null, Date.now() - startTime);
+      return response;
     }
 
     // Extract code and state from URL
@@ -132,7 +138,7 @@ export async function handleExchangeAuthCode(
 
     // Check if Xero returned an error
     if (error) {
-      return createResponse({
+      const response = createResponse({
         success: false,
         data: { error: errorDescription || error },
         verbosity: verbosity as VerbosityLevel,
@@ -147,10 +153,12 @@ export async function handleExchangeAuthCode(
           },
         },
       });
+      auditLogResponse(response, 'exchange_auth_code', null, Date.now() - startTime);
+      return response;
     }
 
     if (!code) {
-      return createResponse({
+      const response = createResponse({
         success: false,
         data: { error: 'No authorization code found in callback URL' },
         verbosity: verbosity as VerbosityLevel,
@@ -165,10 +173,12 @@ export async function handleExchangeAuthCode(
           },
         },
       });
+      auditLogResponse(response, 'exchange_auth_code', null, Date.now() - startTime);
+      return response;
     }
 
     if (!state) {
-      return createResponse({
+      const response = createResponse({
         success: false,
         data: { error: 'No state parameter found in callback URL' },
         verbosity: verbosity as VerbosityLevel,
@@ -183,12 +193,14 @@ export async function handleExchangeAuthCode(
           },
         },
       });
+      auditLogResponse(response, 'exchange_auth_code', null, Date.now() - startTime);
+      return response;
     }
 
     // Validate state (get code verifier)
     const stateData = validateState(state);
     if (!stateData) {
-      return createResponse({
+      const response = createResponse({
         success: false,
         data: { error: 'Invalid or expired state parameter' },
         verbosity: verbosity as VerbosityLevel,
@@ -203,13 +215,15 @@ export async function handleExchangeAuthCode(
           },
         },
       });
+      auditLogResponse(response, 'exchange_auth_code', null, Date.now() - startTime);
+      return response;
     }
 
     // Exchange the code for tokens
     const tokenSet = await xero.apiCallback(callback_url, stateData.codeVerifier);
 
     if (!tokenSet) {
-      return createResponse({
+      const response = createResponse({
         success: false,
         data: { error: 'Failed to exchange authorization code for tokens' },
         verbosity: verbosity as VerbosityLevel,
@@ -224,6 +238,8 @@ export async function handleExchangeAuthCode(
           },
         },
       });
+      auditLogResponse(response, 'exchange_auth_code', null, Date.now() - startTime);
+      return response;
     }
 
     // Update tenants to get the authorised tenant(s)
@@ -231,13 +247,15 @@ export async function handleExchangeAuthCode(
 
     const tenants = xero.tenants;
     if (!tenants || tenants.length === 0) {
-      return createResponse({
+      const response = createResponse({
         success: false,
         data: { error: 'No tenants found in token set' },
         verbosity: verbosity as VerbosityLevel,
         executionTimeMs: Date.now() - startTime,
         narrative: 'The authorization was successful but no Xero organisations were found. This is unusual - please try again.',
       });
+      auditLogResponse(response, 'exchange_auth_code', null, Date.now() - startTime);
+      return response;
     }
 
     // Store each tenant's tokens
@@ -267,7 +285,7 @@ export async function handleExchangeAuthCode(
       });
     }
 
-    return createResponse({
+    const response = createResponse({
       success: true,
       data: {
         connections_established: storedTenants.length,
@@ -278,9 +296,11 @@ export async function handleExchangeAuthCode(
       narrative: `Successfully established ${storedTenants.length} connection(s). ` +
         `You can now use Xero API tools. Call \`list_connections\` to see all stored connections.`,
     });
+    auditLogResponse(response, 'exchange_auth_code', null, Date.now() - startTime);
+    return response;
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: message },
       verbosity: verbosity as VerbosityLevel,
@@ -295,5 +315,7 @@ export async function handleExchangeAuthCode(
         },
       },
     });
+    auditLogResponse(response, 'exchange_auth_code', null, Date.now() - startTime);
+    return response;
   }
 }

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { XeroAdapter, Account, Contact, AccountFilter, ContactFilter } from '../../adapters/adapter-interface.js';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 
 const FilterSchema = z.object({
   type: z.enum(['REVENUE', 'EXPENSE', 'BANK', 'CURRENT', 'FIXED', 'LIABILITY', 'EQUITY']).optional(),
@@ -148,7 +148,7 @@ export async function handleIntrospectEnums(
 
     const executionTimeMs = Date.now() - startTime;
 
-    return createResponse({
+    const response = createResponse({
       success: true,
       data: {
         entity_type,
@@ -160,9 +160,11 @@ export async function handleIntrospectEnums(
       executionTimeMs,
       narrative,
     });
+    auditLogResponse(response, 'introspect_enums', tenant_id, executionTimeMs);
+    return response;
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
-    return createResponse({
+    const errorResponse = createResponse({
       success: false,
       data: {
         entity_type,
@@ -174,5 +176,7 @@ export async function handleIntrospectEnums(
       narrative: `Failed to introspect ${entity_type}: ${message}`,
       rootCause: message,
     });
+    auditLogResponse(errorResponse, 'introspect_enums', tenant_id, Date.now() - startTime);
+    return errorResponse;
   }
 }

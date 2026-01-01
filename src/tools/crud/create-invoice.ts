@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { randomUUID } from 'node:crypto';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import { type XeroAdapter } from '../../adapters/adapter-factory.js';
 import { checkSimulation } from '../chaos/simulate-network.js';
 
@@ -120,7 +120,7 @@ interface InvoiceData {
   date: string;
   due_date: string;
   reference?: string;
-  status: 'DRAFT' | 'SUBMITTED' | 'AUTHORISED';
+  status: 'DRAFT' | 'SUBMITTED' | 'AUTHORISED' | 'PAID' | 'VOIDED';
   line_items: LineItem[];
   sub_total: number;
   total_tax: number;
@@ -156,7 +156,7 @@ export async function handleCreateInvoice(
   // Check for active network simulation
   const simCheck = checkSimulation(tenant_id);
   if (simCheck.shouldFail && simCheck.error) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: {
         invoice: {} as InvoiceData,
@@ -176,13 +176,15 @@ export async function handleCreateInvoice(
         },
       },
     });
+    auditLogResponse(response, 'create_invoice', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Check idempotency
   if (idempotency_key) {
     const existing = invoiceIdempotencyStore.get(idempotency_key);
     if (existing) {
-      return createResponse({
+      const response = createResponse({
         success: true,
         data: {
           invoice: existing,
@@ -194,6 +196,8 @@ export async function handleCreateInvoice(
         narrative: `Invoice already exists with this idempotency key. Returning existing invoice ${existing.invoice_id}.`,
         warnings: ['Duplicate request detected - returning cached result'],
       });
+      auditLogResponse(response, 'create_invoice', tenant_id, Date.now() - startTime);
+      return response;
     }
   }
 
@@ -202,7 +206,7 @@ export async function handleCreateInvoice(
   try {
     tenantContext = await adapter.getTenantContext(tenant_id);
   } catch {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: {
         invoice: {} as InvoiceData,
@@ -220,13 +224,15 @@ export async function handleCreateInvoice(
         },
       },
     });
+    auditLogResponse(response, 'create_invoice', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Validate contact exists
   const contacts = await adapter.getContacts(tenant_id);
   const contact = contacts.find(c => c.contact_id === contact_id);
   if (!contact) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: {
         invoice: {} as InvoiceData,
@@ -245,6 +251,8 @@ export async function handleCreateInvoice(
         },
       },
     });
+    auditLogResponse(response, 'create_invoice', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Validate account codes
@@ -262,7 +270,7 @@ export async function handleCreateInvoice(
   }
 
   if (validationErrors.length > 0) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: {
         invoice: {} as InvoiceData,
@@ -285,6 +293,8 @@ export async function handleCreateInvoice(
         },
       },
     });
+    auditLogResponse(response, 'create_invoice', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Calculate totals with proper regional tax rate
@@ -361,8 +371,9 @@ export async function handleCreateInvoice(
   }
 
   const typeLabel = invoiceType === 'ACCREC' ? 'sales invoice' : 'bill';
+  const executionTimeMs = Date.now() - startTime;
 
-  return createResponse({
+  const response = createResponse({
     success: true,
     data: {
       invoice,
@@ -370,10 +381,13 @@ export async function handleCreateInvoice(
       validation_passed: true,
     },
     verbosity: verbosity as VerbosityLevel,
-    executionTimeMs: Date.now() - startTime,
+    executionTimeMs,
     narrative: `Created ${typeLabel} ${invoice.invoice_number} for ${tenantContext.currency} ${total.toFixed(2)}. ` +
       `Status: ${status}. Due: ${invoiceDueDate}.`,
   });
+
+  auditLogResponse(response, 'create_invoice', tenant_id, executionTimeMs);
+  return response;
 }
 
 function calculateDueDate(date: string, daysToAdd: number): string {

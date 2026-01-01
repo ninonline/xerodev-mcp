@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { XeroAdapter, Invoice, ValidationResult } from '../../adapters/adapter-interface.js';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 
 const LineItemSchema = z.object({
   description: z.string().min(1),
@@ -201,7 +201,7 @@ export async function handleDryRunSync(
       `Fix the issues before running the actual operation.`;
   }
 
-  return createResponse({
+  const response = createResponse({
     success: wouldFail === 0,
     data,
     verbosity: verbosity as VerbosityLevel,
@@ -222,4 +222,6 @@ export async function handleDryRunSync(
       },
     } : undefined,
   });
+  auditLogResponse(response, 'dry_run_sync', tenant_id, executionTimeMs);
+  return response;
 }

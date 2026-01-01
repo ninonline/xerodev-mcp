@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import { type XeroAdapter } from '../../adapters/adapter-factory.js';
 import { checkSimulation } from '../chaos/simulate-network.js';
 
@@ -100,7 +100,7 @@ export async function handleCreateContact(
   // Check for active network simulation
   const simCheck = checkSimulation(tenant_id);
   if (simCheck.shouldFail && simCheck.error) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: {
         contact: {} as ContactData,
@@ -119,13 +119,15 @@ export async function handleCreateContact(
         },
       },
     });
+    auditLogResponse(response, 'create_contact', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Check idempotency
   if (idempotency_key) {
     const existing = contactIdempotencyStore.get(idempotency_key);
     if (existing) {
-      return createResponse({
+      const response = createResponse({
         success: true,
         data: {
           contact: existing,
@@ -136,6 +138,8 @@ export async function handleCreateContact(
         narrative: `Contact already exists with this idempotency key. Returning existing contact ${existing.contact_id}.`,
         warnings: ['Duplicate request detected - returning cached result'],
       });
+      auditLogResponse(response, 'create_contact', tenant_id, Date.now() - startTime);
+      return response;
     }
   }
 
@@ -143,7 +147,7 @@ export async function handleCreateContact(
   const tenants = await adapter.getTenants();
   const tenant = tenants.find(t => t.tenant_id === tenant_id);
   if (!tenant) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: {
         contact: {} as ContactData,
@@ -160,6 +164,8 @@ export async function handleCreateContact(
         },
       },
     });
+    auditLogResponse(response, 'create_contact', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Create the contact via adapter (mock or live)
@@ -191,17 +197,20 @@ export async function handleCreateContact(
     contactIdempotencyStore.set(idempotency_key, contact);
   }
 
-  return createResponse({
+  const executionTimeMs = Date.now() - startTime;
+  const response = createResponse({
     success: true,
     data: {
       contact,
       was_duplicate: false,
     },
     verbosity: verbosity as VerbosityLevel,
-    executionTimeMs: Date.now() - startTime,
+    executionTimeMs,
     narrative: `Created contact '${name}' with ID ${contact.contact_id}. ` +
       `Contact is ${is_customer ? 'a customer' : ''}${is_customer && is_supplier ? ' and ' : ''}${is_supplier ? 'a supplier' : ''}.`,
   });
+  auditLogResponse(response, 'create_contact', tenant_id, executionTimeMs);
+  return response;
 }
 
 // Exported for testing

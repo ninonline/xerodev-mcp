@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import { type XeroAdapter, type Contact, type ContactFilter } from '../../adapters/adapter-factory.js';
 import { checkSimulation } from '../chaos/simulate-network.js';
 
@@ -87,7 +87,7 @@ export async function handleListContacts(
   // Check for active network simulation
   const simCheck = checkSimulation(tenant_id);
   if (simCheck.shouldFail && simCheck.error) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: `Simulated ${simCheck.error.type}: ${simCheck.error.message}` },
       verbosity: verbosity as VerbosityLevel,
@@ -102,13 +102,15 @@ export async function handleListContacts(
         },
       },
     });
+    auditLogResponse(response, 'list_contacts', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Verify tenant exists
   try {
     await adapter.getTenantContext(tenant_id);
   } catch {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: `Tenant '${tenant_id}' not found` },
       verbosity: verbosity as VerbosityLevel,
@@ -122,6 +124,8 @@ export async function handleListContacts(
         },
       },
     });
+    auditLogResponse(response, 'list_contacts', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Build filter
@@ -187,7 +191,7 @@ export async function handleListContacts(
     ? `Filters: ${filtersApplied.join(', ')}. `
     : '';
 
-  return createResponse({
+  const response = createResponse({
     success: true,
     data: {
       contacts: paginatedContacts,
@@ -203,4 +207,6 @@ export async function handleListContacts(
       `Showing page ${page} of ${totalPages} (${paginatedContacts.length} items). ` +
       `Active: ${activeCount}, Customers: ${customerCount}, Suppliers: ${supplierCount}.`,
   });
+  auditLogResponse(response, 'list_contacts', tenant_id, Date.now() - startTime);
+  return response;
 }

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { randomUUID } from 'node:crypto';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import { type XeroAdapter } from '../../adapters/adapter-factory.js';
 import { type Payment } from '../../adapters/adapter-interface.js';
 import { checkSimulation } from '../chaos/simulate-network.js';
@@ -82,7 +82,7 @@ export async function handleCreatePayment(
   // Check for active network simulation
   const simCheck = checkSimulation(tenant_id);
   if (simCheck.shouldFail && simCheck.error) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: simCheck.error.message },
       verbosity: verbosity as VerbosityLevel,
@@ -98,40 +98,48 @@ export async function handleCreatePayment(
       },
       executionTimeMs: Date.now() - startTime,
     });
+    auditLogResponse(response, 'create_payment', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Validate that either invoice_id or credit_note_id is provided (but not both)
   if (!invoice_id && !credit_note_id) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: 'Must specify either invoice_id or credit_note_id' },
       verbosity: verbosity as VerbosityLevel,
       narrative: 'Payment must be applied to either an invoice or a credit note.',
       executionTimeMs: Date.now() - startTime,
     });
+    auditLogResponse(response, 'create_payment', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   if (invoice_id && credit_note_id) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: 'Cannot specify both invoice_id and credit_note_id' },
       verbosity: verbosity as VerbosityLevel,
       narrative: 'Payment can only be applied to one of invoice or credit note, not both.',
       executionTimeMs: Date.now() - startTime,
     });
+    auditLogResponse(response, 'create_payment', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Check idempotency
   if (idempotency_key) {
     const existing = idempotencyStore.get(idempotency_key);
     if (existing) {
-      return createResponse({
+      const response = createResponse({
         success: true,
         data: existing,
         verbosity: verbosity as VerbosityLevel,
         narrative: `Idempotent replay: Returning existing payment ${existing.payment_id} created with same idempotency_key.`,
         executionTimeMs: Date.now() - startTime,
       });
+      auditLogResponse(response, 'create_payment', tenant_id, Date.now() - startTime);
+      return response;
     }
   }
 
@@ -143,7 +151,7 @@ export async function handleCreatePayment(
     // Adapter throws for non-existent tenants
   }
   if (!tenantContext) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: `Tenant '${tenant_id}' not found` },
       verbosity: verbosity as VerbosityLevel,
@@ -158,6 +166,8 @@ export async function handleCreatePayment(
       },
       executionTimeMs: Date.now() - startTime,
     });
+    auditLogResponse(response, 'create_payment', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Build payment payload
@@ -212,7 +222,7 @@ export async function handleCreatePayment(
       };
     }
 
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: {
         error: 'Payment validation failed',
@@ -228,6 +238,8 @@ export async function handleCreatePayment(
       recovery,
       executionTimeMs: Date.now() - startTime,
     });
+    auditLogResponse(response, 'create_payment', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Create the payment
@@ -242,7 +254,7 @@ export async function handleCreatePayment(
     ? `invoice ${invoice_id}`
     : `credit note ${credit_note_id}`;
 
-  return createResponse({
+  const response = createResponse({
     success: true,
     data: createdPayment,
     verbosity: verbosity as VerbosityLevel,
@@ -252,6 +264,8 @@ export async function handleCreatePayment(
     warnings: validation.warnings,
     executionTimeMs: Date.now() - startTime,
   });
+  auditLogResponse(response, 'create_payment', tenant_id, Date.now() - startTime);
+  return response;
 }
 
 // Export for testing

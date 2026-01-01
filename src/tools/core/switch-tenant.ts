@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { XeroAdapter, TenantContext } from '../../adapters/adapter-interface.js';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 
 export const SwitchTenantSchema = z.object({
   tenant_id: z.string().describe('The tenant ID to switch to'),
@@ -87,7 +87,7 @@ export async function handleSwitchTenant(
 
     const executionTimeMs = Date.now() - startTime;
 
-    return createResponse({
+    const response = createResponse({
       success: true,
       data,
       verbosity: verbosity as VerbosityLevel,
@@ -96,9 +96,11 @@ export async function handleSwitchTenant(
         `This tenant has ${context.accounts.length} accounts, ${context.tax_rates.length} tax rates, and ${context.contacts.length} contacts. ` +
         `Valid tax types: ${taxTypes.join(', ')}.`,
     });
+    auditLogResponse(response, 'switch_tenant_context', tenant_id, executionTimeMs);
+    return response;
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
-    return createResponse({
+    const errorResponse = createResponse({
       success: false,
       data: {
         tenant_id,
@@ -124,5 +126,7 @@ export async function handleSwitchTenant(
         },
       },
     });
+    auditLogResponse(errorResponse, 'switch_tenant_context', tenant_id, Date.now() - startTime);
+    return errorResponse;
   }
 }

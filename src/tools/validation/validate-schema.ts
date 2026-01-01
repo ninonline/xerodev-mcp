@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { XeroAdapter, ValidationDiff, Invoice, Quote, CreditNote, Payment, BankTransaction } from '../../adapters/adapter-interface.js';
-import { createResponse, type MCPResponse, type VerbosityLevel, type RecoveryAction } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel, type RecoveryAction } from '../../core/mcp-response.js';
 
 const LineItemSchema = z.object({
   description: z.string().min(1),
@@ -160,29 +160,31 @@ export async function handleValidateSchema(
           e => `${e.path.join('.')}: ${e.message}`
         );
 
+        const structResponse = createResponse({
+          success: false,
+          data: {
+            valid: false,
+            entity_type,
+            score: 0,
+            errors: structureErrors,
+            diff: parseResult.error.errors.map(e => ({
+              field: e.path.join('.'),
+              issue: e.message,
+              severity: 'error' as const,
+            })),
+          },
+          verbosity: verbosity as VerbosityLevel,
+          executionTimeMs: Date.now() - startTime,
+          narrative: `${typeName} structure is invalid. ${structureErrors.length} structural error(s) found.`,
+          recovery: {
+            suggested_action_id: 'fix_structure',
+            description: 'Fix the structural issues in the payload',
+          },
+        });
+        auditLogResponse(structResponse, 'validate_schema_match', tenant_id, Date.now() - startTime);
         return {
           isValid: false,
-          response: createResponse({
-            success: false,
-            data: {
-              valid: false,
-              entity_type,
-              score: 0,
-              errors: structureErrors,
-              diff: parseResult.error.errors.map(e => ({
-                field: e.path.join('.'),
-                issue: e.message,
-                severity: 'error' as const,
-              })),
-            },
-            verbosity: verbosity as VerbosityLevel,
-            executionTimeMs: Date.now() - startTime,
-            narrative: `${typeName} structure is invalid. ${structureErrors.length} structural error(s) found.`,
-            recovery: {
-              suggested_action_id: 'fix_structure',
-              description: 'Fix the structural issues in the payload',
-            },
-          }),
+          response: structResponse,
         };
       }
       return { isValid: true, data: parseResult.data };
@@ -227,7 +229,7 @@ export async function handleValidateSchema(
         );
       }
 
-      return createResponse({
+      const validResponse = createResponse({
         success: true,
         data: {
           valid: true,
@@ -241,6 +243,8 @@ export async function handleValidateSchema(
         narrative: `${entity_type} payload is valid for tenant ${tenant_id}. Score: ${result.score.toFixed(2)}. Safe to proceed.`,
         warnings: warnings.length > 0 ? warnings : undefined,
       });
+      auditLogResponse(validResponse, 'validate_schema_match', tenant_id, executionTimeMs);
+      return validResponse;
     }
 
     // Validation failed - determine recovery action
@@ -286,7 +290,7 @@ export async function handleValidateSchema(
       };
     }
 
-    return createResponse({
+    const failedResponse = createResponse({
       success: false,
       data: {
         valid: false,
@@ -305,9 +309,11 @@ export async function handleValidateSchema(
       warnings: result.warnings,
       recovery,
     });
+    auditLogResponse(failedResponse, 'validate_schema_match', tenant_id, executionTimeMs);
+    return failedResponse;
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
-    return createResponse({
+    const errorResponse = createResponse({
       success: false,
       data: {
         valid: false,
@@ -320,5 +326,7 @@ export async function handleValidateSchema(
       narrative: `Validation failed with error: ${message}`,
       rootCause: message,
     });
+    auditLogResponse(errorResponse, 'validate_schema_match', tenant_id ?? null, Date.now() - startTime);
+    return errorResponse;
   }
 }

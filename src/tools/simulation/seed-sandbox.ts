@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { randomUUID } from 'node:crypto';
 import type { XeroAdapter, Invoice, Contact } from '../../adapters/adapter-interface.js';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 
 export const SeedSandboxSchema = z.object({
   tenant_id: z.string().describe('Target tenant ID'),
@@ -242,11 +242,13 @@ export async function handleSeedSandbox(
     : `Generated ${count} sample contact(s). ` +
       `Use these payloads with validate_schema_match before creating.`;
 
-  return createResponse({
+  const response = createResponse({
     success: true,
     data,
     verbosity: verbosity as VerbosityLevel,
     executionTimeMs,
     narrative,
   });
+  auditLogResponse(response, 'seed_sandbox_data', tenant_id, executionTimeMs);
+  return response;
 }

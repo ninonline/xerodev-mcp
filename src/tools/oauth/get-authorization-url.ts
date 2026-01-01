@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import type { XeroAdapter } from '../../adapters/adapter-factory.js';
 import { generateState } from '../../core/oauth-state.js';
 
@@ -71,7 +71,7 @@ export async function handleGetAuthorizationUrl(
 
   // This tool only works in live mode
   if (adapter.getMode() !== 'live') {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: 'OAuth flow is only available in live mode (MCP_MODE=live)' },
       verbosity: verbosity as VerbosityLevel,
@@ -82,18 +82,22 @@ export async function handleGetAuthorizationUrl(
         description: 'Continue using mock mode for testing without OAuth',
       },
     });
+    auditLogResponse(response, 'get_authorization_url', null, Date.now() - startTime);
+    return response;
   }
 
   // Get the XeroClient from the live adapter
   const liveAdapter = adapter as any;
   if (typeof liveAdapter.getXeroClient !== 'function') {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: 'Adapter does not support OAuth' },
       verbosity: verbosity as VerbosityLevel,
       executionTimeMs: Date.now() - startTime,
       narrative: 'The current adapter configuration does not support OAuth operations.',
     });
+    auditLogResponse(response, 'get_authorization_url', null, Date.now() - startTime);
+    return response;
   }
 
   // Default scopes for accounting operations
@@ -117,13 +121,15 @@ export async function handleGetAuthorizationUrl(
     const clientId = process.env.XERO_CLIENT_ID;
 
     if (!clientId) {
-      return createResponse({
+      const response = createResponse({
         success: false,
         data: { error: 'XERO_CLIENT_ID environment variable is not set' },
         verbosity: verbosity as VerbosityLevel,
         executionTimeMs: Date.now() - startTime,
         narrative: 'The Xero client ID must be configured before using OAuth. Set the XERO_CLIENT_ID environment variable.',
       });
+      auditLogResponse(response, 'get_authorization_url', null, Date.now() - startTime);
+      return response;
     }
 
     // Construct the authorization URL
@@ -142,7 +148,7 @@ export async function handleGetAuthorizationUrl(
       expires_at: Date.now() + 10 * 60 * 1000, // 10 minutes from now
     };
 
-    return createResponse({
+    const response = createResponse({
       success: true,
       data: result,
       verbosity: verbosity as VerbosityLevel,
@@ -151,8 +157,10 @@ export async function handleGetAuthorizationUrl(
         `Visit the URL in your browser, authorize with Xero, then copy the callback URL. ` +
         `Call \`exchange_auth_code\` with the full callback URL to complete the flow.`,
     });
+    auditLogResponse(response, 'get_authorization_url', null, Date.now() - startTime);
+    return response;
   } catch (error) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: error instanceof Error ? error.message : 'Unknown error generating authorization URL' },
       verbosity: verbosity as VerbosityLevel,
@@ -163,5 +171,7 @@ export async function handleGetAuthorizationUrl(
         description: 'Verify XERO_CLIENT_ID and XERO_REDIRECT_URI environment variables are set',
       },
     });
+    auditLogResponse(response, 'get_authorization_url', null, Date.now() - startTime);
+    return response;
   }
 }

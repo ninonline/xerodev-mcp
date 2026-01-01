@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import { type XeroAdapter, type Invoice, type InvoiceFilter } from '../../adapters/adapter-factory.js';
 import { checkSimulation } from '../chaos/simulate-network.js';
 
@@ -96,7 +96,7 @@ export async function handleListInvoices(
   // Check for active network simulation
   const simCheck = checkSimulation(tenant_id);
   if (simCheck.shouldFail && simCheck.error) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: `Simulated ${simCheck.error.type}: ${simCheck.error.message}` },
       verbosity: verbosity as VerbosityLevel,
@@ -111,13 +111,15 @@ export async function handleListInvoices(
         },
       },
     });
+    auditLogResponse(response, 'list_invoices', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Verify tenant exists
   try {
     await adapter.getTenantContext(tenant_id);
   } catch {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: `Tenant '${tenant_id}' not found` },
       verbosity: verbosity as VerbosityLevel,
@@ -131,6 +133,8 @@ export async function handleListInvoices(
         },
       },
     });
+    auditLogResponse(response, 'list_invoices', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Build filter
@@ -195,7 +199,7 @@ export async function handleListInvoices(
     ? `Filters: ${filtersApplied.join(', ')}. `
     : '';
 
-  return createResponse({
+  const response = createResponse({
     success: true,
     data: {
       invoices: paginatedInvoices,
@@ -211,4 +215,6 @@ export async function handleListInvoices(
       `Showing page ${page} of ${totalPages} (${paginatedInvoices.length} items). ` +
       `Page total: ${paginatedInvoices.length > 0 ? paginatedInvoices[0].currency_code : ''} ${totalValue.toFixed(2)}.`,
   });
+  auditLogResponse(response, 'list_invoices', tenant_id, Date.now() - startTime);
+  return response;
 }

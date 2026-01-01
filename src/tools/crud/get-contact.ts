@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import { type XeroAdapter, type Contact } from '../../adapters/adapter-factory.js';
 import { checkSimulation } from '../chaos/simulate-network.js';
 
@@ -57,7 +57,7 @@ export async function handleGetContact(
   // Check for active network simulation
   const simCheck = checkSimulation(tenant_id);
   if (simCheck.shouldFail && simCheck.error) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: `Simulated ${simCheck.error.type}: ${simCheck.error.message}` },
       verbosity: verbosity as VerbosityLevel,
@@ -72,13 +72,15 @@ export async function handleGetContact(
         },
       },
     });
+    auditLogResponse(response, 'get_contact', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Verify tenant exists
   try {
     await adapter.getTenantContext(tenant_id);
   } catch {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: `Tenant '${tenant_id}' not found` },
       verbosity: verbosity as VerbosityLevel,
@@ -92,6 +94,8 @@ export async function handleGetContact(
         },
       },
     });
+    auditLogResponse(response, 'get_contact', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   // Fetch all contacts and find the one we need
@@ -99,7 +103,7 @@ export async function handleGetContact(
   const contact = contacts.find(c => c.contact_id === contact_id);
 
   if (!contact) {
-    return createResponse({
+    const response = createResponse({
       success: false,
       data: { error: `Contact '${contact_id}' not found in tenant ${tenant_id}` },
       verbosity: verbosity as VerbosityLevel,
@@ -114,6 +118,8 @@ export async function handleGetContact(
         },
       },
     });
+    auditLogResponse(response, 'get_contact', tenant_id, Date.now() - startTime);
+    return response;
   }
 
   const contactTypes: string[] = [];
@@ -121,7 +127,7 @@ export async function handleGetContact(
   if (contact.is_supplier) contactTypes.push('supplier');
   const typeLabel = contactTypes.length > 0 ? contactTypes.join('/') : 'contact';
 
-  return createResponse({
+  const response = createResponse({
     success: true,
     data: {
       contact,
@@ -132,4 +138,6 @@ export async function handleGetContact(
     narrative: `Found ${typeLabel} '${contact.name}' (${contact.status}). ` +
       `Email: ${contact.email || 'not set'}.`,
   });
+  auditLogResponse(response, 'get_contact', tenant_id, Date.now() - startTime);
+  return response;
 }
