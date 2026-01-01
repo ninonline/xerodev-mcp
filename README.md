@@ -19,12 +19,12 @@ docker compose up
 
 **That's it.** No Xero credentials needed. You now have:
 
-- 1 Australian test tenant with GST tax system
-- 31 Chart of Accounts entries
-- 20 contacts (customers and suppliers)
-- 20 invoices, 10 quotes, 8 credit notes
-- 10 payments and 15 bank transactions
-- 16 tools for validation, simulation, and CRUD operations
+- 3 test tenants (AU/GST, UK/VAT, US)
+- 93 Chart of Accounts entries
+- 60 contacts (customers and suppliers)
+- 60 invoices, 30 quotes, 24 credit notes
+- 30 payments and 45 bank transactions
+- 25 tools for validation, simulation, CRUD, and OAuth operations
 
 ## Overview
 
@@ -397,7 +397,7 @@ Verbosity levels:
 
 ```bash
 # Production mode (mock data)
-git clone https://github.com/xerodev/xerodev-mcp.git
+git clone https://github.com/ninonline/xerodev-mcp.git
 cd xerodev-mcp
 docker compose up
 
@@ -430,17 +430,24 @@ For live mode, copy `.env.example` to `.env` and configure your Xero OAuth crede
 
 ## Test Fixtures
 
-The server includes realistic Australian test data:
+The server includes realistic multi-region test data:
 
-- **Tenant**: Acme Corporation Pty Ltd (AU)
-- **Accounts**: 31 entries (Chart of Accounts with GST)
-- **Contacts**: 20 contacts (customers and suppliers)
-- **Invoices**: 20 sample invoices
-- **Quotes**: 10 quotes in various states
-- **Credit Notes**: 8 credit notes
-- **Payments**: 10 payments
-- **Bank Transactions**: 15 bank transactions
-- **Tax Types**: OUTPUT, INPUT, EXEMPTOUTPUT, EXEMPTINPUT, BASEXCLUDED
+### Tenants
+
+- **AU**: Acme Corporation Pty Ltd (GST tax system, AUD)
+- **UK**: Acme Technologies Ltd (VAT tax system, GBP)
+- **US**: TechStart Inc (Sales tax, USD)
+
+### Combined Data
+
+- **Accounts**: 93 entries (Chart of Accounts per region)
+- **Contacts**: 60 contacts (customers and suppliers)
+- **Invoices**: 60 sample invoices
+- **Quotes**: 30 quotes in various states
+- **Credit Notes**: 24 credit notes
+- **Payments**: 30 payments
+- **Bank Transactions**: 45 bank transactions
+- **Tax Types**: OUTPUT, INPUT (AU), A, E, Z (UK), NONE, TX (US)
 
 ### Scripts
 
@@ -468,7 +475,7 @@ src/
 
 test/
 ├── fixtures/                # JSON test data
-└── unit/                    # Unit tests (395 tests)
+└── unit/                    # Unit tests (481 tests)
 ```
 
 ## Testing
