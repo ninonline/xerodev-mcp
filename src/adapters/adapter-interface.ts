@@ -14,6 +14,7 @@ export interface Contact {
   email?: string;
   first_name?: string;
   last_name?: string;
+  phone?: string;  // Simplified phone field for create_contact tool
   is_customer: boolean;
   is_supplier: boolean;
   status: 'ACTIVE' | 'ARCHIVED';

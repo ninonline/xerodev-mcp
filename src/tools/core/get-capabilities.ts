@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import type { XeroAdapter } from '../../adapters/adapter-interface.js';
 import { createResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
+import { SERVER_VERSION } from '../../index.js';
 
 export const GetCapabilitiesSchema = z.object({
   include_tenants: z.boolean().default(true).describe('Include list of available tenants'),
@@ -82,7 +83,7 @@ export async function handleGetCapabilities(
   const capabilities: CapabilitiesData = {
     server: {
       name: 'xerodev-mcp',
-      version: '0.1.0',
+      version: SERVER_VERSION,
       mode,
     },
 

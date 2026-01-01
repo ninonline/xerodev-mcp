@@ -874,6 +874,7 @@ export class XeroMockAdapter implements XeroAdapter {
       email: contact.email,
       first_name: contact.first_name,
       last_name: contact.last_name,
+      phone: contact.phone,
       is_customer: contact.is_customer ?? true,
       is_supplier: contact.is_supplier ?? false,
       status: 'ACTIVE',

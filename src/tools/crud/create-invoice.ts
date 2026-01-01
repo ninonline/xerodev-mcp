@@ -287,7 +287,7 @@ export async function handleCreateInvoice(
     });
   }
 
-  // Calculate totals
+  // Calculate totals with proper regional tax rate
   const invoiceDate = date || new Date().toISOString().split('T')[0];
   const invoiceDueDate = due_date || calculateDueDate(invoiceDate, 30);
 
@@ -301,7 +301,11 @@ export async function handleCreateInvoice(
   }));
 
   const subTotal = processedLineItems.reduce((sum, item) => sum + item.line_amount, 0);
-  const taxRate = 0.1; // 10% GST for AU
+
+  // Get tax rate from tenant context (regional support)
+  const taxRates = await adapter.getTaxRates(tenant_id);
+  const defaultTax = taxRates.find((t: any) => t.status === 'ACTIVE') || { rate: 0.1 };
+  const taxRate = defaultTax.rate / 100; // Convert percentage to decimal
   const totalTax = Math.round(subTotal * taxRate * 100) / 100;
   const total = subTotal + totalTax;
 
@@ -312,20 +316,42 @@ export async function handleCreateInvoice(
   const invoicePrefix = invoiceType === 'ACCREC' ? 'INV' : 'BILL';
   const invoiceNumber = `${invoicePrefix}-${randomUUID().substring(0, 6).toUpperCase()}`;
 
-  const invoice: InvoiceData = {
-    invoice_id: `invoice-${randomUUID().substring(0, 8)}`,
-    invoice_number: invoiceNumber,
+  // Create invoice via adapter (mock or live)
+  const createdInvoice = await adapter.createInvoice(tenant_id, {
     type: invoiceType,
     contact: { contact_id },
     date: invoiceDate,
     due_date: invoiceDueDate,
     reference,
     status,
-    line_items: processedLineItems,
+    line_amount_types: 'Exclusive',
+    line_items: processedLineItems.map(item => ({
+      description: item.description,
+      quantity: item.quantity,
+      unit_amount: item.unit_amount,
+      account_code: item.account_code,
+      tax_type: item.tax_type,
+    })),
+    currency_code: tenantContext.currency,
     sub_total: subTotal,
     total_tax: totalTax,
     total,
-    currency_code: tenantContext.currency,
+  });
+
+  const invoice: InvoiceData = {
+    invoice_id: createdInvoice.invoice_id,
+    invoice_number: invoiceNumber,
+    type: createdInvoice.type || invoiceType,
+    contact: { contact_id },
+    date: invoiceDate,
+    due_date: invoiceDueDate,
+    reference,
+    status: createdInvoice.status || status,
+    line_items: processedLineItems,
+    sub_total: createdInvoice.sub_total || subTotal,
+    total_tax: createdInvoice.total_tax || totalTax,
+    total: createdInvoice.total || total,
+    currency_code: createdInvoice.currency_code || tenantContext.currency,
     created_at: new Date().toISOString(),
   };
 

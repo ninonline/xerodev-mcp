@@ -5,8 +5,8 @@ export const SimulateNetworkSchema = z.object({
   tenant_id: z.string().describe('Target tenant ID'),
   condition: z.enum(['RATE_LIMIT', 'TIMEOUT', 'SERVER_ERROR', 'TOKEN_EXPIRED', 'INTERMITTENT'])
     .describe('Network condition to simulate'),
-  duration_seconds: z.number().min(1).max(300).default(60)
-    .describe('Duration to maintain the condition (max 300 seconds)'),
+  duration_seconds: z.number().min(0).max(300).default(60)
+    .describe('Duration to maintain the condition (0 to clear, max 300 seconds)'),
   failure_rate: z.number().min(0).max(1).default(1.0)
     .describe('Probability of failure (0.0-1.0), used for INTERMITTENT condition'),
   verbosity: z.enum(['silent', 'compact', 'diagnostic', 'debug']).default('diagnostic'),

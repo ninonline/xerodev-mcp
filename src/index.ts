@@ -108,6 +108,7 @@ import {
 
 const SERVER_NAME = 'xerodev-mcp';
 const SERVER_VERSION = '0.2.0';
+export { SERVER_VERSION };
 
 /**
  * Main entry point for the Xero Integration Foundry MCP Server.

@@ -163,9 +163,8 @@ export async function handleCreateContact(
     });
   }
 
-  // Create the contact
-  const contact: ContactData = {
-    contact_id: `contact-${randomUUID().substring(0, 8)}`,
+  // Create the contact via adapter (mock or live)
+  const createdContact = await adapter.createContact(tenant_id, {
     name,
     email,
     first_name,
@@ -173,8 +172,19 @@ export async function handleCreateContact(
     phone,
     is_customer,
     is_supplier,
-    status: 'ACTIVE',
-    created_at: new Date().toISOString(),
+  });
+
+  const contact: ContactData = {
+    contact_id: createdContact.contact_id,
+    name: createdContact.name,
+    email: createdContact.email,
+    first_name: createdContact.first_name,
+    last_name: createdContact.last_name,
+    phone: createdContact.phone,
+    is_customer: createdContact.is_customer ?? true,
+    is_supplier: createdContact.is_supplier ?? false,
+    status: (createdContact.status || 'ACTIVE') as 'ACTIVE',
+    created_at: createdContact.created_at || new Date().toISOString(),
   };
 
   // Store for idempotency

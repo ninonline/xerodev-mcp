@@ -48,7 +48,7 @@ describe('create_invoice', () => {
 
       expect(result.success).toBe(true);
       expect(result.data.invoice.type).toBe('ACCREC');
-      expect(result.data.invoice.invoice_id).toMatch(/^invoice-/);
+      expect(result.data.invoice.invoice_id).toMatch(/^inv-/); // Mock adapter uses inv- format
       expect(result.data.invoice.invoice_number).toMatch(/^INV-/);
       expect(result.data.invoice.status).toBe('DRAFT');
       expect(result.data.validation_passed).toBe(true);
