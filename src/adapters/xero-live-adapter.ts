@@ -936,6 +936,69 @@ export class XeroLiveAdapter implements XeroAdapter {
     return mapContact(created);
   }
 
+  async updateContact(tenantId: string, contactId: string, updates: Partial<Omit<Contact, 'contact_id'>>): Promise<Contact> {
+    await this.ensureTokens(tenantId);
+
+    // First get the existing contact to preserve other fields
+    const existingContacts = await this.getContacts(tenantId);
+    const existing = existingContacts.find(c => c.contact_id === contactId);
+    if (!existing) {
+      throw new Error(`Contact '${contactId}' not found in tenant '${tenantId}'`);
+    }
+
+    // Merge updates with existing contact
+    const merged: Contact = {
+      ...existing,
+      ...updates,
+      // Ensure contact_id cannot be changed
+      contact_id: existing.contact_id,
+    };
+
+    // Build Xero API update payload
+    const xeroContact: any = {
+      contactID: contactId,
+      name: merged.name,
+      emailAddress: merged.email,
+      firstName: merged.first_name,
+      lastName: merged.last_name,
+      isCustomer: merged.is_customer,
+      isSupplier: merged.is_supplier,
+      contactStatus: merged.status === 'ARCHIVED' ? 'ARCHIVED' : 'ACTIVE',
+    };
+
+    // Include addresses and phones if they exist
+    if (merged.addresses) {
+      xeroContact.addresses = merged.addresses.map(addr => ({
+        addressType: addr.type === 'POBOX' ? 'POBOX' : 'STREET',
+        addressLine1: addr.line1,
+        addressLine2: addr.line2,
+        city: addr.city,
+        region: addr.region,
+        postalCode: addr.postal_code,
+        country: addr.country,
+      }));
+    }
+
+    if (merged.phones) {
+      xeroContact.phones = merged.phones.map(phone => ({
+        phoneType: phone.type,
+        phoneNumber: phone.number,
+      }));
+    }
+
+    const response = await this.xero.accountingApi.updateContact(tenantId, contactId, { contacts: [xeroContact] });
+    const updated = response.body.contacts?.[0];
+
+    if (!updated) {
+      throw new Error('Failed to update contact: No response from Xero');
+    }
+
+    // Invalidate cache
+    this.tenantCache.delete(tenantId);
+
+    return mapContact(updated);
+  }
+
   async createInvoice(tenantId: string, invoice: Partial<Invoice>): Promise<Invoice> {
     await this.ensureTokens(tenantId);
 

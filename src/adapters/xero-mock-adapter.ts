@@ -901,6 +901,31 @@ export class XeroMockAdapter implements XeroAdapter {
     return newContact;
   }
 
+  async updateContact(tenantId: string, contactId: string, updates: Partial<Omit<Contact, 'contact_id'>>): Promise<Contact> {
+    const contacts = this.contacts.get(tenantId);
+    if (!contacts) {
+      throw new Error(`Tenant '${tenantId}' not found`);
+    }
+
+    const index = contacts.findIndex(c => c.contact_id === contactId);
+    if (index === -1) {
+      throw new Error(`Contact '${contactId}' not found in tenant '${tenantId}'`);
+    }
+
+    // Merge updates with existing contact
+    const updated: Contact = {
+      ...contacts[index],
+      ...updates,
+      // Ensure contact_id cannot be changed
+      contact_id: contacts[index].contact_id,
+    };
+
+    contacts[index] = updated;
+    this.contacts.set(tenantId, contacts);
+
+    return updated;
+  }
+
   async createInvoice(tenantId: string, invoice: Partial<Invoice>): Promise<Invoice> {
     const newInvoice: Invoice = {
       invoice_id: invoice.invoice_id || `inv-${Date.now()}-${Math.random().toString(36).substring(7)}`,

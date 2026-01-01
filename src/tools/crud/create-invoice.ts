@@ -3,7 +3,7 @@ import { randomUUID } from 'node:crypto';
 import { createResponse, auditLogResponse, type MCPResponse, type VerbosityLevel } from '../../core/mcp-response.js';
 import { type XeroAdapter } from '../../adapters/adapter-factory.js';
 import { checkSimulation } from '../chaos/simulate-network.js';
-import { getIdempotency, storeIdempotency } from '../../core/idempotency.js';
+import { getIdempotency, storeIdempotency, clearTenantIdempotency, clearAllIdempotency } from '../../core/idempotency.js';
 
 const LineItemSchema = z.object({
   description: z.string().describe('Line item description'),
@@ -402,8 +402,9 @@ function calculateDueDate(date: string, daysToAdd: number): string {
 // Exported for testing - now uses database-backed store
 export function clearInvoiceIdempotencyStore(tenantId?: string): void {
   if (tenantId) {
-    const { clearTenantIdempotency } = require('../../core/idempotency.js');
     clearTenantIdempotency(tenantId);
+  } else {
+    clearAllIdempotency();
   }
 }
 

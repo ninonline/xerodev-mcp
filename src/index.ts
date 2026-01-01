@@ -82,6 +82,10 @@ import {
   handleListInvoices,
 } from './tools/crud/list-invoices.js';
 import {
+  UpdateContactSchema,
+  handleUpdateContact,
+} from './tools/crud/update-contact.js';
+import {
   ListContactsSchema,
   handleListContacts,
 } from './tools/crud/list-contacts.js';
@@ -769,6 +773,47 @@ Full contact details including name, email, addresses, phones, customer/supplier
     async (args) => {
       const parsed = ListContactsSchema.parse(args);
       const result = await handleListContacts(parsed, adapter);
+      return {
+        content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }],
+      };
+    }
+  );
+
+  // Register update_contact tool
+  server.tool(
+    'update_contact',
+    `Updates an existing contact in Xero.
+
+**PREREQUISITES:**
+- Verify contact_id exists: use list_contacts or get_contact
+
+**COMMON UPDATES:**
+- Change contact name or email
+- Update customer/supplier roles
+- Add or modify contact details
+- Archive a contact by setting status to 'ARCHIVED'
+
+**BEHAVIOR:**
+- Only fields provided will be updated
+- Unprovided fields remain unchanged
+- contact_id cannot be changed
+- Returns the updated contact with all fields`,
+    {
+      tenant_id: z.string().describe('Target tenant ID'),
+      contact_id: z.string().describe('ID of the contact to update'),
+      name: z.string().optional().describe('Contact name (organisation or person)'),
+      email: z.string().optional().describe('Email address'),
+      first_name: z.string().optional().describe('First name (for individuals)'),
+      last_name: z.string().optional().describe('Last name (for individuals)'),
+      phone: z.string().optional().describe('Phone number'),
+      is_customer: z.boolean().optional().describe('Whether this is a customer'),
+      is_supplier: z.boolean().optional().describe('Whether this is a supplier'),
+      status: z.enum(['ACTIVE', 'ARCHIVED']).optional().describe('Contact status'),
+      verbosity: z.enum(['silent', 'compact', 'diagnostic', 'debug']).default('diagnostic'),
+    },
+    async (args) => {
+      const parsed = UpdateContactSchema.parse(args);
+      const result = await handleUpdateContact(parsed, adapter);
       return {
         content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }],
       };

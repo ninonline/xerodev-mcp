@@ -135,3 +135,11 @@ export function getIdempotencyStats(tenantId?: string): {
 
   return { total_entries, by_entity_type };
 }
+
+/**
+ * Clear ALL idempotency entries (for testing purposes).
+ */
+export function clearAllIdempotency(): void {
+  const db = getDatabase();
+  db.prepare('DELETE FROM idempotency_store').run();
+}

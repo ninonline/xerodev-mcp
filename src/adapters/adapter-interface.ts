@@ -355,6 +355,11 @@ export interface XeroAdapter {
   // ============================================================================
 
   /**
+   * Update an existing contact
+   */
+  updateContact(tenantId: string, contactId: string, updates: Partial<Omit<Contact, 'contact_id'>>): Promise<Contact>;
+
+  /**
    * Update entity status (for lifecycle transitions)
    */
   updateEntityStatus(
