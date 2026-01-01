@@ -932,7 +932,7 @@ This operation cannot be undone. After revoking, you must complete the OAuth flo
 
   await server.connect(transport);
 
-  console.error(`[${SERVER_NAME}] Ready. Registered 21 tools:`);
+  console.error(`[${SERVER_NAME}] Ready. Registered 25 tools:`);
   console.error(`  - get_mcp_capabilities`);
   console.error(`  - switch_tenant_context`);
   console.error(`  - validate_schema_match`);
