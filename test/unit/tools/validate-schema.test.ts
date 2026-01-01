@@ -259,6 +259,26 @@ describe('validate_schema_match', () => {
       expect(result.success).toBe(false);
       expect(result.data.errors?.some(e => e.toLowerCase().includes('email'))).toBe(true);
     });
+
+    it('should warn about contact with no role set', async () => {
+      const result = await handleValidateSchema(
+        {
+          tenant_id: 'acme-au-001',
+          entity_type: 'Contact',
+          payload: {
+            name: 'Test Contact',
+            email: 'test@example.com',
+          },
+          verbosity: 'diagnostic',
+        },
+        adapter
+      );
+
+      // Should pass but have a warning about missing role
+      expect(result.success).toBe(true);
+      expect(result.data.valid).toBe(true);
+      expect(result.data.warnings?.some(e => e.includes('no role set') || e.includes('is_customer'))).toBe(true);
+    });
   });
 
   describe('Error handling', () => {

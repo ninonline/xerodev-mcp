@@ -759,9 +759,55 @@ export class XeroLiveAdapter implements XeroAdapter {
     return this.validateEntity(context, 'Invoice', invoice);
   }
 
-  async validateContact(tenantId: string, contact: Partial<Contact>): Promise<ValidationResult> {
-    const context = await this.getTenantContext(tenantId);
-    return this.validateEntity(context, 'Contact', contact);
+  async validateContact(_tenantId: string, contact: Partial<Contact>): Promise<ValidationResult> {
+    const errors: string[] = [];
+    const warnings: string[] = [];
+    const diff: ValidationDiff[] = [];
+
+    // Basic validation
+    if (!contact.name || contact.name.trim().length === 0) {
+      errors.push('Contact name is required');
+      diff.push({
+        field: 'name',
+        issue: 'Required field missing',
+        expected: 'Non-empty string',
+        received: contact.name ?? 'undefined',
+        severity: 'error',
+      });
+    }
+
+    if (contact.email && !contact.email.includes('@')) {
+      errors.push('Invalid email format');
+      diff.push({
+        field: 'email',
+        issue: 'Invalid email format',
+        expected: 'Valid email address',
+        received: contact.email,
+        severity: 'error',
+      });
+    }
+
+    // Warn if neither is_customer nor is_supplier is set
+    if (!contact.is_customer && !contact.is_supplier) {
+      warnings.push('Contact has no role set (neither customer nor supplier). This may limit usability.');
+      diff.push({
+        field: 'is_customer/is_supplier',
+        issue: 'No contact role specified',
+        expected: 'At least one of is_customer or is_supplier should be true',
+        received: 'Both false/undefined',
+        severity: 'warning',
+      });
+    }
+
+    const score = errors.length === 0 ? 1.0 : Math.max(0, 1 - errors.length * 0.2);
+
+    return {
+      valid: errors.length === 0,
+      score,
+      errors,
+      warnings,
+      diff,
+    };
   }
 
   async validateQuote(tenantId: string, quote: Partial<Quote>): Promise<ValidationResult> {

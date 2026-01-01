@@ -431,7 +431,19 @@ export class XeroMockAdapter implements XeroAdapter {
       });
     }
 
-    const score = errors.length === 0 ? 1.0 : 0.0;
+    // Warn if neither is_customer nor is_supplier is set
+    if (!contact.is_customer && !contact.is_supplier) {
+      warnings.push('Contact has no role set (neither customer nor supplier). This may limit usability.');
+      diff.push({
+        field: 'is_customer/is_supplier',
+        issue: 'No contact role specified',
+        expected: 'At least one of is_customer or is_supplier should be true',
+        received: 'Both false/undefined',
+        severity: 'warning',
+      });
+    }
+
+    const score = errors.length === 0 ? 1.0 : Math.max(0, 1 - errors.length * 0.2);
 
     return {
       valid: errors.length === 0,
