@@ -17,7 +17,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "lint": "eslint src --ext .ts",
+    "lint": "tsc --noEmit",
     "generate:fixtures": "tsx scripts/generate-fixtures.ts",
     "validate:fixtures": "tsx scripts/validate-fixtures.ts",
     "prepare": "npm run build"
