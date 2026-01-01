@@ -52,6 +52,13 @@ services:
     # Restart policy
     restart: unless-stopped
 
+    # Security hardening
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=10m
+
 # Named volumes
 volumes:
   xerodev-data:

@@ -69,11 +69,18 @@ ENV MCP_DATABASE_PATH=/app/data/xerodev.db
 # Entry point
 CMD ["node", "dist/index.js"]
 
+# Health check for container monitoring
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD node -e "process.exit(0)" || exit 1
+
 # ==============================================================================
 # Labels for Docker MCP Toolkit
 # ==============================================================================
 LABEL org.opencontainers.image.title="xerodev-mcp"
 LABEL org.opencontainers.image.description="MCP server for testing Xero integrations"
 LABEL org.opencontainers.image.version="0.1.0"
-LABEL org.opencontainers.image.source="https://github.com/xerodev/xerodev-mcp"
+LABEL org.opencontainers.image.source="https://github.com/ninonline/xerodev-mcp"
 LABEL org.opencontainers.image.licenses="MIT"
+LABEL org.opencontainers.image.vendor="ninonline"
+LABEL org.opencontainers.image.documentation="https://github.com/ninonline/xerodev-mcp#readme"
+LABEL org.opencontainers.image.authors="ninonline"

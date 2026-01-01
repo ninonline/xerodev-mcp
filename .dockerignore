@@ -24,7 +24,6 @@ out
 # Testing
 coverage
 .nyc_output
-test/fixtures
 *.test.ts
 *.spec.ts
 
