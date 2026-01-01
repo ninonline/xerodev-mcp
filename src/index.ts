@@ -107,7 +107,7 @@ import {
 } from './tools/oauth/revoke-connection.js';
 
 const SERVER_NAME = 'xerodev-mcp';
-const SERVER_VERSION = '0.1.0';
+const SERVER_VERSION = '0.2.0';
 
 /**
  * Main entry point for the Xero Integration Foundry MCP Server.

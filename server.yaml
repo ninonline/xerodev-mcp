@@ -1,0 +1,236 @@
+# xerodev-mcp MCP Server Configuration
+# This file describes the server for the Docker MCP Catalog
+
+name: xerodev-mcp
+description: |
+  An MCP (Model Context Protocol) server for testing and validating Xero integrations
+  without requiring live Xero credentials. Perfect for developers building, testing,
+  and validating Xero integrations before touching production.
+
+  Features:
+  - 25 tools for validation, simulation, CRUD operations, and OAuth
+  - 3 pre-configured test tenants (AU/GST, UK/VAT, US)
+  - 60+ realistic test fixtures (invoices, contacts, quotes, credit notes, payments)
+  - Educational error messages with recovery suggestions
+  - Multi-region tax system support
+
+version: 0.2.0
+license: MIT
+author: ninonline
+homepage: https://github.com/ninonline/xerodev-mcp
+repository: https://github.com/ninonline/xerodev-mcp.git
+
+# Docker image configuration
+image:
+  # The image name on Docker Hub (update when published)
+  repository: ninonline/xerodev-mcp
+  tag: latest
+  # Alternative: Use official MCP namespace
+  # repository: mcp/xerodev-mcp
+
+# Command to run the MCP server
+command:
+  - docker
+  - run
+  - --rm
+  - -i
+  - --init
+  - -e
+  - MCP_MODE=mock
+  - -e
+  - LOG_LEVEL=diagnostic
+  - ${IMAGE}
+
+# Environment variables that users can configure
+env:
+  - name: MCP_MODE
+    description: Server mode (mock or live)
+    default: mock
+    options:
+      - value: mock
+        description: Use pre-loaded test fixtures (no credentials needed)
+      - value: live
+        description: Connect to real Xero (requires OAuth setup)
+
+  - name: LOG_LEVEL
+    description: Response verbosity level
+    default: diagnostic
+    options:
+      - value: silent
+        description: Data only (minimal output)
+      - value: compact
+        description: Data + metadata
+      - value: diagnostic
+        description: Full details with narrative (recommended)
+      - value: debug
+        description: Everything including internal logs
+
+  - name: MCP_DATABASE_PATH
+    description: SQLite database path
+    default: /app/data/xerodev.db
+
+# Live mode requires additional credentials (only shown when MCP_MODE=live)
+# Users should configure these via .env file or docker-compose override
+credentials:
+  - name: XERO_CLIENT_ID
+    description: Your Xero app client ID from developer.xero.com
+    required_when: MCP_MODE=live
+    sensitive: true
+
+  - name: XERO_CLIENT_SECRET
+    description: Your Xero app client secret from developer.xero.com
+    required_when: MCP_MODE=live
+    sensitive: true
+
+  - name: XERO_REDIRECT_URI
+    description: OAuth callback URL (e.g., http://localhost:3000/callback)
+    required_when: MCP_MODE=live
+    default: http://localhost:3000/callback
+
+  - name: MCP_ENCRYPTION_KEY
+    description: 64-character hex key for token encryption (generate with: openssl rand -hex 32)
+    required_when: MCP_MODE=live
+    sensitive: true
+
+# Example usage for AI agents
+examples:
+  - title: "Get server capabilities"
+    description: "Always call this first to understand available tenants and tools"
+    tool_calls:
+      - tool: get_mcp_capabilities
+        arguments:
+          include_tenants: true
+          verbosity: diagnostic
+
+  - title: "Validate an invoice before creation"
+    description: "Check that your invoice payload is valid before sending to Xero"
+    tool_calls:
+      - tool: switch_tenant_context
+        arguments:
+          tenant_id: acme-au-001
+          verbosity: diagnostic
+      - tool: validate_schema_match
+        arguments:
+          tenant_id: acme-au-001
+          entity_type: Invoice
+          payload:
+            type: ACCREC
+            contact_id: contact-001
+            line_items:
+              - description: "Consulting Services"
+                quantity: 10
+                unit_amount: 150.00
+                account_code: "200"
+                tax_type: OUTPUT
+          verbosity: diagnostic
+
+  - title: "Create a validated invoice"
+    description: "After validation passes, create the invoice"
+    tool_calls:
+      - tool: create_invoice
+        arguments:
+          tenant_id: acme-au-001
+          type: ACCREC
+          contact_id: contact-001
+          line_items:
+            - description: "Consulting Services"
+              quantity: 10
+              unit_amount: 150.00
+              account_code: "200"
+              tax_type: OUTPUT
+          status: DRAFT
+          idempotency_key: unique-invoice-2025-01-01
+          verbosity: diagnostic
+
+# Available tools (25 total)
+tools:
+  core:
+    - get_mcp_capabilities: "Discover server capabilities and available tenants"
+    - switch_tenant_context: "Switch between AU/UK/US test tenants"
+    - get_audit_log: "View tool invocation history for debugging"
+
+  validation:
+    - validate_schema_match: "Validate payloads against Xero schema + tenant config"
+    - introspect_enums: "Get valid AccountCodes, TaxTypes, ContactIDs"
+
+  oauth:
+    - get_authorization_url: "Start OAuth 2.0 flow for live Xero"
+    - exchange_auth_code: "Complete OAuth with callback URL"
+    - list_connections: "View connected Xero organisations"
+    - refresh_connection: "Refresh expired OAuth tokens"
+    - revoke_connection: "Remove a Xero connection"
+
+  simulation:
+    - dry_run_sync: "Simulate batch operations without executing"
+    - seed_sandbox_data: "Generate realistic test data"
+    - drive_lifecycle: "Transition entities through states (DRAFT→AUTHORISED→PAID)"
+
+  chaos:
+    - simulate_network_conditions: "Test resilience to rate limits, timeouts, errors"
+    - replay_idempotency: "Test idempotency key behaviour"
+
+  crud:
+    create:
+      - create_contact: "Create new contacts"
+      - create_invoice: "Create sales invoices or bills"
+      - create_quote: "Create quotes/proposals"
+      - create_credit_note: "Create credit notes"
+      - create_payment: "Record payments"
+      - create_bank_transaction: "Record bank transactions"
+
+    read:
+      - get_contact: "Fetch a single contact"
+      - get_invoice: "Fetch a single invoice"
+      - list_contacts: "List contacts with filters"
+      - list_invoices: "List invoices with filters"
+
+# Supported entity types
+entity_types:
+  - Invoice: "Sales invoices (ACCREC) or bills from suppliers (ACCPAY)"
+  - Contact: "Customers and suppliers"
+  - Quote: "Quotes and proposals"
+  - CreditNote: "Credit notes (ACCRECCREDIT/ACCPAYCREDIT)"
+  - Payment: "Payments against invoices or credit notes"
+  - BankTransaction: "Money received (RECEIVE) or spent (SPEND)"
+  - Account: "Chart of Accounts entries"
+  - TaxRate: "Tax types for the tenant's region"
+
+# Supported regions with test data
+regions:
+  - code: AU
+    name: Australia
+    currency: AUD
+    tax_system: GST (10%)
+    tenant_id: acme-au-001
+    tax_types: [OUTPUT, INPUT, EXEMPTOUTPUT, EXEMPTINPUT, BASEXCLUDED]
+
+  - code: UK
+    name: United Kingdom
+    currency: GBP
+    tax_system: VAT (20%)
+    tenant_id: company-uk-001
+    tax_types: [A, E, Z, AE]
+
+  - code: US
+    name: United States
+    currency: USD
+    tax_system: Sales Tax (varies by state)
+    tenant_id: startup-us-001
+    tax_types: [NONE, TX]
+
+# Tags for discovery
+tags:
+  - xero
+  - accounting
+  - integration-testing
+  - validation
+  - mock-data
+  - developer-tools
+  - mcp
+
+# Links
+links:
+  documentation: https://github.com/ninonline/xerodev-mcp/tree/main/docs
+  issues: https://github.com/ninonline/xerodev-mcp/issues
+  license: https://github.com/ninonline/xerodev-mcp/blob/main/LICENSE
+  changelog: https://github.com/ninonline/xerodev-mcp/blob/main/CHANGELOG.md
