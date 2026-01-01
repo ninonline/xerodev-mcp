@@ -93,6 +93,13 @@ Returns:
 - Compliance score (0.0 to 1.0)
 - Detailed diff showing what's wrong
 - Recovery suggestions with next_tool_call
+- Warnings about API behavior differences (e.g., readonly fields)
+
+**IMPORTANT - Invoice Type Field:**
+When validating invoices with type="ACCREC" or type="ACCPAY":
+- **Live mode**: This warning appears because Type is readonly in Xero API
+- Xero automatically determines Type from the contact's role
+- No action needed - validation passes with this warning
 
 Example flow:
 1. Developer submits invoice payload
@@ -210,19 +217,29 @@ export async function handleValidateSchema(
     const executionTimeMs = Date.now() - startTime;
 
     if (result.valid) {
+      // Add warning about Type field for Invoices in live mode
+      const warnings = result.warnings ? [...result.warnings] : [];
+      if (entity_type === 'Invoice' && payload.type) {
+        warnings.push(
+          'The "type" field (ACCREC/ACCPAY) is ignored in live Xero API. ' +
+          'Xero automatically determines the invoice type from the contact: ' +
+          'customers (is_customer=true) create ACCREC, suppliers (is_supplier=true) create ACCPAY.'
+        );
+      }
+
       return createResponse({
         success: true,
         data: {
           valid: true,
           entity_type,
           score: result.score,
-          warnings: result.warnings,
+          warnings: warnings.length > 0 ? warnings : undefined,
         },
         verbosity: verbosity as VerbosityLevel,
         score: result.score,
         executionTimeMs,
         narrative: `${entity_type} payload is valid for tenant ${tenant_id}. Score: ${result.score.toFixed(2)}. Safe to proceed.`,
-        warnings: result.warnings,
+        warnings: warnings.length > 0 ? warnings : undefined,
       });
     }
 

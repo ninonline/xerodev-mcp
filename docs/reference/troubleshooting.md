@@ -178,6 +178,48 @@ Call get_mcp_capabilities to see available tenants
 
 ## OAuth Issues
 
+### "Cannot set the readonly field 'Type' on Invoice"
+
+**Symptom**: Invoice creation fails with error about Type field being readonly.
+
+**Cause**: In live Xero API, the `Type` field (ACCREC/ACCPAY) is readonly and automatically determined by the contact type.
+
+**How it works**:
+- **Customer contacts** (is_customer=true) → Create ACCREC invoices (sales)
+- **Supplier contacts** (is_supplier=true) → Create ACCPAY invoices (bills)
+
+**Diagnosis**:
+```
+Call introspect_enums with entity_type='Contact' to check contact type
+```
+
+**Fix**:
+
+1. **Verify contact type matches your intended invoice type**
+   ```
+   If you want ACCREC (sales invoice):
+   - Ensure contact has is_customer=true
+
+   If you want ACCPAY (bill from supplier):
+   - Ensure contact has is_supplier=true
+   ```
+
+2. **Create correct contact type if needed**
+   ```
+   Call create_contact with:
+   {
+     "name": "Customer Name",
+     "is_customer": true,  // For ACCREC invoices
+     "is_supplier": false
+   }
+   ```
+
+3. **The 'type' parameter in create_invoice is now optional**
+   - Mock mode: Type is used for categorisation
+   - Live mode: Type is ignored (Xero determines from contact)
+
+## OAuth Issues
+
 ### "Invalid Client Credentials"
 
 **Symptom**: OAuth flow fails with invalid credentials.

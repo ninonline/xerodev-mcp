@@ -893,8 +893,12 @@ export class XeroLiveAdapter implements XeroAdapter {
   async createInvoice(tenantId: string, invoice: Partial<Invoice>): Promise<Invoice> {
     await this.ensureTokens(tenantId);
 
+    // NOTE: Type field is NOT included in create payload
+    // Xero automatically determines Type based on contact:
+    // - IsCustomer = true → ACCREC (Accounts Receivable)
+    // - IsSupplier = true → ACCPAY (Accounts Payable)
     const xeroInvoice = {
-      type: invoice.type,
+      // type is read-only - Xero determines it from the contact
       contact: { contactID: invoice.contact?.contact_id },
       date: invoice.date,
       dueDate: invoice.due_date,

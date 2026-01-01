@@ -14,7 +14,7 @@ const LineItemSchema = z.object({
 
 export const CreateInvoiceSchema = z.object({
   tenant_id: z.string().describe('Target tenant ID'),
-  type: z.enum(['ACCREC', 'ACCPAY']).describe('Invoice type: ACCREC (receivable) or ACCPAY (payable)'),
+  type: z.enum(['ACCREC', 'ACCPAY']).optional().describe('Invoice type (ignored in live mode, determined by contact)'),
   contact_id: z.string().describe('Contact ID for the invoice'),
   line_items: z.array(LineItemSchema).min(1).describe('Line items (at least one required)'),
   date: z.string().optional().describe('Invoice date (YYYY-MM-DD)'),
@@ -37,18 +37,22 @@ export const CREATE_INVOICE_TOOL = {
 3. Verify AccountCodes exist: use introspect_enums with entity_type='Account'
 4. Validate payload: use validate_schema_match with entity_type='Invoice'
 
+**IMPORTANT - Type Field Behavior:**
+- **Mock Mode**: You can optionally specify Type (ACCREC/ACCPAY) for categorisation
+- **Live Mode**: Type is automatically determined by Xero from the contact:
+  - Customer (is_customer=true) → ACCREC (sales invoice)
+  - Supplier (is_supplier=true) → ACCPAY (bill)
+  - The 'type' parameter is ignored in live mode
+
 **COMMON FAILURES:**
 - AccountCode not found → Call introspect_enums with entity_type='Account'
 - Invalid TaxType → AU uses OUTPUT/INPUT, check with introspect_enums entity_type='TaxRate'
 - ContactID not found → Create contact first with create_contact
+- Contact has wrong type → Customer contacts create ACCREC, Supplier contacts create ACCPAY
 
 **IDEMPOTENCY:**
 Always include idempotency_key to prevent duplicates on retry.
-If the same key is used twice, the second call returns the existing invoice.
-
-**INVOICE TYPES:**
-- ACCREC: Accounts Receivable (sales invoice - you send to customer)
-- ACCPAY: Accounts Payable (bill - you receive from supplier)`,
+If the same key is used twice, the second call returns the existing invoice.`,
   inputSchema: {
     type: 'object' as const,
     properties: {
@@ -56,7 +60,7 @@ If the same key is used twice, the second call returns the existing invoice.
       type: {
         type: 'string',
         enum: ['ACCREC', 'ACCPAY'],
-        description: 'Invoice type: ACCREC (receivable) or ACCPAY (payable)',
+        description: 'Invoice type (optional, ignored in live mode, determined by contact type)',
       },
       contact_id: { type: 'string', description: 'Contact ID for the invoice' },
       line_items: {
@@ -90,7 +94,7 @@ If the same key is used twice, the second call returns the existing invoice.
         default: 'diagnostic',
       },
     },
-    required: ['tenant_id', 'type', 'contact_id', 'line_items'],
+    required: ['tenant_id', 'contact_id', 'line_items'],
   },
 };
 
